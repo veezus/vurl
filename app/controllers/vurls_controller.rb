@@ -84,7 +84,7 @@ class VurlsController < ApplicationController
   end
 
   def redirect
-    if vurl = Vurl.find(params[:id])
+    if vurl = Vurl.find_by_slug(params[:slug])
       redirect_to vurl.url
     else
       redirect_to new_vurl_path
