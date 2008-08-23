@@ -1,0 +1,22 @@
+<h1>Listing vurls</h1>
+
+<table>
+  <tr>
+    <th>Url</th>
+    <th>Slug</th>
+  </tr>
+
+<% for vurl in @vurls %>
+  <tr>
+    <td><%=h vurl.url %></td>
+    <td><%=h vurl.slug %></td>
+    <td><%= link_to 'Show', vurl %></td>
+    <td><%= link_to 'Edit', edit_vurl_path(vurl) %></td>
+    <td><%= link_to 'Destroy', vurl, :confirm => 'Are you sure?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New vurl', new_vurl_path %>

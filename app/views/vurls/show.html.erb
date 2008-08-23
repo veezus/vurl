@@ -1,0 +1,13 @@
+<p>
+  <b>Url:</b>
+  <%=h @vurl.url %>
+</p>
+
+<p>
+  <b>Slug:</b>
+  <%=h @vurl.slug %>
+</p>
+
+
+<%= link_to 'Edit', edit_vurl_path(@vurl) %> |
+<%= link_to 'Back', vurls_path %>
