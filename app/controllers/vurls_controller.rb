@@ -82,4 +82,12 @@ class VurlsController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def redirect
+    if vurl = Vurl.find(params[:id])
+      redirect_to vurl.url
+    else
+      redirect_to new_vurl_path
+    end
+  end
 end

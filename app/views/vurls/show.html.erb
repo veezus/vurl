@@ -8,6 +8,11 @@
   <%=h @vurl.slug %>
 </p>
 
+<p>
+  <b>Link:</b>
+  <%= link_to redirect_vurl_url(@vurl), redirect_vurl_url(@vurl) %>
+</p>
+
 
 <%= link_to 'Edit', edit_vurl_path(@vurl) %> |
 <%= link_to 'Back', vurls_path %>
