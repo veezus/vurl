@@ -2,12 +2,7 @@ class VurlsController < ApplicationController
   # GET /vurls
   # GET /vurls.xml
   def index
-    @vurls = Vurl.find(:all)
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @vurls }
-    end
+    redirect_to new_vurl_path
   end
 
   # GET /vurls/1
@@ -34,7 +29,7 @@ class VurlsController < ApplicationController
 
   # GET /vurls/1/edit
   def edit
-    @vurl = Vurl.find(params[:id])
+    redirect_to new_vurl_path
   end
 
   # POST /vurls
@@ -57,30 +52,13 @@ class VurlsController < ApplicationController
   # PUT /vurls/1
   # PUT /vurls/1.xml
   def update
-    @vurl = Vurl.find(params[:id])
-
-    respond_to do |format|
-      if @vurl.update_attributes(params[:vurl])
-        flash[:notice] = 'Vurl was successfully updated.'
-        format.html { redirect_to(@vurl) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @vurl.errors, :status => :unprocessable_entity }
-      end
-    end
+    redirect_to new_vurl_path
   end
 
   # DELETE /vurls/1
   # DELETE /vurls/1.xml
   def destroy
-    @vurl = Vurl.find(params[:id])
-    @vurl.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(vurls_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to new_vurl_path
   end
 
   def redirect
