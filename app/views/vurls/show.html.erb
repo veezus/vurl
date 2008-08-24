@@ -1,14 +1,9 @@
 <p>
-  <b>Url:</b>
+  <b>Original URL:</b>
   <%=h @vurl.url %>
 </p>
 
 <p>
-  <b>Slug:</b>
-  <%=h @vurl.slug %>
-</p>
-
-<p>
-  <b>Link:</b>
+  <b>Vurlified URL:</b>
   <%= link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug) %>
 </p>
