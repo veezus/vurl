@@ -1,0 +1,8 @@
+%p
+  %b
+    Original URL:
+  = h @vurl.url
+%p
+  %b
+    Vurlified URL:
+  = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
