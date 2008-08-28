@@ -1,11 +1,9 @@
-%h1
-  New vurl
 = error_messages_for :vurl
+.span-18{:style => 'padding-top:40px;'}
 - form_for(@vurl) do |f|
-  %p
-    %b
-      Url
-    %br/
+  .span-4 &nbsp;
+  %div{:class => 'span-10'}
+    URL:
     = f.text_field :url
-  %p
-    = f.submit "Create"
+    = f.submit "Vurlify!"
+  .span-4 &nbsp;
