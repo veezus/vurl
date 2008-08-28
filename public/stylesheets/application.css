@@ -4,3 +4,6 @@
 p.flash{ color:green; }
 
 .field_name{ font-weight:bold; }
+
+#footer_menu{ margin-top:20px; padding-top:10px;
+  border-top:1px solid #999999; }

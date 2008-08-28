@@ -1,4 +1,4 @@
-#vurls_show_container
+#vurls_show_container{:class => 'span-16 last'}
   %div{:class => "span-3 field_name"}
     Original URL:
   %div{:class => "span-13 last field_value"}
@@ -11,3 +11,5 @@
     Preview link:
   %div{:class => "span-13 last field_value"}
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
+
+= render :partial => 'footer_menu'
