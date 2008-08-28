@@ -6,7 +6,7 @@ class Vurl < ActiveRecord::Base
     if vurl = Vurl.find(:first, :order => 'slug DESC')
       self.slug = vurl.slug.succ
     else
-      self.slug = 'AAAA'
+      self.slug = 'AA'
     end
   end
 end
