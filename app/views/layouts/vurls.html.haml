@@ -13,14 +13,10 @@
     .span-1
       &nbsp;
     #page_container{:class => 'span-16 last'}
-      #header_container.span-16
+      #header_container{:class => 'span-16 last'}
         %div{:class => 'span-16 bottom_border'}
           %div{:class => 'span-10 title_size'} vurl.me
-          .span-3
-            = link_to 'Home', root_path
-          .span-3
-            = link_to 'New vurl', new_vurl_path
-      #body_container
+      #body_container{:class => 'span-16 last'}
         %p{ :class => "flash" }
           = flash[:notice]
         = yield
