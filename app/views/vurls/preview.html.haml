@@ -2,12 +2,8 @@
   %div{:class => "span-3 field_name"}
     Original URL:
   %div{:class => "span-13 last field_value"}
-    = h @vurl.url
+    = link_to h(@vurl.url), @vurl.url
   %div{:class => "span-3 field_name"}
     Vurlified URL:
   %div{:class => "span-13 last field_value"}
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
-  %div{:class => "span-3 field_name"}
-    Preview link:
-  %div{:class => "span-13 last field_value"}
-    = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)

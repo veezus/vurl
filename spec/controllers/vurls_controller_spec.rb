@@ -58,4 +58,13 @@ describe VurlsController do
       response.should redirect_to(vurl_url(Factory.build(:vurl, :id => vurl.id+1)))
     end
   end
+
+  describe "when previewing vurls" do
+    it "should render the preview form" do
+      vurl = Factory(:vurl)
+      get "/p/#{vurl.slug}"
+      #get preview_url(vurl)
+      response.should render_template(:preview)
+    end
+  end
 end

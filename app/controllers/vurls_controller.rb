@@ -68,4 +68,8 @@ class VurlsController < ApplicationController
       redirect_to new_vurl_path
     end
   end
+
+  def preview
+    redirect_to new_vurl_path unless @vurl = Vurl.find_by_slug(params[:slug])
+  end
 end
