@@ -1,5 +1,6 @@
 .bottom_border{ border-bottom:1px solid #999999; }
 .title_size{ font-size:200%; }
+.tagline{ padding-top:15px; text-align:right; font-style:italic; }
 
 p.flash{ color:green; }
 
