@@ -13,7 +13,7 @@ set :deploy_via, :remote_cache
 # your SCM below:
 # set :scm, :subversion
 set :scm, :git
-set :branch, 'master'
+set :branch, 'production'
 
 role :app, "mattremsik.com"
 role :web, "mattremsik.com"
