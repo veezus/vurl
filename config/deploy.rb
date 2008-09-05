@@ -8,6 +8,7 @@ set :repository,  "git@github.com:veez/vurl.git"
 # set :deploy_to, "/var/www/#{application}"
 set :deploy_to, "~/vurl"
 set :deploy_via, :remote_cache
+set :group_writable, false
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
