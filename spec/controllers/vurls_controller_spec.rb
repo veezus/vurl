@@ -27,7 +27,7 @@ describe VurlsController do
     end
     it "should redirect when the update action is called" do
       post :update, :id => @vurl.id
-      response.should redirect_to new_vurl_path
+      response.should redirect_to(new_vurl_path)
     end
   end
 
