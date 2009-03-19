@@ -9,4 +9,7 @@ describe "Vurl" do
     Factory.build(:vurl, :url => 'invalid_url').should_not be_valid
     Factory.build(:vurl, :url => 'http://sub-domain.mattremsik.com').should be_valid
   end
+  it "has many clicks" do
+    Vurl.new.should respond_to(:clicks)
+  end
 end
