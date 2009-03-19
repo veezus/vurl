@@ -6,7 +6,7 @@ set :repository,  "git@github.com:veez/vurl.git"
 # servers (which is the default), you can specify the actual location
 # via the :deploy_to variable:
 # set :deploy_to, "/var/www/#{application}"
-set :deploy_to, "~/vurl"
+set :deploy_to, "/var/www/apps/#{application}"
 set :deploy_via, :remote_cache
 set :group_writable, false
 
@@ -16,13 +16,14 @@ set :group_writable, false
 set :scm, :git
 set :branch, 'production'
 
-role :app, "mattremsik.com"
-role :web, "mattremsik.com"
-role :db,  "mattremsik.com", :primary => true
+role :app, "li44-246.members.linode.com"
+role :web, "li44-246.members.linode.com"
+role :db,  "li44-246.members.linode.com", :primary => true
 
-set :user, "craftst"
+set :user, "veez"
 set :scm_username, "veez"
 set :use_sudo, false
+
 
 after "deploy:update_code", "vurl_custom"
 task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
