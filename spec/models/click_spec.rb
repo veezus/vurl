@@ -12,4 +12,10 @@ describe Click do
       Click.new.should have(1).error_on(:user_agent)
     end
   end
+
+  describe "associations" do
+    it "belongs to a vurl" do
+      Click.new.should respond_to(:vurl)
+    end
+  end
 end
