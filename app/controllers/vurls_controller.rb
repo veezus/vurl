@@ -63,6 +63,10 @@ class VurlsController < ApplicationController
 
   def redirect
     if vurl = Vurl.find_by_slug(params[:slug])
+      click = Click.new(:vurl => vurl, :ip_address => request.env["REMOTE_ADDR"], :user_agent => request.user_agent)
+      unless click.save
+        logger.warn "Couldn't create Click for Vurl (#{vurl.inspect}) because it had the following errors: #{click.errors}"
+      end
       redirect_to vurl.url
     else
       redirect_to new_vurl_path

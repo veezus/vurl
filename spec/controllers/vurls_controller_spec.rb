@@ -59,11 +59,29 @@ describe VurlsController do
     end
   end
 
+  describe "when redirecting vurls" do
+    before do
+      @vurl = Factory(:vurl)
+      Vurl.stub!(:find_by_slug).and_return(@vurl)
+    end
+    it "creates a click" do
+      Click.should_receive(:new).with(:vurl => @vurl, :ip_address => '0.0.0.0', :user_agent => 'Rails Testing').and_return(mock('click', :save => true))
+      get :redirect, :slug => 'AA'
+    end
+    it "logs the error if the click is not created" do
+      click = Click.new(:vurl => @vurl, :ip_address => nil, :user_agent => nil)
+      click.stub!(:save).and_return(false)
+      Click.stub!(:new).and_return(click)
+      controller.logger.should_receive(:warn).with("Couldn't create Click for Vurl (#{@vurl.inspect}) because it had the following errors: #{click.errors}")
+      get :redirect, :slug => 'some slug'
+    end
+  end
+
   describe "when previewing vurls" do
     it "should render the preview form" do
-      vurl = Factory(:vurl)
-      get "/p/#{vurl.slug}"
-      #get preview_url(vurl)
+      vurl = Vurl.create!(:url => 'http://hashrocket.com/')
+      Vurl.stub!(:find_by_slug).and_return(vurl)
+      get :preview, :slug => vurl.slug
       response.should render_template(:preview)
     end
   end
