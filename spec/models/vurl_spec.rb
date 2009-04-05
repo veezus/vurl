@@ -12,4 +12,11 @@ describe "Vurl" do
   it "has many clicks" do
     Vurl.new.should respond_to(:clicks)
   end
+  describe "#click_count" do
+    it "knows how many clicks it has" do
+      vurl = Vurl.new
+      vurl.clicks.should_receive(:count).and_return(7)
+      vurl.click_count.should == 7
+    end
+  end
 end
