@@ -22,10 +22,17 @@ role :db,  "li44-246.members.linode.com", :primary => true
 
 set :user, "veez"
 set :scm_username, "veez"
-set :use_sudo, false
+set :use_sudo, true
 
 
 after "deploy:update_code", "vurl_custom"
 task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+end
+
+namespace :deploy do
+  desc "Phusion Passenger restart"
+  task :restart do
+    run "touch #{deploy_to}/current/tmp/restart.txt"
+  end
 end
