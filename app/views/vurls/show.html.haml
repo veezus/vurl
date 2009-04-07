@@ -13,6 +13,7 @@
     Preview link:
   %div{:class => "span-13 last field_value"}
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
+  = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
 #video_ads{:class => 'span-16 last', :style => 'padding-top:15px;'}
   = render :partial => 'text_ads.html.erb'
