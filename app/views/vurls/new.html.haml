@@ -1,9 +1,10 @@
 = error_messages_for :vurl
 .span-18{:style => 'padding-top:40px;'}
 - form_for(@vurl) do |f|
-  .span-4 &nbsp;
-  %div{:class => 'span-10'}
+  .span-3 &nbsp;
+  .span-12
     URL:
     = f.text_field :url
     = f.submit "Vurlify!"
-  .span-4 &nbsp;
+    = link_to "I'm Feeling Lucky", random_vurls_path
+  .span-3 &nbsp;
