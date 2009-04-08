@@ -1,2 +1,6 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+$(document).ready(function($) {
+  $('.lucky_link').simpletip({
+    content: "Click to view a random vurl from the archives!",
+    fixed: false
+  });
+});

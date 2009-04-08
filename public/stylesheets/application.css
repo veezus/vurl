@@ -9,5 +9,10 @@ p.flash{ color:green; }
 #footer_menu{ margin-top:20px; padding-top:10px;
   border-top:1px solid #999999; }
 
-.lucky_link {
+.tooltip {
+  padding:5px 15px;
+  position:absolute;
+  background-color:#FFFF99;
+  border: 1px solid #999999;
+  color:#000000;
 }
