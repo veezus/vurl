@@ -12,6 +12,12 @@ describe "Vurl" do
   it "has many clicks" do
     Vurl.new.should respond_to(:clicks)
   end
+
+  describe ".random" do
+    # Not entirely sure how to test this. Maybe stubbing count and rand and setting
+    # an expectation that find is called with that offset? - Veez
+  end
+
   describe "#click_count" do
     it "knows how many clicks it has" do
       vurl = Vurl.new
