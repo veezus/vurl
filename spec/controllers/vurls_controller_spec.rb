@@ -65,7 +65,7 @@ describe VurlsController do
       Vurl.stub!(:find_by_slug).and_return(@vurl)
     end
     it "creates a click" do
-      Click.should_receive(:new).with(:vurl => @vurl, :ip_address => '0.0.0.0', :user_agent => 'Rails Testing').and_return(mock('click', :save => true))
+      Click.should_receive(:new).with(:vurl => @vurl, :ip_address => '0.0.0.0', :user_agent => 'Rails Testing', :referer => nil).and_return(mock('click', :save => true))
       get :redirect, :slug => 'AA'
     end
     it "logs the error if the click is not created" do
