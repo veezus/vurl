@@ -85,4 +85,23 @@ describe VurlsController do
       response.should render_template(:preview)
     end
   end
+
+  describe "when redirecting to a random vurl" do
+    before do
+      @vurl = Factory(:vurl)
+      Vurl.stub!(:random).and_return(@vurl)
+    end
+    it "loads a random vurl" do
+      Vurl.should_receive(:random).and_return(@vurl)
+      do_get
+    end
+    it "redirects to that vurl's url" do
+      do_get
+      response.should redirect_to(@vurl.url)
+    end
+
+    def do_get
+      get :random
+    end
+  end
 end

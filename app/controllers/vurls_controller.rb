@@ -76,4 +76,8 @@ class VurlsController < ApplicationController
   def preview
     redirect_to new_vurl_path unless @vurl = Vurl.find_by_slug(params[:slug])
   end
+
+  def random
+    redirect_to Vurl.random.url
+  end
 end
