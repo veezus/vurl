@@ -1,3 +1,5 @@
+require 'eycap/recipes'
+
 default_run_options[:pty] = true
 set :application, "vurl"
 set :repository,  "git@github.com:veez/vurl.git"
