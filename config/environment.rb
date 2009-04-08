@@ -42,6 +42,7 @@ Rails::Initializer.run do |config|
   }
 
   config.gem 'rspec-rails', :lib => false, :version => '=1.2.2'
+  config.gem "haml", :version => '>=2.0.9'
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
