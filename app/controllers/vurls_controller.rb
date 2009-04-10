@@ -36,6 +36,7 @@ class VurlsController < ApplicationController
   # POST /vurls.xml
   def create
     @vurl = Vurl.new(params[:vurl])
+    @vurl.ip_address = request.remote_ip
 
     respond_to do |format|
       if @vurl.save

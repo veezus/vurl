@@ -57,6 +57,14 @@ describe VurlsController do
       #FIXME Incrementing vurl.id feels wrong
       response.should redirect_to(vurl_url(Factory.build(:vurl, :id => vurl.id+1)))
     end
+
+    it "should set the ip address of the creator" do
+      vurl = Factory(:vurl)
+      Vurl.should_receive(:new).and_return(vurl)
+      vurl.should_receive(:ip_address=).with('0.0.0.0')
+      post :create, :vurl => vurl.attributes
+    end
+
   end
 
   describe "when redirecting vurls" do
