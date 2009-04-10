@@ -2,15 +2,24 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe "Vurl" do
 
+  before do
+    @vurl = Vurl.new
+  end
+
   it "should require a url" do
-    Factory.build(:vurl, :url => '').should_not be_valid
+    @vurl.should have(2).errors_on(:url)
   end
   it "should require a valid url" do
     Factory.build(:vurl, :url => 'invalid_url').should_not be_valid
     Factory.build(:vurl, :url => 'http://sub-domain.mattremsik.com').should be_valid
   end
   it "has many clicks" do
-    Vurl.new.should respond_to(:clicks)
+    @vurl.should respond_to(:clicks)
+  end
+
+  it "should fetch url data before saving" do
+    @vurl.should_receive(:fetch_url_data)
+    @vurl.save_without_validation
   end
 
   describe ".random" do
@@ -20,9 +29,26 @@ describe "Vurl" do
 
   describe "#click_count" do
     it "knows how many clicks it has" do
-      vurl = Vurl.new
-      vurl.clicks.should_receive(:count).and_return(7)
-      vurl.click_count.should == 7
+      @vurl.clicks.should_receive(:count).and_return(7)
+      @vurl.click_count.should == 7
+    end
+  end
+
+  describe "#fetch_url_data" do
+    before do
+      @vurl.stubs(:construct_url).returns(RAILS_ROOT + '/spec/data/nytimes_article.html')
+    end
+    it "assigns a title" do
+      @vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')
+      @vurl.fetch_url_data
+    end
+    it "assigns keywords" do
+      @vurl.should_receive(:keywords=).with('Iraq,Iraq War (2003- ),United States Defense and Military Forces,Terrorism,Bombs and Explosives')
+      @vurl.fetch_url_data
+    end
+    it "assigns a description" do
+      @vurl.should_receive(:description=).with('The bombing of a Mosul police headquarters on Friday was the deadliest attack against American soldiers in 13 months.')
+      @vurl.fetch_url_data
     end
   end
 end
