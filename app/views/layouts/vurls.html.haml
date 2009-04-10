@@ -2,8 +2,9 @@
 %html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
   %head
     %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }/
+    = yield :seo_data
     %title
-      Vurl.me: Veez's URL shortener
+      == Vurl.me: #{page_title}
     = stylesheet_link_tag 'scaffold'
     = stylesheet_link_tag 'application'
     = stylesheet_link_tag 'screen.css', :media => 'screen'
