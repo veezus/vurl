@@ -1,14 +1,18 @@
 #vurls_show_container{:class => 'span-16 last'}
+  = render :partial => 'title', :locals => {:vurl => @vurl}
+
   %div{:class => "span-3 field_name"}
     Original URL:
   %div{:class => "span-13 last field_value"}
     = h @vurl.url
+
   %div{:class => "span-3 field_name"}
     Vurlified URL:
   %div{:class => "span-8 field_value"}
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
   %div{:class => "span-5 last"}
     = link_to 'New vurl', new_vurl_path
+
   %div{:class => "span-3 field_name"}
     Preview link:
   %div{:class => "span-13 last field_value"}

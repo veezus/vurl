@@ -10,6 +10,17 @@ describe "vurls show page" do
     do_render
     response.body.should include('72250')
   end
+  it "displays the title if available" do
+    @vurl.stub!(:title).and_return('a title')
+    do_render
+    response.body.should include('a title')
+  end
+  it "doesn't display the title if it's not available" do
+    @vurl.stub!(:title).and_return('')
+    do_render
+    response.body.should_not include('Title:')
+  end
+
   def do_render
     render "/vurls/show.html.haml"
   end
