@@ -3,4 +3,5 @@ $(document).ready(function($) {
     content: "Click to view a random vurl from the archives!",
     fixed: false
   });
+  $('#vurl_url').focus();
 });
