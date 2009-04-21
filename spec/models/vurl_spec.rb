@@ -27,6 +27,16 @@ describe "Vurl" do
     # an expectation that find is called with that offset? - Veez
   end
 
+  describe ".most_popular" do
+    it "returns the correct number of vurls" do
+      5.times { Factory(:vurl) }
+      Vurl.most_popular(4).size.should == 4
+    end
+    it "has a default number of results" do
+      6.times { Factory(:vurl) }
+      Vurl.most_popular.size.should == 5
+    end
+  end
   describe "#click_count" do
     it "knows how many clicks it has" do
       @vurl.clicks.should_receive(:count).and_return(7)

@@ -12,6 +12,10 @@ class Vurl < ActiveRecord::Base
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
 
+  def self.most_popular(number=5)
+    all.sort_by(&:click_count).reverse.first(number)
+  end
+
   def click_count
     clicks.count
   end
