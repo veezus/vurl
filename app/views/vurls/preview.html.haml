@@ -11,3 +11,5 @@
   %div{:class => "span-13 last field_value"}
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
+#video_ads{:class => 'span-16 last', :style => 'padding-top:15px;'}
+  = render :partial => 'text_ads.html.erb'
