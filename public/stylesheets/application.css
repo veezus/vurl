@@ -16,3 +16,8 @@ p.flash{ color:green; }
   border: 1px solid #999999;
   color:#000000;
 }
+
+.most_popular_vurl {
+  float:right;
+  padding:0 10px;
+}
