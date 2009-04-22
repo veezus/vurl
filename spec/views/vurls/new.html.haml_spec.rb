@@ -2,8 +2,9 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper.rb')
 
 describe "new vurl page" do
   before do
-    assigns[:vurl] = Vurl.new
-    Vurl.any_instance.stubs(:fetch_url_data).returns(true)
+    @vurl = Vurl.new
+    assigns[:vurl] = @vurl
+    @vurl.stub!(:fetch_url_data).and_return(true)
   end
   it "has an I'm Feeling Lucky link" do
     render "/vurls/new.html.haml"

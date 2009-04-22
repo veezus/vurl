@@ -46,7 +46,7 @@ describe "Vurl" do
 
   describe "#fetch_url_data" do
     before do
-      @vurl.stubs(:construct_url).returns(RAILS_ROOT + '/spec/data/nytimes_article.html')
+      @vurl.stub!(:construct_url).and_return(RAILS_ROOT + '/spec/data/nytimes_article.html')
     end
     it "assigns a title" do
       @vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')
