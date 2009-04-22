@@ -1,3 +1,6 @@
+- content_for :seo_data do
+  %meta{:type => 'keywords', :content => 'shorten url vurl long tinyurl rubyurl is.gd bit.ly ruby rails'}
+  %meta{:type => 'description', :content => 'Vurl shortens your lengthy URLs'}
 = error_messages_for :vurl
 .span-18{:style => 'padding-top:40px;'}
 - form_for(@vurl) do |f|
