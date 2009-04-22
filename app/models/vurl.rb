@@ -32,8 +32,8 @@ class Vurl < ActiveRecord::Base
     document = Nokogiri::HTML(open(construct_url))
 
     self.title = document.at('title').text
-    self.keywords = document.at("meta[@name=keywords]/@content").to_s
-    self.description = document.at("meta[@name=description]/@content").to_s
+    self.keywords = document.at("meta[@name*=eywords]/@content").to_s
+    self.description = document.at("meta[@name*=escription]/@content").to_s
   end
 
   def construct_url
