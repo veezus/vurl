@@ -9,8 +9,9 @@
     = link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link'
   .span-3.last &nbsp;
 .span-18.last &nbsp;
+.span-3 &nbsp;
 .span-3 Most Popular Vurls:
-.span-15.last
+.span-12.last
   %ul
     - Vurl.most_popular.each do |vurl|
       %li.most_popular_vurl

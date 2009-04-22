@@ -17,5 +17,7 @@ p.flash{ color:green; }
   color:#000000;
 }
 
-.most_popular_vurl {
+li.most_popular_vurl {
+  list-style: none;
+  line-height: 2.0em;
 }
