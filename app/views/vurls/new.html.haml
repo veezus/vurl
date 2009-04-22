@@ -11,7 +11,10 @@
 .span-18.last &nbsp;
 .span-3 Most Popular Vurls:
 .span-15.last
-  - Vurl.most_popular.each do |vurl|
-    .most_popular_vurl
-      = link_to vurl.title, vurl.url
+  %ul
+    - Vurl.most_popular.each do |vurl|
+      %li.most_popular_vurl
+        = link_to vurl.title, vurl.url
+        %span.small
+          == (#{vurl.click_count} clicks)
   .last
