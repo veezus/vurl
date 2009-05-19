@@ -8,12 +8,10 @@ class Vurl < ActiveRecord::Base
 
   before_save :fetch_url_data
 
+  named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
-  end
-
-  def self.most_popular(number=5)
-    all.sort_by(&:click_count).reverse.first(number)
   end
 
   def click_count
