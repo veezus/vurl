@@ -1,3 +1,4 @@
+class Vurl < ActiveRecord::Base; has_many :clicks; end
 
 namespace :click_counts do
 
