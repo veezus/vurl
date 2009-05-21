@@ -30,11 +30,11 @@ describe "Vurl" do
   describe ".most_popular" do
     it "returns the correct number of vurls" do
       5.times { Factory(:vurl) }
-      Vurl.most_popular(4).map(&:clicks_count).size.should == 4
+      Vurl.most_popular(4).length.should == 4
     end
     it "has a default number of results" do
       6.times { Factory(:vurl) }
-      Vurl.most_popular.map(&:clicks_count).size.should == 5
+      Vurl.most_popular.length.should == 5
     end
   end
 
