@@ -20,6 +20,7 @@ class VurlsController < ApplicationController
   # GET /vurls/new.xml
   def new
     @vurl = Vurl.new
+    @most_popular_vurls = Vurl.since(7.days.ago).most_popular
 
     respond_to do |format|
       format.html # new.html.erb

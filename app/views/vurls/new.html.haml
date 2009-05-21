@@ -13,10 +13,10 @@
   .span-3.last &nbsp;
 .span-18.last &nbsp;
 .span-3 &nbsp;
-.span-3 Most Popular Vurls:
+.span-3 Recent Popular Vurls:
 .span-12.last
   %ul
-    - Vurl.most_popular.each do |vurl|
+    - @most_popular_vurls.each do |vurl|
       %li.most_popular_vurl
         = link_to vurl.title, vurl.url
         %span.small
