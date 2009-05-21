@@ -37,6 +37,7 @@ describe "Vurl" do
       Vurl.most_popular.map(&:clicks_count).size.should == 5
     end
   end
+
   describe "#click_count" do
     it "knows how many clicks it has" do
       @vurl.clicks.should_receive(:count).and_return(7)
