@@ -9,6 +9,7 @@ class Vurl < ActiveRecord::Base
   before_save :fetch_url_data
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
+  named_scope :since, lambda {|*args| { :conditions => ["created_at >= ?", args.first || 7.days.ago] } }
 
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
