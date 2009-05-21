@@ -6,7 +6,7 @@ describe "vurls show page" do
     assigns[:vurl] = @vurl
   end
   it "should display the clicks for this vurl" do
-    @vurl.should_receive(:click_count).and_return(72250)
+    @vurl.should_receive(:clicks_count).and_return(72250)
     do_render
     response.body.should include('72250')
   end

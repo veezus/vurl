@@ -14,10 +14,6 @@ class Vurl < ActiveRecord::Base
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
 
-  def click_count
-    clicks.count
-  end
-
   def before_save
     if vurl = Vurl.find(:first, :order => 'slug DESC')
       self.slug = vurl.slug.succ

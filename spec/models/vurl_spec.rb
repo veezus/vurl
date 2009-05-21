@@ -38,13 +38,6 @@ describe "Vurl" do
     end
   end
 
-  describe "#click_count" do
-    it "knows how many clicks it has" do
-      @vurl.clicks.should_receive(:count).and_return(7)
-      @vurl.click_count.should == 7
-    end
-  end
-
   describe "#fetch_url_data" do
     before do
       @vurl.stub!(:construct_url).and_return(RAILS_ROOT + '/spec/data/nytimes_article.html')
