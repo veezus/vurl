@@ -20,7 +20,7 @@
   %div{:class => "span-8 field_value"}
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
   %div{:class => "span-5 last"}
-    = link_to 'Copy to clipboard', '', :id => 'copy_to_clipboard'
+    = link_to 'Copy to clipboard', '#', :id => 'copy_to_clipboard'
 
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
