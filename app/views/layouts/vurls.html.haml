@@ -25,6 +25,12 @@
         %p{ :class => "flash" }
           = flash[:notice]
         = yield
+      #footer_container.span-18.last
+        .span-18.last.feedback
+          Questions? Comments?
+          = mail_to 'mremsik@gmail.com', 'Contact Veez'
+
+
     .span-1
       &nbsp;
 

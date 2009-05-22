@@ -6,7 +6,7 @@ p.flash{ color:green; }
 
 .field_name{ font-weight:bold; }
 
-#footer_menu{ margin-top:20px; padding-top:10px;
+#footer_container{ margin-top:20px; padding-top:5px;
   border-top:1px solid #999999; }
 
 .tooltip {
@@ -20,4 +20,9 @@ p.flash{ color:green; }
 li.most_popular_vurl {
   list-style: none;
   line-height: 2.0em;
+}
+
+.feedback {
+  text-align:right;
+  font-style:italic;
 }
