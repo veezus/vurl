@@ -19,7 +19,7 @@ class VurlsController < ApplicationController
   # GET /vurls/new
   # GET /vurls/new.xml
   def new
-    @vurl = Vurl.new
+    @vurl = Vurl.new(:url => params[:url])
     @most_popular_vurls = Vurl.since(7.days.ago).most_popular
 
     respond_to do |format|
