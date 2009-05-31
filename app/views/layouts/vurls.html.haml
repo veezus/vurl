@@ -14,16 +14,16 @@
   %body
     .span-1
       &nbsp;
-    #page_container{:class => 'span-18 last'}
-      #header_container{:class => 'span-18 last'}
+    #page_container.span-18.last
+      #header_container.span-18.last
         .content.span-18
           .title.span-9
             = link_to 'vurl.me', '/'
           .tagline.span-8.last 
             A URL shortener by
             = link_to "Veez", 'http://mattremsik.com/'
-      #body_container{:class => 'span-18 last'}
-        %p{ :class => "flash" }
+      #body_container.span-18.last
+        %p.flash
           = flash[:notice]
         = yield
       #footer_container.span-18.last

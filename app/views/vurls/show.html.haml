@@ -1,28 +1,28 @@
-#vurls_show_container{:class => 'span-16 last'}
+#vurls_show_container.span-16.last
   - content_for :seo_data do
     = render :partial => 'seo_data', :locals => {:vurl => @vurl}
   = render :partial => 'title', :locals => {:vurl => @vurl}
 
-  %div{:class => "span-3 field_name"}
+  .field_name.span-3
     Original URL:
-  %div{:class => "span-8 field_value"}
+  .field_value.span-8
     = h @vurl.url
-  %div{:class => "span-5 last"}
+  .span-5.last
     = link_to 'New vurl', new_vurl_path
 
-  %div{:class => "span-3 field_name"}
+  .field_name.span-3
     Vurlified URL:
-  %div{:class => "span-13 last field_value"}
+  .field_value.span-13.last
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug), :id => 'vurlified_url'
 
-  %div{:class => "span-3 field_name"}
+  .field_name.span-3
     Preview link:
-  %div{:class => "span-8 field_value"}
+  .field_value.span-8
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
-  %div{:class => "span-5 last"}
+  .span-5.last
     = link_to 'Copy to clipboard', '#', :id => 'copy_to_clipboard'
 
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
-#video_ads{:class => 'span-16 last', :style => 'padding-top:15px;'}
+#video_ads.span-16.last{:style => 'padding-top:15px;'}
   = render :partial => 'text_ads.html.erb'
