@@ -19,9 +19,10 @@
         .content.span-18
           .title.span-9
             = link_to 'vurl.me', '/'
-          .tagline.span-8.last 
-            A URL shortener by
-            = link_to "Veez", 'http://mattremsik.com/'
+          .span-8.last
+            .tagline
+              A URL shortener by
+              = link_to "Veez", 'http://mattremsik.com/'
       #body_container.span-18.last
         %p.flash
           = flash[:notice]

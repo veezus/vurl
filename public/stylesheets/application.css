@@ -15,7 +15,7 @@
 	padding: 0 40px;
 }
 .title{ font-size:200%; padding-left: 25px;}
-.tagline{ color: #CCC; padding-top:15px; text-align:right; font-style:italic; }
+.tagline{ color: #CCC; padding-top:10px; margin-right:8px; text-align:right; font-style:italic; }
 
 p.flash{ color:green; }
 
