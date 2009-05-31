@@ -16,11 +16,12 @@
       &nbsp;
     #page_container{:class => 'span-18 last'}
       #header_container{:class => 'span-18 last'}
-        %div{:class => 'span-18 bottom_border'}
-          %div{:class => 'span-10 title_size'} vurl.me
-          %div{:class => 'span-8 last tagline'} 
-            = link_to "Veez's", 'http://mattremsik.com/'
-            URL shortener
+        .content.span-18
+          .title.span-9
+            = link_to 'vurl.me', '/'
+          .tagline.span-8.last 
+            A URL shortener by
+            = link_to "Veez", 'http://mattremsik.com/'
       #body_container{:class => 'span-18 last'}
         %p{ :class => "flash" }
           = flash[:notice]

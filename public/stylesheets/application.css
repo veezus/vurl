@@ -1,6 +1,18 @@
-.bottom_border{ border-bottom:1px solid #999999; }
-.title_size{ font-size:200%; }
-.tagline{ padding-top:15px; text-align:right; font-style:italic; }
+#header_container {
+	background-color: #666; 
+	-moz-border-radius: 0 0 20px 20px; 
+	-webkit-border-bottom-left-radius: 20px;
+	-webkit-border-bottom-right-radius: 20px;
+	border: 2px solid #AAA;
+	border-top: 0 !important;
+}
+#header_container a { color: #FFF; text-decoration: none;}
+#header_container.content {
+	padding: 20px;
+	margin: 0 10px;
+}
+.title{ font-size:200%; padding-left: 25px;}
+.tagline{ color: #CCC; padding-top:15px; text-align:right; font-style:italic; }
 
 p.flash{ color:green; }
 
