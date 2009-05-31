@@ -11,6 +11,9 @@
 	padding: 20px;
 	margin: 0 10px;
 }
+#body_container {
+	padding: 0 40px;
+}
 .title{ font-size:200%; padding-left: 25px;}
 .tagline{ color: #CCC; padding-top:15px; text-align:right; font-style:italic; }
 
@@ -29,6 +32,10 @@ p.flash{ color:green; }
   color:#000000;
 }
 
+.bookmarklet_help {
+	font-size: smaller;
+}
+
 li.most_popular_vurl {
   list-style: none;
   line-height: 2.0em;
@@ -37,4 +44,8 @@ li.most_popular_vurl {
 .feedback {
   text-align:right;
   font-style:italic;
+}
+
+#footer_container {
+	background-image:url(../images/slant.png);
 }

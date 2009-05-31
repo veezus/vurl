@@ -27,9 +27,10 @@
           = flash[:notice]
         = yield
       #footer_container.span-18.last
-        .span-12.js_widget
-          Bookmarklet (drag to your toolbar to vurlify any page you're browsing):
+        .js_widget.span-12
+          Bookmarklet:
           = link_to "Vurlify!", "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'bookmarklet'
+          %span.bookmarklet_help (What is this?)
         .span-6.last.feedback
           Questions? Comments?
           = mail_to 'mremsik@gmail.com', 'Contact Veez'
