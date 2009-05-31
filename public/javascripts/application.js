@@ -10,7 +10,7 @@ function set_focus_on_url_input() {
 }
 
 function setup_bookmarklet_tooltip() {
-  $('.bookmarklet_help').simpletip({
+  $('#bookmarklet .help').simpletip({
     content: "Drag the 'Vurlify!' link to your toolbar to vurlify any page address while you're browsing",
     fixed: false
   });

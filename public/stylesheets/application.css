@@ -21,7 +21,7 @@ p.flash{ color:green; }
 
 .field_name{ font-weight:bold; }
 
-#footer_container{ margin-top:20px; padding-top:5px;
+#footer_container{ margin-top:20px; padding:5px 0;
   border-top:1px solid #999999; }
 
 .tooltip {
@@ -32,9 +32,8 @@ p.flash{ color:green; }
   color:#000000;
 }
 
-.bookmarklet_help {
-	font-size: smaller;
-}
+#bookmarklet { padding-left: 20px; }
+#bookmarklet .help { font-size: smaller; }
 
 li.most_popular_vurl {
   list-style: none;
@@ -44,6 +43,7 @@ li.most_popular_vurl {
 .feedback {
   text-align:right;
   font-style:italic;
+  padding-right: 20px
 }
 
 #footer_container {
