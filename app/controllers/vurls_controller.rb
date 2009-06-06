@@ -20,7 +20,7 @@ class VurlsController < ApplicationController
   # GET /vurls/new.xml
   def new
     @vurl = Vurl.new(:url => params[:url])
-    @most_popular_vurls = Vurl.since(7.days.ago).most_popular
+    load_most_popular_vurls
 
     respond_to do |format|
       format.html # new.html.erb
@@ -38,6 +38,8 @@ class VurlsController < ApplicationController
   def create
     @vurl = Vurl.new(params[:vurl])
     @vurl.ip_address = request.remote_ip
+
+    load_most_popular_vurls
 
     respond_to do |format|
       if @vurl.save
@@ -81,5 +83,11 @@ class VurlsController < ApplicationController
 
   def random
     redirect_to Vurl.random.url
+  end
+
+  protected
+
+  def load_most_popular_vurls
+    @most_popular_vurls = Vurl.since(7.days.ago).most_popular
   end
 end
