@@ -24,11 +24,15 @@ class Vurl < ActiveRecord::Base
   end
 
   def fetch_url_data
-    document = Nokogiri::HTML(open(construct_url))
+    begin
+      document = Nokogiri::HTML(open(construct_url))
 
-    self.title = document.at('title').text
-    self.keywords = document.at("meta[@name*=eywords]/@content").to_s
-    self.description = document.at("meta[@name*=escription]/@content").to_s
+      self.title = document.at('title').text
+      self.keywords = document.at("meta[@name*=eywords]/@content").to_s
+      self.description = document.at("meta[@name*=escription]/@content").to_s
+    rescue
+      logger.warn "Could not fetch data for #{construct_url}."
+    end
   end
 
   def construct_url
