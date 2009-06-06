@@ -14,13 +14,12 @@
     Vurlified URL:
   .field_value.span-13.last
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug), :id => 'vurlified_url'
+    = clippy(redirect_url(@vurl.slug))
 
   .field_name.span-3
     Preview link:
-  .field_value.span-8
+  .field_value.span-13.last
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
-  .span-5.last
-    = link_to 'Copy to clipboard', '#', :id => 'copy_to_clipboard'
 
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
