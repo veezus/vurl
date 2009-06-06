@@ -20,6 +20,7 @@
     Preview link:
   .field_value.span-13.last
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
+    = clippy(preview_url(@vurl.slug))
 
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
