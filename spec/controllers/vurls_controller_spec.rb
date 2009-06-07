@@ -88,6 +88,26 @@ describe VurlsController do
         get :redirect, :slug => 'some slug'
       end
     end
+
+    describe "when the vurl cannot be found" do
+      before do
+        Vurl.stub!(:find_by_slug).and_return(nil)
+      end
+      it "loads all-time most popular vurls" do
+        controller.should_receive(:load_most_popular_vurls)
+        controller.instance_variable_set(:@most_popular_vurls, [])
+        get :redirect, :slug => 'not_found'
+      end
+      it "loads recent popular vurls" do
+        controller.should_receive(:load_recent_popular_vurls)
+        controller.instance_variable_set(:@recent_popular_vurls, [])
+        get :redirect, :slug => 'not_found'
+      end
+      it "renders the not_found template" do
+        get :redirect, :slug => 'not_found'
+        response.should render_template('not_found')
+      end
+    end
   end
 
   describe "when previewing vurls" do

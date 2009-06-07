@@ -1,0 +1,35 @@
+- content_for :seo_data do
+  %meta{:type => 'keywords', :content => 'shorten url vurl long tinyurl rubyurl is.gd bit.ly ruby rails'}
+  %meta{:type => 'description', :content => 'Vurl shortens your lengthy URLs'}
+= error_messages_for :vurl
+.span-18.last &nbsp;
+.span-18.last
+  %h2 Not Found
+  %p
+    The vurl you entered could not be found.  If you feel this is an error, please
+    = mail_to 'mremsik@gmail.com', 'contact Veez'
+    and let him know what's up.
+  %h4 Other actions:
+  %ul
+    %li= link_to 'Create a new vurl', new_vurl_path
+    %li= link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link'
+.span-9.last
+  .field_name
+    All-Time Most Popular Vurls:
+  %ul
+    - @most_popular_vurls.each do |vurl|
+      %li.most_popular_vurl
+        = link_to vurl.title, vurl.url
+        %span.small
+          == (#{vurl.clicks_count} clicks)
+  .last
+.span-9.last
+  .field_name
+    Recent Popular Vurls:
+  %ul
+    - @recent_popular_vurls.each do |vurl|
+      %li.most_popular_vurl
+        = link_to vurl.title, vurl.url
+        %span.small
+          == (#{vurl.clicks_count} clicks)
+  .last

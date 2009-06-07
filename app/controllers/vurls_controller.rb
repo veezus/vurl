@@ -73,7 +73,9 @@ class VurlsController < ApplicationController
       end
       redirect_to vurl.url
     else
-      redirect_to new_vurl_path
+      load_recent_popular_vurls
+      load_most_popular_vurls
+      render :template => 'vurls/not_found'
     end
   end
 
