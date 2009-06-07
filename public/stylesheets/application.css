@@ -11,8 +11,9 @@
 	padding: 20px;
 	margin: 0 10px;
 }
-#body_container {
-	padding: 0 40px;
+.wrapper {
+  width: 710px;
+  margin: 0 auto;
 }
 .title{ font-size:200%; padding-left: 25px;}
 .tagline{ color: #CCC; padding-top:10px; margin-right:8px; text-align:right; font-style:italic; }

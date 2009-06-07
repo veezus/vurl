@@ -12,41 +12,36 @@
     = javascript_include_tag %w(jquery-1.3.2 jquery.simpletip-1.3.1)
     = javascript_include_tag %w(application)
   %body
-    .span-1
-      &nbsp;
-    #page_container.span-18.last
-      #header_container.span-18.last
-        .content.span-18
-          .title.span-9
-            = link_to 'vurl.me', '/'
-          .span-8.last
-            .tagline
-              A URL shortener by
-              = link_to "Veez", 'http://mattremsik.com/'
-      #body_container.span-18.last
-        %p.flash
-          = flash[:notice]
-        = yield
-      #footer_container.span-18.last
-        .js_widget.span-12
-          #bookmarklet
-            Bookmarklet:
-            = link_to "Vurlify!", "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'target'
-            %span.help (What is this?)
-        .span-6.last
-          .feedback
-            Questions? Comments?
-            = mail_to 'mremsik@gmail.com', 'Contact Veez'
+    .wrapper
+      #page_container.span-18.last
+        #header_container.span-18.last
+          .content.span-18
+            .title.span-9
+              = link_to 'vurl.me', '/'
+            .span-8.last
+              .tagline
+                A URL shortener by
+                = link_to "Veez", 'http://mattremsik.com/'
+        #body_container.span-18.last
+          %p.flash
+            = flash[:notice]
+          = yield
+        #footer_container.span-18.last
+          .js_widget.span-12
+            #bookmarklet
+              Bookmarklet:
+              = link_to "Vurlify!", "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'target'
+              %span.help (What is this?)
+          .span-6.last
+            .feedback
+              Questions? Comments?
+              = mail_to 'mremsik@gmail.com', 'Contact Veez'
 
-
-    .span-1
-      &nbsp;
-
-    %script{ :type => "text/javascript" }
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    %script{ :type => "text/javascript" }
-      try {
-      var pageTracker = _gat._getTracker("UA-7239606-1");
-      pageTracker._trackPageview();
-      } catch(err) {}
+      %script{ :type => "text/javascript" }
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+      %script{ :type => "text/javascript" }
+        try {
+        var pageTracker = _gat._getTracker("UA-7239606-1");
+        pageTracker._trackPageview();
+        } catch(err) {}
