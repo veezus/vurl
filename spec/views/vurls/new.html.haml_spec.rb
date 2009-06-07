@@ -12,7 +12,7 @@ describe "new vurl page" do
     response.should have_tag("a[href=?]", random_vurls_path, "I'm Feeling Lucky")
   end
   it "has most popular vurls" do
-    vurl = Factory(:vurl, :title => 'title', :url => 'http://example.com')
+    vurl = Factory.build(:vurl, :title => 'title', :url => 'http://example.com')
     assigns[:recent_popular_vurls] = [vurl]
     render "/vurls/new.html.haml"
     response.should have_tag("a[href=?]", vurl.url, vurl.title)
