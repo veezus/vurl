@@ -15,8 +15,8 @@ class Vurl < ActiveRecord::Base
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
 
-  def before_save
-    if vurl = Vurl.find(:first, :order => 'slug DESC')
+  def before_create
+    if vurl = Vurl.find(:first, :order => 'id DESC')
       self.slug = vurl.slug.succ
     else
       self.slug = 'AA'
