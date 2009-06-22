@@ -22,6 +22,11 @@
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
     = clippy(preview_url(@vurl.slug))
 
+  .field_name.span-3
+    Statistics link:
+  .field_value.span-13.last
+    = link_to stats_url(@vurl.slug), stats_url(@vurl.slug)
+    = clippy(stats_url(@vurl.slug))
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
 #video_ads.span-16.last{:style => 'padding-top:15px;'}
