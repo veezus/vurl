@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :vurls, :member => {:redirect => :get}, :collection => {:random => :get}
   map.redirect  ':slug', :controller => 'vurls', :action => 'redirect'
   map.preview   '/p/:slug', :controller => 'vurls', :action => 'preview'
-
+  map.stats     '/stats/:slug', :controller => 'vurls', :action => 'stats'
   # The priority is based upon order of creation: first created -> highest priority.
 
   # Sample of regular route:

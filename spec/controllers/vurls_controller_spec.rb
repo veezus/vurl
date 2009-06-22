@@ -137,6 +137,46 @@ describe VurlsController do
       end
     end
   end
+  
+  describe "when viewing stats" do
+    before do
+      @vurl = Factory(:vurl)
+      Vurl.stub!(:find_by_slug).and_return(@vurl)
+    end
+    it "find the vurl by the slug" do
+      Vurl.should_receive(:find_by_slug).with(@vurl.slug).and_return(@vurl)
+      get :stats, :slug => @vurl.slug
+    end
+    it "assigns the vurl to @vurl" do
+      get :stats, :slug => @vurl.slug
+      assigns[:vurl].should be(@vurl)
+    end
+    it "renders the show template" do
+      get :stats, :slug => @vurl.slug
+      response.should render_template(:show)
+    end
+    context "for a non-existent vurl" do
+      before do
+        Vurl.stub!(:find_by_slug).and_return(nil)
+        controller.stub!(:load_most_popular_vurls)
+        controller.stub!(:load_recent_popular_vurls)
+        controller.instance_variable_set(:@most_popular_vurls, [])
+        controller.instance_variable_set(:@recent_popular_vurls, [])
+      end
+      it "loads all-time most popular vurls" do
+        controller.should_receive(:load_most_popular_vurls)
+        get :preview, :slug => 'not_found'
+      end
+      it "loads recent popular vurls" do
+        controller.should_receive(:load_recent_popular_vurls)
+        get :preview, :slug => 'not_found'
+      end
+      it "renders the not_found template" do
+        get :stats, :slug => 'not_found'
+        response.should render_template('not_found')
+      end
+    end
+  end
 
   describe "when redirecting to a random vurl" do
     before do

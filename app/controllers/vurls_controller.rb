@@ -16,6 +16,21 @@ class VurlsController < ApplicationController
     end
   end
 
+  # GET /vurls/stats/AA
+  def stats
+    @vurl = Vurl.find_by_slug(params[:slug])
+    if @vurl.nil?
+      load_recent_popular_vurls
+      load_most_popular_vurls
+      render :template => 'vurls/not_found'
+      return
+    end
+    respond_to do |format|
+      format.html { render :show }
+      format.xml  { render :xml => @vurl }
+    end
+  end
+  
   # GET /vurls/new
   # GET /vurls/new.xml
   def new
