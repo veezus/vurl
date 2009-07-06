@@ -22,15 +22,14 @@ class VurlsController < ApplicationController
     if @vurl.nil?
       load_recent_popular_vurls
       load_most_popular_vurls
-      render :template => 'vurls/not_found'
-      return
+      render :template => 'vurls/not_found' and return
     end
     respond_to do |format|
       format.html { render :show }
       format.xml  { render :xml => @vurl }
     end
   end
-  
+
   # GET /vurls/new
   # GET /vurls/new.xml
   def new
