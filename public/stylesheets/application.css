@@ -9,6 +9,11 @@ body {
   background: url(/images/vurl.me_logo.png) no-repeat;
   height: 152px;
 }
+#header_container #logo_link {
+  display: block;
+  height: 152px;
+  width: 400px;
+}
 #header_container a { color: #FFF; text-decoration: none;}
 #header_container.content {
   padding: 20px;
