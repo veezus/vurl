@@ -106,8 +106,8 @@ body {
 #footer_container #bookmarklet .text {
   padding-right: 10px;
 }
-#footer_container #bookmarklet .help {
-  font-size: 10px;
+.help, .tooltip {
+  font-size: 12px;
   padding: 5px 0 0 5px;
 }
 #footer_container .feedback {
