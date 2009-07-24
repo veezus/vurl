@@ -19,12 +19,6 @@
     = h @vurl.url
 
   .field_name.span-4
-    Preview link
-  .field_value.span-9.last
-    = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
-    = clippy(preview_url(@vurl.slug))
-
-  .field_name.span-4
     Statistics link
   .field_value.span-9.last
     = link_to stats_url(@vurl.slug), stats_url(@vurl.slug)

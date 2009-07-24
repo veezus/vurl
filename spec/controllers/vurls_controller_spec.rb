@@ -110,34 +110,6 @@ describe VurlsController do
     end
   end
 
-  describe "when previewing vurls" do
-    it "should render the preview form" do
-      @vurl.url = 'http://hashrocket.com/'
-      Vurl.stub!(:find_by_slug).and_return(@vurl)
-      get :preview, :slug => @vurl.slug
-      response.should render_template(:preview)
-    end
-    describe "and the vurl is not found" do
-      before do
-        Vurl.stub!(:find_by_slug).and_return(nil)
-      end
-      it "loads all-time most popular vurls" do
-        controller.should_receive(:load_most_popular_vurls)
-        controller.instance_variable_set(:@most_popular_vurls, [])
-        get :preview, :slug => 'not_found'
-      end
-      it "loads recent popular vurls" do
-        controller.should_receive(:load_recent_popular_vurls)
-        controller.instance_variable_set(:@recent_popular_vurls, [])
-        get :preview, :slug => 'not_found'
-      end
-      it "renders the not_found template" do
-        get :preview, :slug => 'not_found'
-        response.should render_template('not_found')
-      end
-    end
-  end
-  
   describe "when viewing stats" do
     before do
       @vurl = Factory(:vurl)
@@ -155,6 +127,7 @@ describe VurlsController do
       get :stats, :slug => @vurl.slug
       response.should render_template(:show)
     end
+
     context "for a non-existent vurl" do
       before do
         Vurl.stub!(:find_by_slug).and_return(nil)
@@ -165,11 +138,11 @@ describe VurlsController do
       end
       it "loads all-time most popular vurls" do
         controller.should_receive(:load_most_popular_vurls)
-        get :preview, :slug => 'not_found'
+        get :stats, :slug => 'not_found'
       end
       it "loads recent popular vurls" do
         controller.should_receive(:load_recent_popular_vurls)
-        get :preview, :slug => 'not_found'
+        get :stats, :slug => 'not_found'
       end
       it "renders the not_found template" do
         get :stats, :slug => 'not_found'

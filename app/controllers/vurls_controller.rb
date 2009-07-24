@@ -93,14 +93,6 @@ class VurlsController < ApplicationController
     end
   end
 
-  def preview
-    unless @vurl = Vurl.find_by_slug(params[:slug])
-      load_recent_popular_vurls
-      load_most_popular_vurls
-      render :template => 'vurls/not_found'
-    end
-  end
-
   def random
     redirect_to Vurl.random.url
   end
