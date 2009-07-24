@@ -15,27 +15,26 @@
     .wrapper
       #page_container.span-18.last
         #header_container.span-18.last
-          .content.span-18
-            .title.span-9
-              = link_to 'vurl.me', '/'
-            .span-8.last
-              .tagline
-                A URL shortener by
-                = link_to "Veez", 'http://mattremsik.com/'
         #body_container.span-18.last
           %p.flash
             = flash[:notice]
           = yield
         #footer_container.span-18.last
-          .js_widget.span-12
+          .js_widget.span-9
             #bookmarklet
-              Bookmarklet:
-              = link_to "Vurlify!", "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'target'
-              %span.help (What is this?)
-          .span-6.last
+              .text
+                bookmarklet
+              .button
+                = link_to image_tag('bookmarklet.png'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeuricomponent(location.href))", :id => 'target'
+              .help
+                What is this?
+          .span-9.last
             .feedback
               Questions? Comments?
               = mail_to 'mremsik@gmail.com', 'Contact Veez'
+          #sponsors.span-18.last
+            .sponsor= link_to image_tag('hashrocket.png'), 'http://hashrocket.com/'
+            .sponsor= link_to image_tag('ruby_trends.gif'), 'http://rubytrends.com/styles/project/trends/371'
 
       %script{ :type => "text/javascript" }
         var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

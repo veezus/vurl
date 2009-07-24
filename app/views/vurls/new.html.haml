@@ -2,23 +2,21 @@
   %meta{:type => 'keywords', :content => 'shorten url vurl long tinyurl rubyurl is.gd bit.ly ruby rails'}
   %meta{:type => 'description', :content => 'Vurl shortens your lengthy URLs'}
 = error_messages_for :vurl
-.span-18{:style => 'padding-top:40px;'}
+.span-18{:style => 'padding-top:30px;'}
 - form_for(@vurl) do |f|
-  .span-3 &nbsp;
-  .span-12
-    URL:
+  .span-18.last
     = f.text_field :url
-    = f.submit "Vurlify!"
-    = link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link'
-  .span-3.last &nbsp;
-.span-18.last &nbsp;
-.span-2 &nbsp;
-.span-4 Recent Popular Vurls:
-.span-12.last
-  %ul
+  .span-18.button_container.last
+    = f.submit "Vurlify!", :class => 'button right'
+    = link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link button left'
+.recent_popular.span-18.last
+  .recent_popular_header
+    popular this week
+  %dl
     - @recent_popular_vurls.each do |vurl|
-      %li.most_popular_vurl
+      %dt
         = link_to vurl.title, vurl.url
+      %dd
+        = vurl.clicks_count
         %span.small
-          == (#{vurl.clicks_count} clicks)
-  .last
+          clicks

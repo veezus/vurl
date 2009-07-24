@@ -1,33 +1,46 @@
-#vurls_show_container.span-16.last
+#vurls_show_container.span-13
   - content_for :seo_data do
     = render :partial => 'seo_data', :locals => {:vurl => @vurl}
-  = render :partial => 'title', :locals => {:vurl => @vurl}
 
-  .field_name.span-3
-    Original URL:
-  .field_value.span-8
-    = h @vurl.url
-  .span-5.last
-    = link_to 'New vurl', new_vurl_path
-
-  .field_name.span-3
-    Vurlified URL:
-  .field_value.span-13.last
+  #vurl.field_name.span-13.last
+    Your new vurl is...
+  #vurl.field_value.span-13.last
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
     = clippy(redirect_url(@vurl.slug))
 
-  .field_name.span-3
-    Preview link:
-  .field_value.span-13.last
+  .video_ads.span-13.last
+    = render :partial => 'text_ads.html.erb'
+
+  = render :partial => 'title', :locals => {:vurl => @vurl}
+
+  .field_name.span-4
+    Original URL
+  .field_value.span-9.last
+    = h @vurl.url
+
+  .field_name.span-4
+    Preview link
+  .field_value.span-9.last
     = link_to preview_url(@vurl.slug), preview_url(@vurl.slug)
     = clippy(preview_url(@vurl.slug))
 
-  .field_name.span-3
-    Statistics link:
-  .field_value.span-13.last
+  .field_name.span-4
+    Statistics link
+  .field_value.span-9.last
     = link_to stats_url(@vurl.slug), stats_url(@vurl.slug)
     = clippy(stats_url(@vurl.slug))
+
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
-#video_ads.span-16.last{:style => 'padding-top:15px;'}
+#vurls_show_vertical_ad.span-5.last
+  %script{ :type => "text/javascript" }
+    /
+      google_ad_client = "pub-7786221017043842";
+      \/* 160x600, created 7/24/09 */
+      google_ad_slot = "1026335280";
+      google_ad_width = 160;
+      google_ad_height = 600;
+  %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js" }
+
+.video_ads.span-13.last{:style => 'padding-top:15px;'}
   = render :partial => 'text_ads.html.erb'
