@@ -26,7 +26,7 @@
               .text
                 bookmarklet
               .button
-                = link_to image_tag('bookmarklet.png'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeuricomponent(location.href))", :id => 'target'
+                = link_to image_tag('bookmarklet.png'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'target'
               .help
                 What is this?
           .span-9.last
