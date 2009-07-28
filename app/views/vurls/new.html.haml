@@ -17,6 +17,5 @@
       %dt
         = link_to vurl.title, vurl.url
       %dd
-        = vurl.clicks_count
         %span.small
-          clicks
+          = pluralize vurl.clicks_count, 'click'
