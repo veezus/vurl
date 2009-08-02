@@ -1,3 +1,4 @@
 thoughtbot-factory_girl --version '=1.2.1' --source http://gems.github.com
 rspec-rails --version '=1.2.6'
 nokogiri --version '=1.2.3'
+thoughtbot-shoulda --source http://gems.github.com
