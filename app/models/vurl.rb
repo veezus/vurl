@@ -6,6 +6,7 @@ class Vurl < ActiveRecord::Base
   validates_format_of   :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
   has_many :clicks
 
+  before_validation :format_url
   before_save :fetch_url_data
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
@@ -37,5 +38,11 @@ class Vurl < ActiveRecord::Base
 
   def construct_url
     url
+  end
+
+  private
+
+  def format_url
+    self.url = url.strip unless url.nil?
   end
 end

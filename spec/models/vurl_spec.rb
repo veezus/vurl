@@ -17,6 +17,11 @@ describe "Vurl" do
     @vurl.should respond_to(:clicks)
   end
 
+  it "formats the url before validating" do
+    @vurl.should_receive(:format_url)
+    @vurl.valid?
+  end
+
   it "should fetch url data before saving" do
     @vurl.should_receive(:fetch_url_data)
     @vurl.save_without_validation
@@ -64,6 +69,14 @@ describe "Vurl" do
     it "assigns a description" do
       @vurl.should_receive(:description=).with('The bombing of a Mosul police headquarters on Friday was the deadliest attack against American soldiers in 13 months.')
       @vurl.fetch_url_data
+    end
+  end
+
+  describe "#format_url" do
+    it "removes leading and trailing spaces" do
+      @vurl.url = '  http://google.com/ '
+      @vurl.send(:format_url)
+      @vurl.url.should == 'http://google.com/'
     end
   end
 end
