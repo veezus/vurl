@@ -45,6 +45,7 @@ Rails::Initializer.run do |config|
   config.gem "haml", :version => '>=2.0.9'
   config.gem "nokogiri", :version => '>=1.2.3'
   config.gem "thoughtbot-factory_girl", :lib => false, :version => '=1.2.1'
+  config.gem "thoughtbot-shoulda", :lib => false
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
