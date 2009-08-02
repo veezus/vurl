@@ -2,9 +2,11 @@ class Vurl < ActiveRecord::Base
   require 'open-uri'
   require 'nokogiri'
 
-  validates_presence_of :url
-  validates_format_of   :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
+  belongs_to :user
   has_many :clicks
+
+  validates_presence_of :url, :user
+  validates_format_of   :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
 
   before_validation :format_url
   before_save :fetch_url_data

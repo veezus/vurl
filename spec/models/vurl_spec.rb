@@ -6,15 +6,17 @@ describe "Vurl" do
     @vurl = Vurl.new
   end
 
-  it "should require a url" do
-    @vurl.should have(2).errors_on(:url)
-  end
-  it "should require a valid url" do
-    Factory.build(:vurl, :url => 'invalid_url').should_not be_valid
-    Factory.build(:vurl, :url => 'http://sub-domain.mattremsik.com').should be_valid
-  end
-  it "has many clicks" do
-    @vurl.should respond_to(:clicks)
+  describe "validations and associations" do
+    subject { @vurl }
+
+    it { should belong_to(:user) }
+    it { should have_many(:clicks) }
+
+    it { should validate_presence_of(:url) }
+    it { should validate_presence_of(:user) }
+
+    it { should allow_value('http://sub-domain.mattremsik.com').for(:url) }
+    it { should_not allow_value('invalid_url').for(:url) }
   end
 
   it "formats the url before validating" do

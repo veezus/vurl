@@ -53,6 +53,7 @@ class VurlsController < ApplicationController
   def create
     @vurl = Vurl.new(params[:vurl])
     @vurl.ip_address = request.remote_ip
+    @vurl.user = current_user
 
     load_recent_popular_vurls
 

@@ -20,6 +20,7 @@ describe VurlsController do
 
   describe "when editing a vurl" do
     before(:each) do
+      @vurl.save
       get :edit, :id => @vurl.id
     end
     it "should redirect when the edit action is called" do
@@ -62,13 +63,17 @@ describe VurlsController do
       #FIXME Incrementing vurl.id feels wrong
       response.should redirect_to(vurl_path(@vurl))
     end
-
     it "should set the ip address of the creator" do
       Vurl.should_receive(:new).and_return(@vurl)
       @vurl.should_receive(:ip_address=).with('0.0.0.0')
       post :create, :vurl => @vurl.attributes
     end
-
+    it "assigns the current user as the vurls user" do
+      user = Factory(:user)
+      controller.stub!(:current_user).and_return(user)
+      post :create, :vurl => @vurl.attributes
+      @vurl.user.should == user
+    end
   end
 
   describe "when redirecting vurls" do
