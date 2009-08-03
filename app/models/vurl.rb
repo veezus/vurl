@@ -49,6 +49,7 @@ class Vurl < ActiveRecord::Base
       self.title = document.at('title').text
       self.keywords = document.at("meta[@name*=eywords]/@content").to_s
       self.description = document.at("meta[@name*=escription]/@content").to_s
+      truncate_metadata
     rescue
       logger.warn "Could not fetch data for #{construct_url}."
     end
@@ -62,5 +63,11 @@ class Vurl < ActiveRecord::Base
 
   def format_url
     self.url = url.strip unless url.nil?
+  end
+
+  def truncate_metadata
+    self.title = title.first(255) if title.length > 255
+    self.description = description.first(255) if description.length > 255
+    self.keywords = keywords.first(255) if keywords.length > 255
   end
 end

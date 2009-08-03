@@ -72,6 +72,10 @@ describe "Vurl" do
       @vurl.should_receive(:description=).with('The bombing of a Mosul police headquarters on Friday was the deadliest attack against American soldiers in 13 months.')
       @vurl.fetch_url_data
     end
+    it "truncates metadata" do
+      @vurl.should_receive(:truncate_metadata)
+      @vurl.fetch_url_data
+    end
   end
 
   describe "#format_url" do
@@ -79,6 +83,17 @@ describe "Vurl" do
       @vurl.url = '  http://google.com/ '
       @vurl.send(:format_url)
       @vurl.url.should == 'http://google.com/'
+    end
+  end
+
+  describe "#truncate_metadata" do
+    it "limits metadata to 255 characters" do
+      invalid = "meta!data!" * 30 # 300 characters
+      valid = invalid.first(255)
+      metadata = %w(title description keywords)
+      metadata.each {|metadatum| @vurl.send("#{metadatum}=", invalid) }
+      @vurl.send(:truncate_metadata)
+      metadata.each {|metadatum| @vurl.send("#{metadatum}").should == valid }
     end
   end
 end
