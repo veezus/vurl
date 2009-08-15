@@ -9,3 +9,7 @@ development:
 test:
   :twitter:
     <<: *default_twitter
+
+staging:
+  :twitter:
+    <<: *default_twitter
