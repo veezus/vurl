@@ -26,6 +26,22 @@ class Vurl < ActiveRecord::Base
     end
   end
 
+  def self.tweet_most_popular_of_the_day
+    require 'twitter'
+
+    vurl = find(:first, :order => 'clicks_count desc', :conditions => ['created_at >= ?', 1.day.ago])
+    return if vurl.nil?
+
+    intro = 'Most popular vurl today? '
+    link = ' http://vurl.me/' + vurl.slug
+    description_length = 140 - intro.length - link.length
+    description = vurl.title.first(description_length)
+
+    httpauth = Twitter::HTTPAuth.new(APP_CONFIG[:twitter][:login], APP_CONFIG[:twitter][:password])
+    base = Twitter::Base.new(httpauth)
+    base.update("#{intro}#{description}#{link}")
+  end
+
   def fetch_url_data
     begin
       document = Nokogiri::HTML(open(construct_url))
