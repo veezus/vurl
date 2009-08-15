@@ -31,6 +31,10 @@ class VurlsController < ApplicationController
     end
   end
 
+  def preview
+    redirect_to :action => :stats, :slug => params[:slug]
+  end
+
   # GET /vurls/new
   # GET /vurls/new.xml
   def new
