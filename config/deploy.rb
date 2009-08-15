@@ -30,6 +30,7 @@ set :use_sudo, true
 after "deploy:update_code", "vurl_custom"
 task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
     run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
+    run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
 end
 
 namespace :deploy do
