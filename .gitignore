@@ -1,5 +1,6 @@
 log/*.log
 db/schema.rb
 db/*.sqlite3
+config/settings.yml
 config/database.yml
 .*.sw?

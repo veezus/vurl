@@ -1,0 +1,11 @@
+:twitter: &default_twitter
+  :login: vurlme_test
+  :password: passwordz
+
+development:
+  :twitter:
+    <<: *default_twitter
+
+test:
+  :twitter:
+    <<: *default_twitter

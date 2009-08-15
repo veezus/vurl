@@ -10,6 +10,15 @@ RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
+config_file_path = File.join(RAILS_ROOT, *%w(config settings.yml))
+if File.exist?(config_file_path)
+  config = YAML.load_file(config_file_path)
+  APP_CONFIG = config.has_key?(RAILS_ENV) ? config[RAILS_ENV] : {}
+else
+  puts "WARNING: configuration file #{config_file_path} not found."
+  APP_CONFIG = {}
+end
+
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
   # Application configuration should go into files in config/initializers
