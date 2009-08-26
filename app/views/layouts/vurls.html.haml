@@ -19,6 +19,7 @@
         #body_container.span-18.last
           %p.flash
             = flash[:notice]
+            = flash[:error]
           = yield
         #footer_container.span-18.last
           .js_widget.span-9

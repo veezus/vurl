@@ -24,4 +24,8 @@ class ApplicationController < ActionController::Base
     cookies[:user_id] = user.id
     user
   end
+
+  def suspected_spam_user?
+    %w(76.168.113.69 84.46.116.13).include? request.remote_ip
+  end
 end

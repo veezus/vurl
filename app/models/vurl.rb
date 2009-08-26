@@ -35,7 +35,7 @@ class Vurl < ActiveRecord::Base
     intro = 'Most popular vurl today? '
     link = ' http://vurl.me/' + vurl.slug
     description_length = 140 - intro.length - link.length
-    description = vurl.title.first(description_length)
+    description = vurl.title.first(description_length) unless vurl.title.blank?
 
     httpauth = Twitter::HTTPAuth.new(APP_CONFIG[:twitter][:login], APP_CONFIG[:twitter][:password], :ssl => true)
     base = Twitter::Base.new(httpauth)
