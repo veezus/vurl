@@ -2,7 +2,7 @@ require 'eycap/recipes'
 
 default_run_options[:pty] = true
 set :application, "vurl"
-set :repository,  "git@github.com:veez/vurl.git"
+set :repository,  "git@github.com:veezus/vurl.git"
 
 # If you aren't deploying to /u/apps/#{application} on the target
 # servers (which is the default), you can specify the actual location
