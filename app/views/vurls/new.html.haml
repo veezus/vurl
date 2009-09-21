@@ -18,4 +18,4 @@
         = link_to vurl.title, vurl.url
       %dd
         %span.small
-          = pluralize vurl.clicks_count, 'click'
+          = link_to pluralize(vurl.clicks_count, 'click'), stats_path(vurl.slug)
