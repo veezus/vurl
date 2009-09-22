@@ -8,3 +8,8 @@ end
 
 Factory.define :user do |user|
 end
+
+Factory.define :click do |click|
+  click.ip_address '127.0.0.1'
+  click.user_agent '1337 browser'
+end

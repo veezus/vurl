@@ -96,4 +96,20 @@ describe "Vurl" do
       metadata.each {|metadatum| @vurl.send("#{metadatum}").should == valid }
     end
   end
+
+  describe "#days_with_clicks" do
+    it "returns a distinct list of days" do
+      @vurl = Factory(:vurl)
+      click_one = Factory(:click, :vurl => @vurl)
+      click_two = Factory(:click, :vurl => @vurl)
+
+      click_one.update_attribute(:created_at, DateTime.new(2009, 12, 31, 10, 30))
+      click_two.update_attribute(:created_at, DateTime.new(2009, 12, 31, 16, 30))
+
+      @vurl.days_with_clicks.size.should == 1
+      @vurl.days_with_clicks.first.year.should == 2009
+      @vurl.days_with_clicks.first.month.should == 12
+      @vurl.days_with_clicks.first.day.should == 31
+    end
+  end
 end

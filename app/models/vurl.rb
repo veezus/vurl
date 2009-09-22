@@ -14,6 +14,10 @@ class Vurl < ActiveRecord::Base
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
   named_scope :since, lambda {|*args| { :conditions => ["created_at >= ?", args.first || 7.days.ago] } }
 
+  def days_with_clicks
+    clicks.map(&:created_at).map(&:to_date).uniq
+  end
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
