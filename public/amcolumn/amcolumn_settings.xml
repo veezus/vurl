@@ -47,7 +47,7 @@
                                                               <!-- if you set "above" for column chart, the data label will be displayed inside column, rotated  by 90 degrees -->
     <data_labels_always_on></data_labels_always_on>           <!-- [false] (true / false) If the data label is placed inside of the bar or column (stacked chart) and the bar or column is too small for the label to fit, it is hidden. If you set this setting to "true", the data labels will always be visible. -->
     <balloon_text>                                                    
-	    <![CDATA[{value} clicks]]>                                             <!-- [] ({title} {value} {series} {percents} {start} {difference} {total}) You can format any data label: {title} will be replaced with real title, {value} - with value and so on. You can add your own text or html code too. -->
+	    <![CDATA[{series}: {value} clicks]]>                                             <!-- [] ({title} {value} {series} {percents} {start} {difference} {total}) You can format any data label: {title} will be replaced with real title, {value} - with value and so on. You can add your own text or html code too. -->
     </balloon_text>    
     <link_target></link_target>                               <!-- [] (_blank, _top ...) -->
     <gradient></gradient>                                     <!-- [vertical] (horizontal / vertical) Direction of column gradient. Gradient colors are defined in graph settings below. -->
