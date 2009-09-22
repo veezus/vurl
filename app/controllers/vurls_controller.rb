@@ -19,7 +19,7 @@ class VurlsController < ApplicationController
 
   def clicks
     @vurl = Vurl.find(params[:id])
-    @days = @vurl.days_with_clicks
+    @periods = @vurl.click_periods
 
     respond_to do |format|
       format.html { render :nothing => true }
