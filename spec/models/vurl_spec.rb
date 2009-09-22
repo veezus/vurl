@@ -155,4 +155,18 @@ describe "Vurl" do
       @vurl.chart_with_hours?.should be_false
     end
   end
+
+  describe "#click_periods" do
+    it "returns hours if the vurl should chart with hours" do
+      @vurl.stubs(:chart_with_hours?).returns(true)
+      @vurl.expects(:hours_with_clicks)
+      @vurl.click_periods
+    end
+
+    it "returns days if the vurl should chart with days" do
+      @vurl.stubs(:chart_with_hours?).returns(false)
+      @vurl.expects(:days_with_clicks)
+      @vurl.click_periods
+    end
+  end
 end

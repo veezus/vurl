@@ -28,6 +28,18 @@ class Vurl < ActiveRecord::Base
     hours_with_clicks.size <= 16
   end
 
+  def click_periods
+    chart_with_hours? ? hours_with_clicks : days_with_clicks
+  end
+
+  def clicks_in_period(period)
+    if chart_with_hours?
+      clicks.by_hour(period)
+    else
+      clicks.by_date(period)
+    end
+  end
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
