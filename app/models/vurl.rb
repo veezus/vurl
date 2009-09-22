@@ -18,6 +18,12 @@ class Vurl < ActiveRecord::Base
     clicks.map(&:created_at).map(&:to_date).uniq
   end
 
+  def hours_with_clicks
+    hours = clicks.map(&:created_at)
+    hours = hours.map {|h| h.change(:hour => h.hour) }
+    hours.uniq
+  end
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
   end

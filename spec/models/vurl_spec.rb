@@ -112,4 +112,29 @@ describe "Vurl" do
       @vurl.days_with_clicks.first.day.should == 31
     end
   end
+
+  describe "#hours_with_clicks" do
+    it "returns a distinct list of hours" do
+      @vurl = Factory(:vurl)
+      click_one = Factory(:click, :vurl => @vurl)
+      click_two = Factory(:click, :vurl => @vurl)
+      click_three = Factory(:click, :vurl => @vurl)
+
+      click_one.update_attribute(:created_at, DateTime.new(2009, 12, 31, 10, 30))
+      click_two.update_attribute(:created_at, DateTime.new(2009, 12, 31, 10, 31))
+      click_three.update_attribute(:created_at, DateTime.new(2009, 12, 31, 16, 30))
+
+      @vurl.hours_with_clicks.size.should == 2
+
+      @vurl.hours_with_clicks.first.year.should == 2009
+      @vurl.hours_with_clicks.first.month.should == 12
+      @vurl.hours_with_clicks.first.day.should == 31
+      @vurl.hours_with_clicks.first.hour.should == 10
+
+      @vurl.hours_with_clicks.last.year.should == 2009
+      @vurl.hours_with_clicks.last.month.should == 12
+      @vurl.hours_with_clicks.last.day.should == 31
+      @vurl.hours_with_clicks.last.hour.should == 16
+    end
+  end
 end
