@@ -138,6 +138,16 @@ describe "Vurl" do
     end
   end
 
+  describe "#last_sixty_minutes" do
+    it "returns the last sixty minutes" do
+      time_now = Time.now
+      @vurl.last_sixty_minutes.size.should == 60
+      @vurl.last_sixty_minutes.each do |minute|
+        minute.should be_close(time_now.change(:hour => time_now.hour, :minute => time_now.min), 1.hour + 2.seconds)
+      end
+    end
+  end
+
   describe "#chart_with_hours?" do
     it "returns true if hours with clicks is less than or equal to 16" do
       hour_clicks = []

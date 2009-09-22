@@ -24,6 +24,15 @@ class Vurl < ActiveRecord::Base
     hours.uniq
   end
 
+  def last_sixty_minutes(start_time=Time.now)
+    minutes = []
+    60.times do |i|
+      new_time = i.minutes.ago(start_time)
+      minutes << new_time.change(:hour => new_time.hour, :minute => new_time.min)
+    end
+    minutes
+  end
+
   def chart_with_hours?
     hours_with_clicks.size <= 16
   end
