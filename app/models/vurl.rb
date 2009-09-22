@@ -36,7 +36,7 @@ class Vurl < ActiveRecord::Base
     if chart_with_hours?
       clicks.by_hour(period)
     else
-      clicks.by_date(period)
+      clicks.by_day(period)
     end
   end
 
