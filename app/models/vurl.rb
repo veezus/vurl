@@ -24,6 +24,10 @@ class Vurl < ActiveRecord::Base
     hours.uniq
   end
 
+  def chart_with_hours?
+    hours_with_clicks.size <= 16
+  end
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
   end

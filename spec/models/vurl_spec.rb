@@ -137,4 +137,22 @@ describe "Vurl" do
       @vurl.hours_with_clicks.last.hour.should == 16
     end
   end
+
+  describe "#chart_with_hours?" do
+    it "returns true if hours with clicks is less than or equal to 16" do
+      hour_clicks = []
+      15.times { hour_clicks << ['a click'] }
+      @vurl.stubs(:hours_with_clicks).returns(hour_clicks)
+      @vurl.chart_with_hours?.should be_true
+      hour_clicks << ['a new click']
+      @vurl.chart_with_hours?.should be_true
+    end
+
+    it "returns false if hours with clicks is more than 16" do
+      hour_clicks = []
+      17.times { hour_clicks << ['a click'] }
+      @vurl.stubs(:hours_with_clicks).returns(hour_clicks)
+      @vurl.chart_with_hours?.should be_false
+    end
+  end
 end
