@@ -1,0 +1,10 @@
+<script type="text/javascript">
+  // <![CDATA[    
+  var so = new SWFObject("/amcolumn/amcolumn.swf", "clicks_chart", "400", "180", "8", "#FFFFFF");
+  so.addVariable("path", "/amcolumn/");
+  so.addVariable("settings_file", escape("/amcolumn/amcolumn_settings.xml"));
+  so.addVariable("data_file", escape("<%= clicks_vurl_path(@vurl, :format => :xml) %>"));
+  so.addVariable("preloader_color", "#000000");
+  so.write("clicks_chart");
+  // ]]>
+</script>

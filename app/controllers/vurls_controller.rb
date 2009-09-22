@@ -17,6 +17,16 @@ class VurlsController < ApplicationController
     end
   end
 
+  def clicks
+    @vurl = Vurl.find(params[:id])
+    @days = @vurl.days_with_clicks
+
+    respond_to do |format|
+      format.html { render :nothing => true }
+      format.xml
+    end
+  end
+
   # GET /vurls/stats/AA
   def stats
     @vurl = Vurl.find_by_slug(params[:slug])

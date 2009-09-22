@@ -26,6 +26,14 @@
 
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
+  .span-13
+    #clicks_chart.chart
+      %strong
+        Text displayed when the user doesn't have Flash. You might want to display a simple table with the population, search engines and visitor without flash would love that.
+      %p
+        To see this page properly, you need to upgrade your Flash Player, please visit the Adobe web site
+
+
 #vurls_show_vertical_ad.span-5.last
   %script{ :type => "text/javascript" }
     /
@@ -38,3 +46,5 @@
 
 .video_ads.span-13.last{:style => 'padding-top:15px;'}
   = render :partial => 'text_ads.html.erb'
+
+= render :partial => 'clicks_include'
