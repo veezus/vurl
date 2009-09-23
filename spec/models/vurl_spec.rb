@@ -140,7 +140,6 @@ describe "Vurl" do
 
   describe "#last_sixty_minutes" do
     it "returns the last sixty minutes" do
-      raise @vurl.last_sixty_minutes.inspect
       time_now = Time.now
       @vurl.last_sixty_minutes.size.should == 60
       @vurl.last_sixty_minutes.each do |minute|
