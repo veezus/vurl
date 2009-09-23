@@ -27,6 +27,15 @@ class VurlsController < ApplicationController
     end
   end
 
+  def real_time_clicks
+    @vurl = Vurl.find(params[:id])
+
+    respond_to do |format|
+      format.html { render :nothing => true }
+      format.xml
+    end
+  end
+
   # GET /vurls/stats/AA
   def stats
     @vurl = Vurl.find_by_slug(params[:slug])

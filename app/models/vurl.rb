@@ -30,7 +30,7 @@ class Vurl < ActiveRecord::Base
       new_time = i.minutes.ago(start_time)
       minutes << new_time.change(:hour => new_time.hour, :min => new_time.min)
     end
-    minutes
+    minutes.reverse
   end
 
   def chart_with_hours?

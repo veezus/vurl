@@ -27,6 +27,8 @@
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
   .span-13
+    .field_name Real-time click updates
+    %p The chart below shows clicks over the last hour and will update every fifteen seconds.
     #clicks_chart.chart
       %strong
         Text displayed when the user doesn't have Flash. You might want to display a simple table with the population, search engines and visitor without flash would love that.
@@ -47,4 +49,4 @@
 .video_ads.span-13.last{:style => 'padding-top:15px;'}
   = render :partial => 'text_ads.html.erb'
 
-= render :partial => 'clicks_include'
+= render :partial => 'real_time_clicks_include'

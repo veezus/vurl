@@ -131,10 +131,8 @@ body {
 }
 
 #vurls_show_container #vurl.field_name {
-  margin-top: 35px;
 }
 #vurls_show_container #vurl.field_value {
-  margin: 10px 0 25px 0;
   font-size: 24px;
   text-align: center;
 }
