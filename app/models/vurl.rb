@@ -28,7 +28,7 @@ class Vurl < ActiveRecord::Base
     minutes = []
     60.times do |i|
       new_time = i.minutes.ago(start_time)
-      minutes << new_time.change(:hour => new_time.hour, :minute => new_time.min)
+      minutes << new_time.change(:hour => new_time.hour, :min => new_time.min)
     end
     minutes
   end
