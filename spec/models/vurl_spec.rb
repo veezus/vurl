@@ -97,47 +97,6 @@ describe "Vurl" do
     end
   end
 
-  describe "#days_with_clicks" do
-    it "returns a distinct list of days" do
-      @vurl = Factory(:vurl)
-      click_one = Factory(:click, :vurl => @vurl)
-      click_two = Factory(:click, :vurl => @vurl)
-
-      click_one.update_attribute(:created_at, DateTime.new(2009, 12, 31, 10, 30))
-      click_two.update_attribute(:created_at, DateTime.new(2009, 12, 31, 16, 30))
-
-      @vurl.days_with_clicks.size.should == 1
-      @vurl.days_with_clicks.first.year.should == 2009
-      @vurl.days_with_clicks.first.month.should == 12
-      @vurl.days_with_clicks.first.day.should == 31
-    end
-  end
-
-  describe "#hours_with_clicks" do
-    it "returns a distinct list of hours" do
-      @vurl = Factory(:vurl)
-      click_one = Factory(:click, :vurl => @vurl)
-      click_two = Factory(:click, :vurl => @vurl)
-      click_three = Factory(:click, :vurl => @vurl)
-
-      click_one.update_attribute(:created_at, DateTime.new(2009, 12, 31, 10, 30))
-      click_two.update_attribute(:created_at, DateTime.new(2009, 12, 31, 10, 31))
-      click_three.update_attribute(:created_at, DateTime.new(2009, 12, 31, 16, 30))
-
-      @vurl.hours_with_clicks.size.should == 2
-
-      @vurl.hours_with_clicks.first.year.should == 2009
-      @vurl.hours_with_clicks.first.month.should == 12
-      @vurl.hours_with_clicks.first.day.should == 31
-      @vurl.hours_with_clicks.first.hour.should == 10
-
-      @vurl.hours_with_clicks.last.year.should == 2009
-      @vurl.hours_with_clicks.last.month.should == 12
-      @vurl.hours_with_clicks.last.day.should == 31
-      @vurl.hours_with_clicks.last.hour.should == 16
-    end
-  end
-
   describe "#last_sixty_minutes" do
     it "returns the last sixty minutes" do
       time_now = Time.now
@@ -145,38 +104,6 @@ describe "Vurl" do
       @vurl.last_sixty_minutes.each do |minute|
         minute.should be_close(time_now.change(:hour => time_now.hour, :minute => time_now.min), 1.hour + 2.seconds)
       end
-    end
-  end
-
-  describe "#chart_with_hours?" do
-    it "returns true if hours with clicks is less than or equal to 16" do
-      hour_clicks = []
-      15.times { hour_clicks << ['a click'] }
-      @vurl.stubs(:hours_with_clicks).returns(hour_clicks)
-      @vurl.chart_with_hours?.should be_true
-      hour_clicks << ['a new click']
-      @vurl.chart_with_hours?.should be_true
-    end
-
-    it "returns false if hours with clicks is more than 16" do
-      hour_clicks = []
-      17.times { hour_clicks << ['a click'] }
-      @vurl.stubs(:hours_with_clicks).returns(hour_clicks)
-      @vurl.chart_with_hours?.should be_false
-    end
-  end
-
-  describe "#click_periods" do
-    it "returns hours if the vurl should chart with hours" do
-      @vurl.stubs(:chart_with_hours?).returns(true)
-      @vurl.expects(:hours_with_clicks)
-      @vurl.click_periods
-    end
-
-    it "returns days if the vurl should chart with days" do
-      @vurl.stubs(:chart_with_hours?).returns(false)
-      @vurl.expects(:days_with_clicks)
-      @vurl.click_periods
     end
   end
 end

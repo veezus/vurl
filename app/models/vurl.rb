@@ -14,16 +14,6 @@ class Vurl < ActiveRecord::Base
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
   named_scope :since, lambda {|*args| { :conditions => ["created_at >= ?", args.first || 7.days.ago] } }
 
-  def days_with_clicks
-    clicks.map(&:created_at).map(&:to_date).uniq
-  end
-
-  def hours_with_clicks
-    hours = clicks.map(&:created_at)
-    hours = hours.map {|h| h.change(:hour => h.hour) }
-    hours.uniq
-  end
-
   def last_sixty_minutes(start_time=Time.now)
     minutes = []
     60.times do |i|
@@ -31,22 +21,6 @@ class Vurl < ActiveRecord::Base
       minutes << new_time.change(:hour => new_time.hour, :min => new_time.min)
     end
     minutes.reverse
-  end
-
-  def chart_with_hours?
-    hours_with_clicks.size <= 16
-  end
-
-  def click_periods
-    chart_with_hours? ? hours_with_clicks : days_with_clicks
-  end
-
-  def clicks_in_period(period)
-    if chart_with_hours?
-      clicks.by_hour(period)
-    else
-      clicks.by_day(period)
-    end
   end
 
   def self.random
