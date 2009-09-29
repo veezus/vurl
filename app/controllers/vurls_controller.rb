@@ -88,7 +88,7 @@ class VurlsController < ApplicationController
     respond_to do |format|
       if @vurl.save
         flash[:notice] = 'Vurl was successfully created.'
-        format.html { redirect_to(@vurl) }
+        format.html { redirect_to stats_path(@vurl.slug) }
         format.xml  { render :xml => @vurl, :status => :created, :location => @vurl }
       else
         format.html { render :action => "new" }

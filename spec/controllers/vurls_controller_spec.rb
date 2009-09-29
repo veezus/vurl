@@ -42,14 +42,6 @@ describe VurlsController do
     end
   end
 
-  describe "when showing vurls" do
-    it "should render the show action" do
-      vurl = Factory(:vurl)
-      get :show, :id => vurl.id
-      response.should render_template(:show)
-    end
-  end
-
   describe "when creating vurls" do
     before do
       Vurl.stub!(:new).and_return(@vurl)
@@ -61,7 +53,7 @@ describe VurlsController do
     it "should redirect to the show page" do
       post :create, :vurl => @vurl.attributes
       #FIXME Incrementing vurl.id feels wrong
-      response.should redirect_to(vurl_path(@vurl))
+      response.should redirect_to(stats_path(@vurl.slug))
     end
     it "should set the ip address of the creator" do
       Vurl.should_receive(:new).and_return(@vurl)

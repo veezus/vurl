@@ -1,9 +1,9 @@
 require File.expand_path(File.join(File.dirname(__FILE__), '..', 'spec_helper'))
 
 describe "Create Vurls" do
-  it "redirects to the vurl show page" do
+  it "redirects to the vurl stats page" do
     submit_vurl 'http://google.com'
-    current_url.should == vurl_url(Vurl.last)
+    current_url.should == stats_url(Vurl.last.slug)
   end
   it "shows a success message" do
     submit_vurl 'http://google.com'
