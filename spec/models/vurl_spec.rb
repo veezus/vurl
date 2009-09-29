@@ -40,6 +40,18 @@ describe "Vurl" do
     new_vurl.slug.should == 'AAB'
   end
 
+  describe "#clicks_for_last" do
+    before { @vurl = Factory(:vurl) }
+
+    context "hour" do
+      it "returns a hash of minute => clicks" do
+        click = Factory(:click, :vurl => @vurl)
+        @vurl.clicks_for_last('hour').size.should == 1
+        @vurl.clicks_for_last('hour')[click.created_at.min.to_s].size.should == 1
+      end
+    end
+  end
+
   describe ".random" do
     # Not entirely sure how to test this. Maybe stubbing count and rand and setting
     # an expectation that find is called with that offset? - Veez

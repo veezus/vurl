@@ -23,6 +23,13 @@ class Vurl < ActiveRecord::Base
     minutes.reverse
   end
 
+  def clicks_for_last period
+    case period
+    when 'hour'
+      clicks.since(1.hour.ago).all(:select => 'clicks.*, MINUTE(clicks.created_at) AS minute').group_by(&:minute)
+    end
+  end
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
