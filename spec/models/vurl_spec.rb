@@ -7,6 +7,7 @@ describe "Vurl" do
   end
 
   describe "validations and associations" do
+    before { @vurl.user = Factory(:user) }
     subject { @vurl }
 
     it { should belong_to(:user) }
@@ -17,6 +18,13 @@ describe "Vurl" do
 
     it { should allow_value('http://sub-domain.mattremsik.com').for(:url) }
     it { should_not allow_value('invalid_url').for(:url) }
+    it { should_not allow_value('http://vurl.me').for(:url) }
+    it { should_not allow_value('https://vurl.me').for(:url) }
+    it { should_not allow_value('http://www.vurl.me').for(:url) }
+    it { should_not allow_value('https://www.vurl.me').for(:url) }
+    it { should_not allow_value('http://vurl.me/').for(:url) }
+    it { should_not allow_value('http://vurl.me/AA').for(:url) }
+    it { should_not allow_value('http://blow-me.vurl.me/AA').for(:url) }
   end
 
   it "formats the url before validating" do

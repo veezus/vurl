@@ -7,6 +7,7 @@ class Vurl < ActiveRecord::Base
 
   validates_presence_of :url, :user
   validates_format_of   :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
+  validate :appropriateness_of_url
 
   before_validation :format_url
   before_save :fetch_url_data
@@ -118,5 +119,11 @@ class Vurl < ActiveRecord::Base
     self.title = title.first(255) if title.length > 255
     self.description = description.first(255) if description.length > 255
     self.keywords = keywords.first(255) if keywords.length > 255
+  end
+
+  def appropriateness_of_url
+    if url =~ /https*:\/\/[a-zA-Z-]*\.*vurl\.me/i
+      errors.add(:url, "Please don't create vurls that point back to vurl.me")
+    end
   end
 end
