@@ -68,7 +68,6 @@
   <legend>
 	  <enabled>false</enabled>
   </legend>
-  <values><value><min>0</min><integers_only>1</integers_only></value><category><frequency>10</frequency></category></values>
 
   <plot_area>
 	  <margins>

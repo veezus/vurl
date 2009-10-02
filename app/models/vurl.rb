@@ -23,10 +23,43 @@ class Vurl < ActiveRecord::Base
     minutes.reverse
   end
 
+  def last_twenty_four_hours(start_time=Time.now)
+    hours = []
+    24.times do |i|
+      new_time = i.hours.ago(start_time)
+      hours << new_time.change(:hour => new_time.hour)
+    end
+    hours.reverse
+  end
+
+  def last_seven_days(start_date=Time.now)
+    dates = []
+    7.times do |i|
+      new_date = i.days.ago(start_date)
+      dates << new_date.change(:hour => 0)
+    end
+    dates.reverse
+  end
+
   def clicks_for_last period
     case period
     when 'hour'
       clicks.since(1.hour.ago).all(:select => 'clicks.*, MINUTE(clicks.created_at) AS minute').group_by(&:minute)
+    when 'day'
+      clicks.since(1.day.ago).all(:select => 'clicks.*, HOUR(clicks.created_at) AS hour').group_by(&:hour)
+    when 'week'
+      clicks.since(1.week.ago).all(:select => 'clicks.*, DAY(clicks.created_at) AS day').group_by(&:day)
+    end
+  end
+
+  def units_for_last period
+    case period
+    when 'hour'
+      last_sixty_minutes
+    when 'day'
+      last_twenty_four_hours
+    when 'week'
+      last_seven_days
     end
   end
 
