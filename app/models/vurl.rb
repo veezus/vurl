@@ -123,7 +123,7 @@ class Vurl < ActiveRecord::Base
 
   def appropriateness_of_url
     if url =~ /https*:\/\/[a-zA-Z-]*\.*vurl\.me/i
-      errors.add(:url, "Please don't create vurls that point back to vurl.me")
+      errors.add(:url, "shouldn't point back to vurl.me")
     end
   end
 end
