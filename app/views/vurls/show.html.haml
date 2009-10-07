@@ -11,12 +11,10 @@
   .video_ads.span-13.last
     = render :partial => 'text_ads.html.erb'
 
-  = render :partial => 'title', :locals => {:vurl => @vurl}
-
   .field_name.span-4
-    Original URL
+    Original link
   .field_value.span-9.last
-    = h @vurl.url
+    = link_to @vurl.title.present? ? @vurl.title : @vurl.url, @vurl.url
 
   .field_name.span-4
     Statistics link
