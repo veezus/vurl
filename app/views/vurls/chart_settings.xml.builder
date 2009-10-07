@@ -10,7 +10,7 @@ xml.settings do
   xml.column do
     case current_period
     when 'hour'
-      xml.width 100
+      xml.width 90
     when 'day'
       xml.width 70
     when 'week'
