@@ -8,7 +8,8 @@ require 'webrat'
 require 'spec/support/integration'
 
 Webrat.configure do |config|
-    config.mode = :rails
+  config.mode = :rails
+  config.open_error_files = false
 end
 
 require File.expand_path(File.dirname(__FILE__) + "/factories.rb")
