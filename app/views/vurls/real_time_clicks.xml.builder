@@ -1,31 +1,15 @@
-units = @vurl.units_for_last(@period)
+units = @vurl.units_for_last(current_period)
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 xml.chart do
-  xml.values do
-    xml.value do
-      xml.min 0
-      xml.integers_only 1
-    end
-    xml.category do
-      case @period
-      when 'hour'
-        xml.frequency 10
-      when 'day'
-        xml.frequency 3
-      when 'week'
-        xml.frequency 1
-      end
-    end
-  end
   xml.series do
     units.each_with_index do |unit, index|
-      case @period
+      case current_period
       when 'hour'
         xml.value "#{unit.hour.to_s.rjust(2, '0')}:#{unit.min.to_s.rjust(2, '0')}", :xid => index
       when 'day'
         xml.value "#{unit.hour.to_s.rjust(2, '0')}:00", :xid => index
       when 'week'
-        xml.value "#{Date::DAYNAMES[unit.day]}", :xid => index
+        xml.value "#{Date::DAYNAMES[unit.wday]}", :xid => index
       end
     end
   end
@@ -33,8 +17,8 @@ xml.chart do
   xml.graphs do
    #the gid is used in the settings file to set different settings just for this graph
     xml.graph :gid => 'hits_by_day' do
-      clicks = @vurl.clicks_for_last @period
-      case @period
+      clicks = @vurl.clicks_for_last current_period
+      case current_period
       when 'hour'
         units.each_with_index do |unit, index|
           clicks_for_this_minute = clicks[unit.min.to_s]

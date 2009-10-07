@@ -19,7 +19,6 @@ class VurlsController < ApplicationController
 
   def real_time_clicks
     @vurl = Vurl.find(params[:id])
-    @period = params[:period] || 'hour'
 
     respond_to do |format|
       format.html { render :nothing => true }

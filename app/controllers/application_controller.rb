@@ -28,4 +28,9 @@ class ApplicationController < ActionController::Base
   def suspected_spam_user?
     %w(76.168.113.69 84.46.116.13).include? request.remote_ip
   end
+
+  def current_period
+    @current_period ||= params[:period].present? ? params[:period] : 'hour'
+  end
+  helper_method :current_period
 end

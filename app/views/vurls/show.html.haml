@@ -27,11 +27,12 @@
   = render :partial => 'clicks', :locals => {:vurl => @vurl}
 
   .span-13
-    .field_name Real-time click updates
-    %p The chart below shows clicks over the last hour and will update every fifteen seconds.
-    = link_to 'Hour', '?period=hour'
-    = link_to 'Day', '?period=day'
-    = link_to 'Week', '?period=week'
+    .field_name
+      Real-time updates for last
+      = link_to_period 'hour'
+      = link_to_period 'day'
+      = link_to_period 'week'
+    %p The chart below shows real-time clicks over the last #{current_period} and will update every few seconds.
     #clicks_chart.chart
       %strong
         Loading real-time click chart

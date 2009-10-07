@@ -145,3 +145,15 @@ body {
   margin: 20px 25px 20px 25px;
   float: left;
 }
+
+.period_link {
+  padding: 5px 10px;;
+}
+.selected_period {
+  background-color: #00688D;
+  color: white;
+}
+.deselected_period {
+  background-color: #F5F5F5;
+  color: #00F;
+}

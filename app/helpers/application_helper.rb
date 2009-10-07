@@ -33,4 +33,12 @@ module ApplicationHelper
     </object>
     EOF
   end
+
+  def link_to_period period
+    if period == current_period
+      content_tag :span, period.titleize, :class => 'selected_period period_link'
+    else
+      link_to period.titleize, "?period=#{period}", :class => 'deselected_period period_link'
+    end
+  end
 end
