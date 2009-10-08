@@ -130,10 +130,16 @@ body {
   margin: 5px 0 5px 0;
 }
 
-#vurls_show_container #vurl.field_name {
+#vurls_show_container #vurl_link.field_name {
 }
-#vurls_show_container #vurl.field_value {
+#vurls_show_container #vurl_link.field_value {
   font-size: 24px;
+  text-align: center;
+}
+#vurls_show_container #stats_link.field_name {
+}
+#vurls_show_container #stats_link.field_value {
+  font-size: 18px;
   text-align: center;
 }
 

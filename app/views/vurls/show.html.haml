@@ -2,29 +2,27 @@
   - content_for :seo_data do
     = render :partial => 'seo_data', :locals => {:vurl => @vurl}
 
-  #vurl.field_name.span-13.last
+  #vurl_link.field_name.span-13.last
     Your new vurl is...
-  #vurl.field_value.span-13.last
+  #vurl_link.field_value.span-13.last
     = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
     = clippy(redirect_url(@vurl.slug))
 
-  .video_ads.span-13.last
-    = render :partial => 'text_ads.html.erb'
-
-  .field_name.span-4
-    Original link
-  .field_value.span-9.last
-    = link_to @vurl.title.present? ? @vurl.title : @vurl.url, @vurl.url
-
-  .field_name.span-4
-    Statistics link
-  .field_value.span-9.last
+  #stats_link.field_name.span-13.last
+    View your stats at...
+  #stats_link.field_value.span-13.last
     = link_to stats_url(@vurl.slug), stats_url(@vurl.slug)
     = clippy(stats_url(@vurl.slug))
 
-  = render :partial => 'clicks', :locals => {:vurl => @vurl}
+  .field_name.span-13.summary.last{:style => 'margin-top:40px;'}
+    Your original link to
+    = link_to @vurl.title.present? ? @vurl.title : @vurl.url, @vurl.url
+    has been clicked
+    %span.click_count
+      = @vurl.clicks_count
+      times.
 
-  .span-13
+  .span-13.last{:style => 'margin-top:40px;'}
     .field_name
       Real-time updates for last
       = link_to_period 'hour'
@@ -47,8 +45,5 @@
       google_ad_width = 160;
       google_ad_height = 600;
   %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js" }
-
-.video_ads.span-13.last{:style => 'padding-top:15px;'}
-  = render :partial => 'text_ads.html.erb'
 
 = render :partial => 'real_time_clicks_include'
