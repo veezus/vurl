@@ -14,13 +14,16 @@
     = link_to stats_url(@vurl.slug), stats_url(@vurl.slug)
     = clippy(stats_url(@vurl.slug))
 
-  .field_name.span-13.summary.last{:style => 'margin-top:40px;'}
+  .field_value.span-13.summary.last{:style => 'margin-top:40px;'}
     Your original link to
     = link_to @vurl.title.present? ? @vurl.title : @vurl.url, @vurl.url
     has been clicked
     %span.click_count
       = @vurl.clicks_count
-      times.
+    times.
+    [
+    = link_to "Refresh to update total", stats_path(@vurl.slug)
+    ]
 
   .span-13.last{:style => 'margin-top:40px;'}
     .field_name

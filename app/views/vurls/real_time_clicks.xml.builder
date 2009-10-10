@@ -1,5 +1,6 @@
 units = @vurl.units_for_last(current_period)
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
+
 xml.chart do
   xml.series do
     units.each_with_index do |unit, index|

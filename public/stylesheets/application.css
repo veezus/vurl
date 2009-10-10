@@ -119,6 +119,10 @@ body {
 #vurls_show_vertical_ad {
   float: right;
 }
+
+#vurls_show_container, #vurls_show_vertical_ad {
+  margin: 20px 0 0 0;
+}
 #vurls_show_container .video_ads {
   margin: 10px 0 10px 0;
 }

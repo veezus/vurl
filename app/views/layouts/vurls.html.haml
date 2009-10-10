@@ -17,9 +17,6 @@
         #header_container.span-18.last
           = link_to "", new_vurl_path, :id => 'logo_link'
         #body_container.span-18.last
-          %p.flash
-            = flash[:notice]
-            = flash[:error]
           = yield
         #footer_container.span-18.last
           .js_widget.span-9

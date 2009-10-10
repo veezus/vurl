@@ -5,10 +5,6 @@ describe "Create Vurls" do
     submit_vurl 'http://google.com'
     current_url.should == stats_url(Vurl.last.slug)
   end
-  it "shows a success message" do
-    submit_vurl 'http://google.com'
-    response.body.should include('Vurl was successfully created')
-  end
   it "creates a vurl" do
     submit_vurl 'http://veez.us'
     Vurl.last.url.should == 'http://veez.us'
