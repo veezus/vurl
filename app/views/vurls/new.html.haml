@@ -13,10 +13,13 @@
   .recent_popular_header
     popular this
     = popular_period_links
-  %dl
-    - @recent_popular_vurls.each do |vurl|
-      %dt
-        = link_to vurl.title, vurl.url
-      %dd
-        %span.small
-          = link_to pluralize(vurl.clicks_count, 'click'), stats_path(vurl.slug)
+  - if @recent_popular_vurls.blank?
+    == No vurls have been created in the last #{current_period}.
+  - else
+    %dl
+      - @recent_popular_vurls.each do |vurl|
+        %dt
+          = link_to vurl.title, vurl.url
+        %dd
+          %span.small
+            = link_to pluralize(vurl.clicks_count, 'click'), stats_path(vurl.slug)
