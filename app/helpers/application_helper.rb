@@ -43,7 +43,7 @@ module ApplicationHelper
   end
 
   def popular_period_links
-    %w(week day hour).map {|period| period_link period}.join ' | '
+    %w(week day hour).map {|period| period_link(period) if Vurl.since(period_ago(period)).any?}.compact.join ' | '
   end
 
   def period_link period
