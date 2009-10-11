@@ -11,7 +11,8 @@
     = link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link button left'
 .recent_popular.span-18.last
   .recent_popular_header
-    popular this week
+    popular this
+    = popular_period_links
   %dl
     - @recent_popular_vurls.each do |vurl|
       %dt

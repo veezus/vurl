@@ -41,4 +41,12 @@ module ApplicationHelper
       link_to period.titleize, "?period=#{period}", :class => 'deselected_period period_link'
     end
   end
+
+  def popular_period_links
+    %w(week day hour).map {|period| period_link period}.join ' | '
+  end
+
+  def period_link period
+    current_period == period ? period : link_to(period, root_path(:period => period))
+  end
 end

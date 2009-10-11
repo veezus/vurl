@@ -119,8 +119,16 @@ class VurlsController < ApplicationController
 
   protected
 
+  def current_period
+    params[:period] || 'week'
+  end
+
+  def current_period_ago
+    1.send(current_period).ago
+  end
+
   def load_recent_popular_vurls
-    @recent_popular_vurls = Vurl.since(7.days.ago).most_popular
+    @recent_popular_vurls = Vurl.since(current_period_ago).most_popular
   end
 
   def load_most_popular_vurls
