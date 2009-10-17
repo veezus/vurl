@@ -45,7 +45,7 @@ describe ApplicationController do
       User.stub!(:create!).and_return(@user)
       @user.stub!(:id).and_return(17)
       should be_a_kind_of(User)
-      @cookies[:user_id].should == @user.id
+      @cookies[:user_id][:value].should == @user.id
     end
   end
 end

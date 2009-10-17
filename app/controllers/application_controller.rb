@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def create_user
     user = User.create!
-    cookies[:user_id] = user.id
+    cookies[:user_id] = {:value => user.id, :expires => 5.years.from_now}
     user
   end
 
