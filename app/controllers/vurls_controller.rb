@@ -125,7 +125,12 @@ class VurlsController < ApplicationController
   helper_method :current_vurls
 
   def current_period
-    params[:period] || 'week'
+    return params[:period] if params[:period]
+    if action_name == 'stats'
+      'hour'
+    else
+      'week'
+    end
   end
 
   def current_period_ago
