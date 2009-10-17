@@ -1,7 +1,7 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  has_many :vurls
+  has_many :vurls, :order => 'created_at DESC'
 
   before_create :generate_claim_code, :set_default_name
 
@@ -15,6 +15,14 @@ class User < ActiveRecord::Base
 
   def unclaimed?
     !claimed?
+  end
+
+  def has_vurls?
+    vurls.any?
+  end
+
+  def number_of_vurls
+    vurls.count
   end
 
   private

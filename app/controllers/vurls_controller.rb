@@ -3,7 +3,7 @@ class VurlsController < ApplicationController
   # GET /vurls
   # GET /vurls.xml
   def index
-    redirect_to new_vurl_path
+
   end
 
   # GET /vurls/1
@@ -118,6 +118,11 @@ class VurlsController < ApplicationController
   end
 
   protected
+
+  def current_vurls
+    current_user.vurls
+  end
+  helper_method :current_vurls
 
   def current_period
     params[:period] || 'week'

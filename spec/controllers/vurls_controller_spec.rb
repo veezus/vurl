@@ -8,13 +8,9 @@ describe VurlsController do
   end
 
   describe "when displaying an index of vurls" do
-    it "should redirect when the index action is called" do
+    it "renders the index view" do
       get :index
-      response.should be_redirect
-    end
-    it "should redirect to the new vurl page" do
-      get :index
-      response.should redirect_to(new_vurl_url)
+      response.should render_template('vurls/index')
     end
   end
 

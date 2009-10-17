@@ -64,6 +64,10 @@ class Vurl < ActiveRecord::Base
     end
   end
 
+  def last_click
+    clicks.last
+  end
+
   def self.random
     find(:first, :offset => (Vurl.count * rand).to_i)
   end

@@ -6,6 +6,7 @@ describe "new vurl page" do
     assigns[:vurl] = @vurl
     @vurl.stub!(:fetch_url_data).and_return(true)
     assigns[:recent_popular_vurls] = []
+    template.stubs :popular_period_links
   end
   it "has an I'm Feeling Lucky link" do
     render "/vurls/new.html.haml"

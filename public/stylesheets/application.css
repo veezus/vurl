@@ -167,3 +167,6 @@ body {
   background-color: #F5F5F5;
   color: #00F;
 }
+
+ul.history { list-style: none; margin: 0 0 0 0; }
+ul.history li { padding: 10px 0; }
