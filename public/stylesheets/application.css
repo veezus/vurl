@@ -170,3 +170,9 @@ body {
 
 ul.history { list-style: none; margin: 0 0 0 0; }
 ul.history li { padding: 10px 0; }
+
+a#layout_history_link {
+  color: black;
+  float: right;
+  margin-top: 130px;
+}
