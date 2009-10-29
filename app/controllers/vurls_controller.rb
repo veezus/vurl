@@ -69,7 +69,7 @@ class VurlsController < ApplicationController
     @vurl.user = current_user
 
     if suspected_spam_user?
-      flash[:error] = "We've flagged this IP for suspicious activity and will not allow creation of Vurls.  Contact Veez if you feel this is an error"
+      flash[:error] = "We've flagged this IP for suspicious activity and will not allow creation of Vurls.  Contact Veezus if you feel this is an error"
       redirect_to root_path and return
     end
 

@@ -62,7 +62,7 @@ describe "Vurl" do
 
   describe ".random" do
     # Not entirely sure how to test this. Maybe stubbing count and rand and setting
-    # an expectation that find is called with that offset? - Veez
+    # an expectation that find is called with that offset? - Veezus
   end
 
   describe ".most_popular" do
