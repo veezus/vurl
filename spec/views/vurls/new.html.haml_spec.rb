@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper.rb')
 describe "new vurl page" do
   before do
     @vurl = Vurl.new
-    assigns[:vurl] = @vurl
+    template.stub!(:new_vurl).and_return(@vurl)
     @vurl.stub!(:fetch_url_data).and_return(true)
     assigns[:recent_popular_vurls] = []
     template.stub! :popular_period_links

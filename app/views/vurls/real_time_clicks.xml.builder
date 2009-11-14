@@ -1,4 +1,4 @@
-units = @vurl.units_for_last(current_period)
+units = current_vurl.units_for_last(current_period)
 xml.instruct! :xml, :version=>"1.0", :encoding=>"UTF-8"
 
 xml.chart do
@@ -18,7 +18,7 @@ xml.chart do
   xml.graphs do
    #the gid is used in the settings file to set different settings just for this graph
     xml.graph :gid => 'hits_by_day' do
-      clicks = @vurl.clicks_for_last current_period
+      clicks = current_vurl.clicks_for_last current_period
       case current_period
       when 'hour'
         units.each_with_index do |unit, index|

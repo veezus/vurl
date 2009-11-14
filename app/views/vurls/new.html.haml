@@ -3,7 +3,7 @@
   %meta{:type => 'description', :content => 'Vurl shortens your lengthy URLs'}
 = error_messages_for :vurl
 .span-18{:style => 'padding-top:30px;'}
-- form_for(@vurl) do |f|
+- form_for(new_vurl) do |f|
   .span-18.last
     = f.text_field :url
   .span-18.button_container.last

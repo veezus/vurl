@@ -1,28 +1,28 @@
 #vurls_show_container.span-13
   - content_for :seo_data do
-    = render :partial => 'seo_data', :locals => {:vurl => @vurl}
+    = render :partial => 'seo_data'
 
   #vurl_link.field_name.span-13.last
     Your new vurl is...
   #vurl_link.field_value.span-13.last
-    = link_to redirect_url(@vurl.slug), redirect_url(@vurl.slug)
-    = clippy(redirect_url(@vurl.slug))
+    = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
+    = clippy(redirect_url(current_vurl.slug))
 
   #stats_link.field_name.span-13.last
     View your stats at...
   #stats_link.field_value.span-13.last
-    = link_to stats_url(@vurl.slug), stats_url(@vurl.slug)
-    = clippy(stats_url(@vurl.slug))
+    = link_to stats_url(current_vurl.slug), stats_url(current_vurl.slug)
+    = clippy(stats_url(current_vurl.slug))
 
   .field_value.span-13.summary.last{:style => 'margin-top:40px;'}
     Your original link to
-    = link_to @vurl.title.present? ? @vurl.title : @vurl.url, @vurl.url
+    = link_to current_vurl.title.present? ? current_vurl.title : current_vurl.url, current_vurl.url
     has been clicked
     %span.click_count
-      = @vurl.clicks_count
+      = current_vurl.clicks_count
     times.
     [
-    = link_to "Refresh to update total", stats_path(@vurl.slug)
+    = link_to "Refresh to update total", stats_path(current_vurl.slug)
     ]
 
   .span-13.last{:style => 'margin-top:40px;'}

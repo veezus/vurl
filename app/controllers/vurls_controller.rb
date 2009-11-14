@@ -9,17 +9,13 @@ class VurlsController < ApplicationController
   # GET /vurls/1
   # GET /vurls/1.xml
   def show
-    @vurl = Vurl.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @vurl }
+      format.xml  { render :xml => current_vurl }
     end
   end
 
   def real_time_clicks
-    @vurl = Vurl.find(params[:id])
-
     respond_to do |format|
       format.html { render :nothing => true }
       format.xml
@@ -28,15 +24,14 @@ class VurlsController < ApplicationController
 
   # GET /vurls/stats/AA
   def stats
-    @vurl = Vurl.find_by_slug(params[:slug])
-    if @vurl.nil?
+    if current_vurl.nil?
       load_recent_popular_vurls
       load_most_popular_vurls
       render :template => 'vurls/not_found' and return
     end
     respond_to do |format|
       format.html { render :show }
-      format.xml  { render :xml => @vurl }
+      format.xml  { render :xml => current_vurl }
     end
   end
 
@@ -47,12 +42,11 @@ class VurlsController < ApplicationController
   # GET /vurls/new
   # GET /vurls/new.xml
   def new
-    @vurl = Vurl.new(:url => params[:url])
     load_recent_popular_vurls
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @vurl }
+      format.xml  { render :xml => new_vurl }
     end
   end
 
@@ -64,9 +58,8 @@ class VurlsController < ApplicationController
   # POST /vurls
   # POST /vurls.xml
   def create
-    @vurl = Vurl.new(params[:vurl])
-    @vurl.ip_address = request.remote_ip
-    @vurl.user = current_user
+    new_vurl.ip_address = request.remote_ip
+    new_vurl.user = current_user
 
     if suspected_spam_user?
       flash[:error] = "We've flagged this IP for suspicious activity and will not allow creation of Vurls.  Contact Veezus if you feel this is an error"
@@ -76,13 +69,13 @@ class VurlsController < ApplicationController
     load_recent_popular_vurls
 
     respond_to do |format|
-      if @vurl.save
+      if new_vurl.save
         flash[:notice] = 'Vurl was successfully created.'
-        format.html { redirect_to stats_path(@vurl.slug) }
-        format.xml  { render :xml => @vurl, :status => :created, :location => @vurl }
+        format.html { redirect_to stats_path(new_vurl.slug) }
+        format.xml  { render :xml => new_vurl, :status => :created, :location => new_vurl }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @vurl.errors, :status => :unprocessable_entity }
+        format.xml  { render :xml => new_vurl.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -100,12 +93,12 @@ class VurlsController < ApplicationController
   end
 
   def redirect
-    if vurl = Vurl.find_by_slug(params[:slug])
-      click = Click.new(:vurl => vurl, :ip_address => request.env["REMOTE_ADDR"], :user_agent => request.user_agent, :referer => request.referer)
+    if current_vurl
+      click = Click.new(:vurl => current_vurl, :ip_address => request.env["REMOTE_ADDR"], :user_agent => request.user_agent, :referer => request.referer)
       unless click.save
-        logger.warn "Couldn't create Click for Vurl (#{vurl.inspect}) because it had the following errors: #{click.errors}"
+        logger.warn "Couldn't create Click for Vurl (#{current_vurl.inspect}) because it had the following errors: #{click.errors}"
       end
-      redirect_to vurl.url
+      redirect_to current_vurl.url
     else
       load_recent_popular_vurls
       load_most_popular_vurls
@@ -123,6 +116,20 @@ class VurlsController < ApplicationController
     current_user.vurls
   end
   helper_method :current_vurls
+
+  def current_vurl
+    @current_vurl ||= if params[:slug]
+                Vurl.find_by_slug params[:slug]
+              else
+                Vurl.find_by_id params[:id]
+              end
+  end
+  helper_method :current_vurl
+
+  def new_vurl
+    @new_vurl ||= Vurl.new params[:vurl]
+  end
+  helper_method :new_vurl
 
   def current_period
     return params[:period] if params[:period]

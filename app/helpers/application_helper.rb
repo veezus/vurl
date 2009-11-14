@@ -2,7 +2,7 @@
 module ApplicationHelper
 
   def page_title
-    @vurl && !@vurl.title.blank? ?  @vurl.title : "The URL shortener by Veezus Kreist"
+    current_vurl && !current_vurl.title.blank? ?  current_vurl.title : "The URL shortener by Veezus Kreist"
   end
 
   # Thanks to mojombo for his clippy swf

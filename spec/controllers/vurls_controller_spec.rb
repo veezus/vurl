@@ -112,10 +112,6 @@ describe VurlsController do
       Vurl.should_receive(:find_by_slug).with(@vurl.slug).and_return(@vurl)
       get :stats, :slug => @vurl.slug
     end
-    it "assigns the vurl to @vurl" do
-      get :stats, :slug => @vurl.slug
-      assigns[:vurl].should be(@vurl)
-    end
     it "renders the show template" do
       get :stats, :slug => @vurl.slug
       response.should render_template(:show)
