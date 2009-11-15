@@ -25,7 +25,6 @@ class VurlsController < ApplicationController
   # GET /vurls/stats/AA
   def stats
     if current_vurl.nil?
-      load_most_popular_vurls
       render :template => 'vurls/not_found' and return
     end
     respond_to do |format|
@@ -95,7 +94,6 @@ class VurlsController < ApplicationController
       end
       redirect_to current_vurl.url
     else
-      load_most_popular_vurls
       render :template => 'vurls/not_found'
     end
   end
@@ -148,7 +146,8 @@ class VurlsController < ApplicationController
   end
   helper_method :recent_popular_vurls
 
-  def load_most_popular_vurls
-    @most_popular_vurls = Vurl.most_popular
+  def most_popular_vurls
+    @most_popular_vurls ||= Vurl.most_popular
   end
+  helper_method :most_popular_vurls
 end

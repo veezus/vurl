@@ -86,11 +86,6 @@ describe VurlsController do
       before do
         Vurl.stub!(:find_by_slug).and_return(nil)
       end
-      it "loads all-time most popular vurls" do
-        controller.should_receive(:load_most_popular_vurls)
-        controller.instance_variable_set(:@most_popular_vurls, [])
-        get :redirect, :slug => 'not_found'
-      end
       it "renders the not_found template" do
         get :redirect, :slug => 'not_found'
         response.should render_template('not_found')
@@ -115,12 +110,7 @@ describe VurlsController do
     context "for a non-existent vurl" do
       before do
         Vurl.stub!(:find_by_slug).and_return(nil)
-        controller.stub!(:load_most_popular_vurls)
         controller.instance_variable_set(:@most_popular_vurls, [])
-      end
-      it "loads all-time most popular vurls" do
-        controller.should_receive(:load_most_popular_vurls)
-        get :stats, :slug => 'not_found'
       end
       it "renders the not_found template" do
         get :stats, :slug => 'not_found'
@@ -144,14 +134,6 @@ describe VurlsController do
 
     def do_get
       get :random
-    end
-  end
-
-  describe "#load_most_popular_vurls" do
-    it "asks Vurl for the all-time most popular vurls" do
-      Vurl.should_receive(:most_popular).and_return([])
-      controller.send(:load_most_popular_vurls)
-      controller.instance_variable_get(:@most_popular_vurls).should == []
     end
   end
 end

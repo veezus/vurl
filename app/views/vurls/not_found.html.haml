@@ -17,7 +17,7 @@
   .field_name
     All-Time Most Popular Vurls:
   %ul
-    - @most_popular_vurls.each do |vurl|
+    - most_popular_vurls.each do |vurl|
       %li.most_popular_vurl
         = link_to vurl.title, vurl.url
         %span.small
