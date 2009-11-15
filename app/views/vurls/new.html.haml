@@ -13,11 +13,11 @@
   .recent_popular_header
     popular this
     = popular_period_links
-  - if @recent_popular_vurls.blank?
+  - if recent_popular_vurls.blank?
     == No vurls have been created in the last #{current_period}.
   - else
     %dl
-      - @recent_popular_vurls.each do |vurl|
+      - recent_popular_vurls.each do |vurl|
         %dt
           = link_to vurl.title, vurl.url
         %dd

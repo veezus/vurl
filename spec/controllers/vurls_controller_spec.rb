@@ -91,11 +91,6 @@ describe VurlsController do
         controller.instance_variable_set(:@most_popular_vurls, [])
         get :redirect, :slug => 'not_found'
       end
-      it "loads recent popular vurls" do
-        controller.should_receive(:load_recent_popular_vurls)
-        controller.instance_variable_set(:@recent_popular_vurls, [])
-        get :redirect, :slug => 'not_found'
-      end
       it "renders the not_found template" do
         get :redirect, :slug => 'not_found'
         response.should render_template('not_found')
@@ -121,16 +116,10 @@ describe VurlsController do
       before do
         Vurl.stub!(:find_by_slug).and_return(nil)
         controller.stub!(:load_most_popular_vurls)
-        controller.stub!(:load_recent_popular_vurls)
         controller.instance_variable_set(:@most_popular_vurls, [])
-        controller.instance_variable_set(:@recent_popular_vurls, [])
       end
       it "loads all-time most popular vurls" do
         controller.should_receive(:load_most_popular_vurls)
-        get :stats, :slug => 'not_found'
-      end
-      it "loads recent popular vurls" do
-        controller.should_receive(:load_recent_popular_vurls)
         get :stats, :slug => 'not_found'
       end
       it "renders the not_found template" do
@@ -163,16 +152,6 @@ describe VurlsController do
       Vurl.should_receive(:most_popular).and_return([])
       controller.send(:load_most_popular_vurls)
       controller.instance_variable_get(:@most_popular_vurls).should == []
-    end
-  end
-
-  describe "#load_recent_popular_vurls" do
-    it "asks Vurl for the recent popular vurls" do
-      since = mock('named scope')
-      Vurl.should_receive(:since).and_return(since)
-      since.should_receive(:most_popular).and_return([])
-      controller.send(:load_recent_popular_vurls)
-      controller.instance_variable_get(:@recent_popular_vurls).should == []
     end
   end
 end

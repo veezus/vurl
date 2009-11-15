@@ -5,7 +5,7 @@ describe "new vurl page" do
     @vurl = Vurl.new
     template.stub!(:new_vurl).and_return(@vurl)
     @vurl.stub!(:fetch_url_data).and_return(true)
-    assigns[:recent_popular_vurls] = []
+    template.stub!(:recent_popular_vurls).and_return([])
     template.stub! :popular_period_links
   end
   it "has an I'm Feeling Lucky link" do
@@ -14,7 +14,7 @@ describe "new vurl page" do
   end
   it "has most popular vurls" do
     vurl = Factory.build(:vurl, :title => 'title', :url => 'http://example.com')
-    assigns[:recent_popular_vurls] = [vurl]
+    template.stub!(:recent_popular_vurls).and_return([vurl])
     render "/vurls/new.html.haml"
     response.should have_tag("a[href=?]", vurl.url, vurl.title)
   end

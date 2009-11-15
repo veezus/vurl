@@ -2,7 +2,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper.rb')
 
 describe "new vurl page" do
   before do
-    assigns[:recent_popular_vurls] = []
+    template.stub!(:recent_popular_vurls).and_return([])
     assigns[:most_popular_vurls] = []
   end
   it "has a title" do
@@ -25,7 +25,7 @@ describe "new vurl page" do
   end
   it "has recent popular vurls" do
     vurl = Factory.build(:vurl, :title => 'other title', :url => 'http://other.example.com')
-    assigns[:recent_popular_vurls] = [vurl]
+    template.stub!(:recent_popular_vurls).and_return([vurl])
     render "/vurls/not_found.html.haml"
     response.should have_tag("a[href=?]", vurl.url, vurl.title)
   end

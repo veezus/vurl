@@ -25,7 +25,6 @@ class VurlsController < ApplicationController
   # GET /vurls/stats/AA
   def stats
     if current_vurl.nil?
-      load_recent_popular_vurls
       load_most_popular_vurls
       render :template => 'vurls/not_found' and return
     end
@@ -42,8 +41,6 @@ class VurlsController < ApplicationController
   # GET /vurls/new
   # GET /vurls/new.xml
   def new
-    load_recent_popular_vurls
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => new_vurl }
@@ -65,8 +62,6 @@ class VurlsController < ApplicationController
       flash[:error] = "We've flagged this IP for suspicious activity and will not allow creation of Vurls.  Contact Veezus if you feel this is an error"
       redirect_to root_path and return
     end
-
-    load_recent_popular_vurls
 
     respond_to do |format|
       if new_vurl.save
@@ -100,7 +95,6 @@ class VurlsController < ApplicationController
       end
       redirect_to current_vurl.url
     else
-      load_recent_popular_vurls
       load_most_popular_vurls
       render :template => 'vurls/not_found'
     end
@@ -149,9 +143,10 @@ class VurlsController < ApplicationController
   end
   helper_method :period_ago
 
-  def load_recent_popular_vurls
-    @recent_popular_vurls = Vurl.since(current_period_ago).most_popular
+  def recent_popular_vurls
+    @recent_popular_vurls ||= Vurl.since(current_period_ago).most_popular
   end
+  helper_method :recent_popular_vurls
 
   def load_most_popular_vurls
     @most_popular_vurls = Vurl.most_popular
