@@ -8,15 +8,25 @@ set :repository,  "git@github.com:veezus/vurl.git"
 # servers (which is the default), you can specify the actual location
 # via the :deploy_to variable:
 # set :deploy_to, "/var/www/#{application}"
-set :deploy_to, "/var/www/apps/#{application}"
 set :deploy_via, :remote_cache
 set :group_writable, false
+
+task :production do
+  set :deploy_to, "/var/www/apps/#{application}"
+  set :rails_env, 'production'
+  set :branch, 'production'
+end
+
+task :staging do
+  set :deploy_to, "/var/www/apps/#{application}-staging"
+  set :rails_env, 'staging'
+  set :branch, 'staging'
+end
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
 # set :scm, :subversion
 set :scm, :git
-set :branch, 'production'
 
 role :app, "li44-246.members.linode.com"
 role :web, "li44-246.members.linode.com"
