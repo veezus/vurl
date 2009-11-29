@@ -46,6 +46,10 @@ describe VurlsController do
       get :new
       response.should render_template(:new)
     end
+    it "should set the url passed on query string" do
+      Vurl.should_receive(:new).with(:url => "the_url")
+      get :new, :url => "the_url"
+    end
     it "should redirect to the show page" do
       post :create, :vurl => @vurl.attributes
       #FIXME Incrementing vurl.id feels wrong

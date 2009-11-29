@@ -119,7 +119,8 @@ class VurlsController < ApplicationController
   helper_method :current_vurl
 
   def new_vurl
-    @new_vurl ||= Vurl.new params[:vurl]
+    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
+    @new_vurl ||= Vurl.new vurl_params
   end
   helper_method :new_vurl
 
