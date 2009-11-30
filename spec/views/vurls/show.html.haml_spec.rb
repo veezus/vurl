@@ -3,7 +3,7 @@ require File.expand_path(File.dirname(__FILE__) + '/../../spec_helper.rb')
 describe "vurls show page" do
   before do
     @vurl = Factory(:vurl)
-    template.stubs(:current_vurl).returns(@vurl)
+    template.stub(:current_vurl).and_return(@vurl)
   end
   it "should display the clicks for this vurl" do
     @vurl.should_receive(:clicks_count).and_return(72250)
