@@ -55,7 +55,7 @@ Rails::Initializer.run do |config|
   config.gem "nokogiri", :version => '>=1.2.3'
   config.gem 'sitemap_generator', :version => '0.2.2', :lib => false
   config.gem "thoughtbot-factory_girl", :lib => false, :version => '=1.2.1'
-  config.gem "thoughtbot-shoulda", :lib => false
+  config.gem "shoulda", :version => "2.10.2", :lib => false
   config.gem "webrat", :version => ">= 0.5.3", :lib => false
 
   # Use the database for sessions instead of the cookie-based default,
