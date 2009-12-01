@@ -4,3 +4,4 @@ db/*.sqlite3
 config/settings.yml
 config/database.yml
 .*.sw?
+tmp/
