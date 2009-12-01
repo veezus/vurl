@@ -51,6 +51,28 @@ class VurlsController < ApplicationController
     redirect_to new_vurl_path
   end
 
+  # GET /shorten
+  # GET /shorten.json
+  def api
+    new_vurl.ip_address = request.remote_ip
+    new_vurl.user = User.create!(:name => 'API')
+
+    respond_to do |format|
+      if suspected_spam_user?
+        format.html { render :text => "Get thee behind me, spammer" and return }
+        format.json { render :json => {:errors => "Get thee behind me, spammer"} and return }
+      end
+
+      if new_vurl.save
+        format.html { render :text => redirect_url(new_vurl.slug) }
+        format.json { render :json => {:shortUrl => redirect_url(new_vurl.slug)} }
+      else
+        format.html { render :text => new_vurl.errors.full_messages }
+        format.json { render :json => {:errors => new_vurl.errors.full_messages.first} }
+      end
+    end
+  end
+
   # POST /vurls
   # POST /vurls.xml
   def create
