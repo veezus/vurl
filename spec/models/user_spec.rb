@@ -19,6 +19,12 @@ describe User do
     subject.save_without_validation
   end
 
+  it "does not set the name to Anonymous if the user already has a name" do
+    subject.name = "API"
+    subject.save_without_validation
+    subject.name.should == "API"
+  end
+
   describe "#claimed?" do
     before { @user = User.new }
     subject { @user.claimed? }

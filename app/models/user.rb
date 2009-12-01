@@ -28,7 +28,7 @@ class User < ActiveRecord::Base
   private
 
   def set_default_name
-    self.name = 'Anonymous'
+    self.name = 'Anonymous' if name.blank?
   end
 
   def generate_claim_code
