@@ -1,0 +1,25 @@
+= vurl.me
+
+A simple URL-shortening app that was live-coded during Jax Code Camp 2007 as part of my Distributed, Rapid Application Development with git and Ruby On Rails talk.
+
+== API Access
+
+Use VURL as your custom URL shortening service in clients like Tweetie. You can submit an html or a json request to the service.
+
+  http://vurl.me/shorten?url=http://mycrazylongurlthat/desperately/needs/shortening
+
+will return a plain text response with the shortened url:
+
+  http://vurl.me/OMG
+
+Or use json:
+
+  http://vurl.me/shorten.json?url=http://mycrazylongurlthat/desperately/needs/shortening
+
+will return a json response with the shortened url:
+
+  {:shortUrl => 'http://vurl.me/OMG'}
+
+== Credits
+
+Credit for the design goes to Alex Daskalov (@andpersand)
