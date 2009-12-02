@@ -176,3 +176,11 @@ a#layout_history_link {
   float: right;
   margin-top: 130px;
 }
+
+.did_you_know {
+  padding: 10px 20px;
+  margin-bottom: 20px;
+  background: #FFF6BF;
+  color:#514721;
+  border:2px solid #FFD324;
+}

@@ -5,6 +5,11 @@
 - if new_vurl.errors.any?
   .clear
   = error_messages_for :new_vurl
+- else
+  .did_you_know.clear
+    Did you know we're on twitter?
+    = link_to 'Follow us', "http://twitter.com/vurlme"
+    to see the most popular vurl each evening.
 - form_for(new_vurl) do |f|
   .span-18.last
     = f.text_field :url
