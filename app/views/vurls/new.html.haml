@@ -1,8 +1,10 @@
 - content_for :seo_data do
   %meta{:type => 'keywords', :content => default_keywords}
   %meta{:type => 'description', :content => default_description}
-= error_messages_for :vurl
 .span-18{:style => 'padding-top:30px;'}
+- if new_vurl.errors.any?
+  .clear
+  = error_messages_for :new_vurl
 - form_for(new_vurl) do |f|
   .span-18.last
     = f.text_field :url
