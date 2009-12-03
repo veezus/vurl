@@ -22,4 +22,4 @@ will return a json response with the shortened url:
 
 == Credits
 
-Credit for the design goes to Alex Daskalov (@andpersand)
+See contributors file
