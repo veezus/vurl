@@ -33,4 +33,13 @@ class ApplicationController < ActionController::Base
     @current_period ||= params[:period].present? ? params[:period] : 'hour'
   end
   helper_method :current_period
+
+  def current_vurl
+    @current_vurl ||= if params[:slug]
+                Vurl.find_by_slug params[:slug]
+              else
+                Vurl.find_by_id params[:id]
+              end
+  end
+  helper_method :current_vurl
 end

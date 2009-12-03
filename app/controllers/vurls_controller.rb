@@ -131,15 +131,6 @@ class VurlsController < ApplicationController
   end
   helper_method :current_vurls
 
-  def current_vurl
-    @current_vurl ||= if params[:slug]
-                Vurl.find_by_slug params[:slug]
-              else
-                Vurl.find_by_id params[:id]
-              end
-  end
-  helper_method :current_vurl
-
   def new_vurl
     vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
     @new_vurl ||= Vurl.new vurl_params
