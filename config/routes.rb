@@ -5,5 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.preview   '/p/:slug', :controller => 'vurls', :action => 'preview'
   map.stats     '/stats/:slug', :controller => 'vurls', :action => 'stats'
 
+  map.resources :pages, :collection => {:tweetie => :get}
+
   map.root :controller => 'vurls', :action => 'new'
 end

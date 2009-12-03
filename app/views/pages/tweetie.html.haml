@@ -1,0 +1,27 @@
+.spacer{:style => "margin-top: 30px;"}
+%h2 Using Vurl with the Tweetie2 iPhone App
+%p
+  There's only one piece of information you need from us to make Vurl work with Tweetie:
+
+%bq
+  %pre
+    %code
+      http://vurl.me/shorten.json?url=%@
+
+%p
+  This is the code that Tweetie2 needs to understand how to use Vurl. Follow these steps to set the app up:
+%ol
+  %li Start your Tweetie client (it should open right to your Twitter timeline)
+  %li Tap the Accounts button at the top left of the screen
+  %li Tap the Settings button at the lower left of the screen
+  %li Tap Services
+  %li Tap URL Shortening
+  %li Tap Custom
+  %li Paste in the code from above
+  %li Tap Save
+  %li Tap Services
+  %li Tap Settings
+  %li Tap Done to save your changes
+%p
+  If you have any questions, feel free to contact Veezus or check out the
+  #{link_to "developer's documentation", "http://vurl.me/BXG"}.
