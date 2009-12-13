@@ -55,12 +55,13 @@ Rails::Initializer.run do |config|
   }
 
   config.gem 'rspec-rails', :lib => false, :version => '1.2.7.1'
-  config.gem "haml", :version => '=2.2.6'
-  config.gem "nokogiri", :version => '>=1.2.3'
+  config.gem 'haml', :version => '2.2.6'
+  config.gem 'newrelic_rpm', :version => '2.9.8'
+  config.gem 'nokogiri', :version => '>=1.2.3'
   config.gem 'sitemap_generator', :version => '0.2.2', :lib => false
-  config.gem "thoughtbot-factory_girl", :lib => false, :version => '=1.2.1'
-  config.gem "shoulda", :version => "2.10.2", :lib => false
-  config.gem "webrat", :version => ">= 0.5.3", :lib => false
+  config.gem 'thoughtbot-factory_girl', :lib => false, :version => '1.2.1'
+  config.gem 'shoulda', :version => '2.10.2', :lib => false
+  config.gem 'webrat', :version => '>= 0.5.3', :lib => false
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
