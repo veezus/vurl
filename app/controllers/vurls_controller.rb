@@ -1,16 +1,8 @@
 class VurlsController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => :create
-  # GET /vurls
-  # GET /vurls.xml
-  def index
-
-  end
-
-  # GET /vurls/1
-  # GET /vurls/1.xml
   def show
     respond_to do |format|
-      format.html # show.html.erb
+      format.html
       format.xml  { render :xml => current_vurl }
     end
   end
@@ -22,7 +14,6 @@ class VurlsController < ApplicationController
     end
   end
 
-  # GET /vurls/stats/AA
   def stats
     if current_vurl.nil?
       render :template => 'vurls/not_found' and return
@@ -37,22 +28,17 @@ class VurlsController < ApplicationController
     redirect_to :action => :stats, :slug => params[:slug]
   end
 
-  # GET /vurls/new
-  # GET /vurls/new.xml
   def new
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.xml  { render :xml => new_vurl }
     end
   end
 
-  # GET /vurls/1/edit
   def edit
     redirect_to new_vurl_path
   end
 
-  # GET /shorten
-  # GET /shorten.json
   def api
     new_vurl.ip_address = request.remote_ip
     new_vurl.user = User.create!(:name => 'API')
@@ -73,8 +59,6 @@ class VurlsController < ApplicationController
     end
   end
 
-  # POST /vurls
-  # POST /vurls.xml
   def create
     new_vurl.ip_address = request.remote_ip
     new_vurl.user = current_user
@@ -96,8 +80,6 @@ class VurlsController < ApplicationController
     end
   end
 
-  # PUT /vurls/1
-  # PUT /vurls/1.xml
   def update
     redirect_to new_vurl_path
   end
@@ -132,8 +114,10 @@ class VurlsController < ApplicationController
   helper_method :current_vurls
 
   def new_vurl
-    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
-    @new_vurl ||= Vurl.new vurl_params
+    @new_vurl ||= begin
+                    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
+                    Vurl.new vurl_params
+                  end
   end
   helper_method :new_vurl
 

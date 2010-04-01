@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   end
 
   def claim!
-    self.update_attribute(:claim_code, nil)
+    update_attribute(:claim_code, nil)
   end
 
   def unclaimed?
