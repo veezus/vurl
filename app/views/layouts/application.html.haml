@@ -12,15 +12,17 @@
     = javascript_include_tag %w(jquery-1.3.2 jquery.simpletip-1.3.1 /amcolumn/swfobject)
     = javascript_include_tag %w(application)
   %body
-    .wrapper
-      #page_container.span-18.last
-        #header_container.span-18.last
+    #page_container
+      #header_container.vertical_element
+        .section.span-18.last
           - if current_user.has_vurls?
             = link_to 'History', vurls_path, :id => 'layout_history_link'
           = link_to "", root_path, :id => 'logo_link'
-        #body_container.span-18.last
+      #body_container.vertical_element
+        .section.span-18.last
           = yield
-        #footer_container.span-18.last
+      #footer_container.vertical_element
+        .section.span-18.last
           .js_widget.span-9
             #bookmarklet
               .text
@@ -37,11 +39,11 @@
             .sponsor= link_to image_tag('hashrocket.png'), 'http://hashrocket.com/'
             .sponsor= link_to image_tag('ruby_trends.gif'), 'http://rubytrends.com/styles/project/trends/371'
 
-      %script{ :type => "text/javascript" }
-        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-      %script{ :type => "text/javascript" }
-        try {
-        var pageTracker = _gat._getTracker("UA-7239606-1");
-        pageTracker._trackPageview();
-        } catch(err) {}
+    %script{ :type => "text/javascript" }
+      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    %script{ :type => "text/javascript" }
+      try {
+      var pageTracker = _gat._getTracker("UA-7239606-1");
+      pageTracker._trackPageview();
+      } catch(err) {}

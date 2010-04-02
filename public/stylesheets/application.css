@@ -1,9 +1,14 @@
 body {
   background: #FFF url(/images/page_bg.png) repeat-x !important;
 }
-.wrapper {
-  width: 710px;
+.section {
   margin: 0 auto;
+}
+.vertical_element {
+  width: 710px;
+}
+#page_container {
+  width: 100%;
 }
 #header_container {
   background: url(/images/vurl.me_logo.png) no-repeat;
