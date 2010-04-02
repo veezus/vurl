@@ -82,19 +82,19 @@ describe "Vurl" do
     end
     it "assigns a title" do
       @vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')
-      @vurl.fetch_url_data
+      @vurl.send(:fetch_url_data)
     end
     it "assigns keywords" do
       @vurl.should_receive(:keywords=).with('Iraq,Iraq War (2003- ),United States Defense and Military Forces,Terrorism,Bombs and Explosives')
-      @vurl.fetch_url_data
+      @vurl.send(:fetch_url_data)
     end
     it "assigns a description" do
       @vurl.should_receive(:description=).with('The bombing of a Mosul police headquarters on Friday was the deadliest attack against American soldiers in 13 months.')
-      @vurl.fetch_url_data
+      @vurl.send(:fetch_url_data)
     end
     it "truncates metadata" do
       @vurl.should_receive(:truncate_metadata)
-      @vurl.fetch_url_data
+      @vurl.send(:fetch_url_data)
     end
   end
 

@@ -91,6 +91,7 @@ class Vurl < ActiveRecord::Base
     clicks.last
   end
 
+  private
 
   def fetch_url_data
     begin
@@ -108,8 +109,6 @@ class Vurl < ActiveRecord::Base
   def construct_url
     url
   end
-
-  private
 
   def set_slug
     if vurl = Vurl.find(:first, :order => 'id DESC')
