@@ -16,6 +16,28 @@ class Vurl < ActiveRecord::Base
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
   named_scope :since, lambda {|*args| { :conditions => ["created_at >= ?", args.first || 7.days.ago] } }
 
+  class << self
+    def random
+      find(:first, :offset => (Vurl.count * rand).to_i)
+    end
+
+    def tweet_most_popular_of_the_day
+      require 'twitter'
+
+      vurl = find(:first, :order => 'clicks_count desc', :conditions => ['created_at >= ?', 1.day.ago])
+      return if vurl.nil?
+
+      intro = 'Most popular vurl today? '
+      link = ' http://vurl.me/' + vurl.slug
+      description_length = 140 - intro.length - link.length
+      description = vurl.title.first(description_length) unless vurl.title.blank?
+
+      httpauth = Twitter::HTTPAuth.new(APP_CONFIG[:twitter][:login], APP_CONFIG[:twitter][:password], :ssl => true)
+      base = Twitter::Base.new(httpauth)
+      base.update("#{intro}#{description}#{link}")
+    end
+  end
+
   def last_sixty_minutes(start_time=Time.now)
     minutes = []
     60.times do |i|
@@ -69,25 +91,6 @@ class Vurl < ActiveRecord::Base
     clicks.last
   end
 
-  def self.random
-    find(:first, :offset => (Vurl.count * rand).to_i)
-  end
-
-  def self.tweet_most_popular_of_the_day
-    require 'twitter'
-
-    vurl = find(:first, :order => 'clicks_count desc', :conditions => ['created_at >= ?', 1.day.ago])
-    return if vurl.nil?
-
-    intro = 'Most popular vurl today? '
-    link = ' http://vurl.me/' + vurl.slug
-    description_length = 140 - intro.length - link.length
-    description = vurl.title.first(description_length) unless vurl.title.blank?
-
-    httpauth = Twitter::HTTPAuth.new(APP_CONFIG[:twitter][:login], APP_CONFIG[:twitter][:password], :ssl => true)
-    base = Twitter::Base.new(httpauth)
-    base.update("#{intro}#{description}#{link}")
-  end
 
   def fetch_url_data
     begin
