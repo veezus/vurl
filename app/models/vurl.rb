@@ -10,6 +10,7 @@ class Vurl < ActiveRecord::Base
   validate :appropriateness_of_url
 
   before_validation :format_url
+  before_create :set_slug
   before_save :fetch_url_data
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
@@ -72,14 +73,6 @@ class Vurl < ActiveRecord::Base
     find(:first, :offset => (Vurl.count * rand).to_i)
   end
 
-  def before_create
-    if vurl = Vurl.find(:first, :order => 'id DESC')
-      self.slug = vurl.slug.succ
-    else
-      self.slug = 'AA'
-    end
-  end
-
   def self.tweet_most_popular_of_the_day
     require 'twitter'
 
@@ -114,6 +107,14 @@ class Vurl < ActiveRecord::Base
   end
 
   private
+
+  def set_slug
+    if vurl = Vurl.find(:first, :order => 'id DESC')
+      self.slug = vurl.slug.succ
+    else
+      self.slug = 'AA'
+    end
+  end
 
   def format_url
     self.url = url.strip unless url.nil?
