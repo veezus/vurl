@@ -36,6 +36,7 @@ body {
   width: 100%;
   background-color: #FFF;
   min-height: 700px;
+  border-bottom: 1px solid #CCC;
 }
 #body_container .section {
   width: 710px;
@@ -112,7 +113,7 @@ body {
 
 #footer_container {
   width: 100%;
-  padding: 5px 0;
+  padding: 15px 0;
   background-color: #F0F0F0;
   height: 152px;
 }
