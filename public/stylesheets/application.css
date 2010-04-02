@@ -1,18 +1,25 @@
 body {
-  background: #FFF url(/images/page_bg.png) repeat-x !important;
+  background-color: #F0F0F0;
 }
 .section {
   margin: 0 auto;
 }
 .vertical_element {
   width: 710px;
+  clear: both;
 }
 #page_container {
   width: 100%;
 }
 #header_container {
+  background: url(/images/header_bg.png) repeat-x;
+  height: 152px;
+  width: 100%;
+}
+#header_container .section {
   background: url(/images/vurl.me_logo.png) no-repeat;
   height: 152px;
+  width: 710px;
 }
 #header_container #logo_link {
   display: block;
@@ -26,7 +33,12 @@ body {
 }
 
 #body_container {
-  height: 650px;
+  width: 100%;
+  background-color: #FFF;
+  min-height: 700px;
+}
+#body_container .section {
+  width: 710px;
 }
 #body_container p.flash { color:green; }
 
@@ -99,7 +111,13 @@ body {
 }
 
 #footer_container {
+  width: 100%;
   padding: 5px 0;
+  background-color: #F0F0F0;
+  height: 152px;
+}
+#footer_container .section {
+  width: 710px;
 }
 #footer_container #bookmarklet {
   font-size: 14px;
