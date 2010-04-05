@@ -8,10 +8,11 @@ class Vurl < ActiveRecord::Base
   validates_presence_of :url, :user
   validates_format_of   :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$/ix
   validate :appropriateness_of_url
+  validate :not_a_spam_site
 
   before_validation :format_url
+  before_validation :fetch_url_data
   before_create :set_slug
-  before_save :fetch_url_data
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
   named_scope :since, lambda {|*args| { :conditions => ["created_at >= ?", args.first || 7.days.ago] } }
@@ -131,6 +132,14 @@ class Vurl < ActiveRecord::Base
   def appropriateness_of_url
     if url =~ /https*:\/\/[a-zA-Z-]*\.*vurl\.me/i
       errors.add(:url, "shouldn't point back to vurl.me")
+    end
+  end
+
+  def not_a_spam_site
+    %w(title description url).each do |attr|
+      if send(attr).to_s.downcase.include?('tramadol')
+        errors.add(attr, "shouldn't reference TRAMADOL")
+      end
     end
   end
 end

@@ -25,6 +25,9 @@ describe "Vurl" do
     it { should_not allow_value('http://vurl.me/').for(:url) }
     it { should_not allow_value('http://vurl.me/AA').for(:url) }
     it { should_not allow_value('http://blow-me.vurl.me/AA').for(:url) }
+
+    it { should_not allow_value('tramadol').for(:title) }
+    it { should_not allow_value('tramadol').for(:description) }
   end
 
   it "formats the url before validating" do
@@ -32,9 +35,9 @@ describe "Vurl" do
     @vurl.valid?
   end
 
-  it "should fetch url data before saving" do
+  it "should fetch url data before validating" do
     @vurl.should_receive(:fetch_url_data)
-    @vurl.save_without_validation
+    @vurl.valid?
   end
 
   it "handles the switch to AAA" do
