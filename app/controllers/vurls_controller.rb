@@ -140,7 +140,7 @@ class VurlsController < ApplicationController
   helper_method :period_ago
 
   def recent_popular_vurls
-    @recent_popular_vurls ||= Vurl.since(current_period_ago).most_popular
+    @recent_popular_vurls ||= Click.popular_vurls_since(current_period_ago)
   end
   helper_method :recent_popular_vurls
 

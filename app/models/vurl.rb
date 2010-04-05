@@ -15,7 +15,6 @@ class Vurl < ActiveRecord::Base
   before_create :set_slug
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
-  named_scope :since, lambda {|*args| { :conditions => ["created_at >= ?", args.first || 7.days.ago] } }
 
   class << self
     def random
@@ -25,7 +24,7 @@ class Vurl < ActiveRecord::Base
     def tweet_most_popular_of_the_day
       require 'twitter'
 
-      vurl = find(:first, :order => 'clicks_count desc', :conditions => ['created_at >= ?', 1.day.ago])
+      vurl = Clicks.popular_vurls_since(1.day.ago, :limit => 1).first
       return if vurl.nil?
 
       intro = 'Most popular vurl today? '

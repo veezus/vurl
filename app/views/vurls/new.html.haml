@@ -25,9 +25,9 @@
     == No vurls have been created in the last #{current_period}.
   - else
     %dl
-      - recent_popular_vurls.each do |vurl|
+      - recent_popular_vurls.each do |vurl, clicks_count|
         %dt
           = link_to vurl.title, vurl.url
         %dd
           %span.small
-            = link_to pluralize(vurl.clicks_count, 'click'), stats_path(vurl.slug)
+            = link_to pluralize(clicks_count, 'click'), stats_path(vurl.slug)
