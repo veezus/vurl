@@ -62,7 +62,7 @@ Rails::Initializer.run do |config|
   config.gem 'factory_girl', :lib => false, :version => '1.2.4'
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
   config.gem 'shoulda', :version => '2.10.3', :lib => false
-  config.gem 'webrat', :version => '>= 0.5.3', :lib => false
+  config.gem 'capybara', :version => '0.3.7'
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
