@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '5ee0c1f9ce72a776ebba8a8c3338e3d2'
 
+  expose(:current_period) { params[:period].present? ? params[:period] : 'hour' }
+  expose(:current_vurl) { params[:slug] ? Vurl.find_by_slug(params[:slug]) : Vurl.find_by_id(params[:id]) }
+
   protected
 
   def current_user
@@ -29,17 +32,4 @@ class ApplicationController < ActionController::Base
     %w(76.168.113.69 84.46.116.13).include? request.remote_ip
   end
 
-  def current_period
-    @current_period ||= params[:period].present? ? params[:period] : 'hour'
-  end
-  helper_method :current_period
-
-  def current_vurl
-    @current_vurl ||= if params[:slug]
-                Vurl.find_by_slug params[:slug]
-              else
-                Vurl.find_by_id params[:id]
-              end
-  end
-  helper_method :current_vurl
 end

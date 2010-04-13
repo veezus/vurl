@@ -1,4 +1,13 @@
 class VurlsController < ApplicationController
+
+  expose(:current_vurls) { current_user.vurls }
+  expose(:new_vurl) do
+    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
+    Vurl.new vurl_params
+  end
+  expose(:recent_popular_vurls) { Click.popular_vurls_since(current_period_ago) }
+  expose(:most_popular_vurls) { Vurl.most_popular }
+
   skip_before_filter :verify_authenticity_token, :only => :create
   def show
     respond_to do |format|
@@ -108,19 +117,6 @@ class VurlsController < ApplicationController
 
   protected
 
-  def current_vurls
-    current_user.vurls
-  end
-  helper_method :current_vurls
-
-  def new_vurl
-    @new_vurl ||= begin
-                    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
-                    Vurl.new vurl_params
-                  end
-  end
-  helper_method :new_vurl
-
   def current_period
     return params[:period] if params[:period]
     if action_name == 'stats'
@@ -139,13 +135,4 @@ class VurlsController < ApplicationController
   end
   helper_method :period_ago
 
-  def recent_popular_vurls
-    @recent_popular_vurls ||= Click.popular_vurls_since(current_period_ago)
-  end
-  helper_method :recent_popular_vurls
-
-  def most_popular_vurls
-    @most_popular_vurls ||= Vurl.most_popular
-  end
-  helper_method :most_popular_vurls
 end

@@ -7,7 +7,6 @@ if File.dirname(__FILE__).include? 'staging'
   ENV['RAILS_ENV'] = 'staging'
 end
 
-
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 
@@ -63,6 +62,7 @@ Rails::Initializer.run do |config|
   config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
   config.gem 'shoulda', :version => '2.10.3', :lib => false
   config.gem 'capybara', :version => '0.3.7'
+  config.gem 'decent_exposure', :version => '0.2.3'
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
