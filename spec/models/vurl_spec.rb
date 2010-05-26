@@ -79,6 +79,51 @@ describe "Vurl" do
     end
   end
 
+  describe ".popular_since" do
+    let(:vzs) {
+      vurl = Factory(:vurl, :url => 'http://veez.us')
+      vurl.update_attribute(:created_at, 1.month.ago)
+      vurl
+    }
+    let(:exa) { Factory(:vurl, :url => 'http://example.com') }
+    let(:nyt) { Factory(:vurl, :url => 'http://nytimes.com') }
+    before do
+      3.times { Factory(:click, :vurl => vzs) }
+      9.times { Factory(:click, :vurl => nyt) }
+      5.times { Factory(:click, :vurl => exa) }
+    end
+    it "returns the vurls with clicks from today" do
+      Vurl.popular_since(1.day.ago).size.should == 3
+    end
+    it "returns the most popular first" do
+      vurl = Vurl.popular_since(1.day.ago).first
+      vurl.should == nyt
+      vurl.clicks_count.should == '9'
+    end
+    it "returns the least popular last" do
+      vurl = Vurl.popular_since(1.day.ago).last
+      vurl.should == vzs
+      vurl.clicks_count.should == '3'
+    end
+    it "limits results correctly" do
+      Vurl.popular_since(1.day.ago, :limit => 2).size.should == 2
+    end
+    it "returns an array with only one result" do
+      Vurl.popular_since(1.minute.ago, :limit => 1).should be_a_kind_of(Array)
+    end
+  end
+
+  describe "#clicks_count" do
+    let(:vurl) { Vurl.new(:clicks_count => 17) }
+    it "returns recent_clicks_count when present" do
+      vurl.write_attribute(:recent_clicks_count, 12)
+      vurl.clicks_count.should == 12
+    end
+    it "returns clicks_count otherwise" do
+      vurl.clicks_count.should == 17
+    end
+  end
+
   describe "#fetch_url_data" do
     before do
       @vurl.stub!(:construct_url).and_return(RAILS_ROOT + '/spec/data/nytimes_article.html')

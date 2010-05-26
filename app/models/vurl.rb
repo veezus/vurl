@@ -17,6 +17,23 @@ class Vurl < ActiveRecord::Base
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
 
   class << self
+    def popular_since(period_ago, options={})
+      limit = options[:limit] || 5
+      find_by_sql "
+        SELECT vurls.*, counts.recent_clicks_count
+        FROM vurls
+        INNER JOIN(
+          SELECT vurl_id, count(*) AS recent_clicks_count
+          FROM clicks
+          WHERE clicks.created_at >= '#{period_ago.to_s(:db)}'
+          GROUP BY vurl_id
+          ORDER BY recent_clicks_count DESC
+          LIMIT #{limit}
+        ) AS counts
+        ON counts.vurl_id = vurls.id
+      "
+    end
+
     def random
       find(:first, :offset => (Vurl.count * rand).to_i)
     end
@@ -24,7 +41,7 @@ class Vurl < ActiveRecord::Base
     def tweet_most_popular_of_the_day
       require 'twitter'
 
-      vurl = Clicks.popular_vurls_since(1.day.ago, :limit => 1).first
+      vurl = Vurl.popular_since(1.day.ago, :limit => 1).first
       return if vurl.nil?
 
       intro = 'Most popular vurl today? '
@@ -36,6 +53,10 @@ class Vurl < ActiveRecord::Base
       base = Twitter::Base.new(httpauth)
       base.update("#{intro}#{description}#{link}")
     end
+  end
+
+  def clicks_count
+    read_attribute(:recent_clicks_count) || read_attribute(:clicks_count)
   end
 
   def last_sixty_minutes(start_time=Time.now)
