@@ -6,6 +6,7 @@ $(document).ready(function() {
   });
   loadTweets();
   setInterval(loadTweets, 20000);
+  setupCopyToClipboardPopup();
 });
 
 function set_focus_on_url_input() {
@@ -20,4 +21,8 @@ function loadTweets() {
     count: 10,
     loading_text: "Searching twitter..."
   });
+}
+
+function setupCopyToClipboardPopup() {
+  $(".clippy").tipsy({gravity: 'w', fallback: 'copy to clipboard'});
 }

@@ -10,7 +10,7 @@ module ApplicationHelper
   def clippy(text, bgcolor='#FFFFFF')
     html = <<-EOF
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
-            width="110"
+            width="14"
             height="14"
             id="clippy" >
     <param name="movie" value="/flash/clippy.swf"/>
@@ -20,7 +20,7 @@ module ApplicationHelper
     <param NAME="FlashVars" value="text=#{text}">
     <param name="bgcolor" value="#{bgcolor}">
     <embed src="/flash/clippy.swf"
-           width="110"
+           width="14"
            height="14"
            name="clippy"
            quality="high"
@@ -32,6 +32,7 @@ module ApplicationHelper
     />
     </object>
     EOF
+    content_tag(:span, html, :class => 'clippy')
   end
 
   def link_to_period period
