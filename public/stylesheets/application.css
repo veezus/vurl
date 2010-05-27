@@ -78,3 +78,9 @@ form#new_vurl .button.left {
   float: left;
   padding: 3px 5px 0 0;
 }
+
+#services .box-center img#hashrocket_logo {
+  margin-top: 10px;
+  padding: 0;
+  border: 1px solid #CCCCCC;
+}
