@@ -5,49 +5,97 @@
     = yield :seo_data
     %title
       == Vurl.me: #{page_title}
-    = stylesheet_link_tag 'scaffold'
-    = stylesheet_link_tag 'application'
-    = stylesheet_link_tag 'screen.css', :media => 'screen'
-    = stylesheet_link_tag 'print.css',  :media => 'print'
+    = stylesheet_link_tag %w(style jquery.lightbox-0.5.min.js application)
     = javascript_include_tag %w(jquery-1.3.2 jquery.simpletip-1.3.1 /amcolumn/swfobject)
+    = javascript_include_tag %w(cufon-yui jquery.color general Myriad_Pro_400-Myriad_Pro_700-Myriad_Pro_italic_400-Myriad_Pro_italic_700.font contentslider jquery.form jquery.lightbox-0.5.min)
     = javascript_include_tag %w(application)
   %body
-    #page_container
-      #header_container.vertical_element
-        .section
-          .span-18.last
+    #preloader
+    #wrapper
+      #navhold
+        #navleft
+        #nav
+          %ul
+            %li.first= link_to 'Home', root_path, :class => 'active'
             - if current_user.has_vurls?
-              = link_to 'History', vurls_path, :id => 'layout_history_link'
-            = link_to "", root_path, :id => 'logo_link'
-      #body_container.vertical_element
-        .section
-          .span-18.last
-            = yield
-          %br{:style => 'clear:both'}
-      #footer_container.vertical_element
-        .section
-          .span-18.last
-            .js_widget.span-9
-              #bookmarklet
-                .text
-                  bookmarklet
-                .button
-                  = link_to image_tag('bookmarklet.png'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'target'
-                .help
-                  What is this?
-            .span-9.last
-              .feedback
-                Questions? Comments?
-                = mail_to 'mremsik@gmail.com', 'Contact Veezus'
-            #sponsors.span-18.last
-              .sponsor= link_to image_tag('hashrocket.png'), 'http://hashrocket.com/'
-              .sponsor= link_to image_tag('ruby_trends.gif'), 'http://rubytrends.com/styles/project/trends/371'
+              %li= link_to 'History', vurls_path
+        #navright
+      #logo
+        %h1= link_to 'Vurl.me', root_path
+      #featured
+        = yield :featured
+        .shadow
+      #content
+        .inner
+          .shadow
+          #services
+            .left
+              .right
+                .box
+                  = link_to image_tag("vurlify.png", :width => '64', :height => '64', :class => 'iconic'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))"
+                  %h3 Bookmarklet
+                  %p
+                    Drag this image to your browser's toolbar. Then click it to vurlify any page you're browsing!
+                .box-center
+                  = link_to image_tag('hashrocket.png'), 'http://hashrocket.com/'
+                  = link_to image_tag('ruby_trends.gif'), 'http://rubytrends.com/project/trend/vurl-371'
+                .box2
+                  = image_tag "help.png", :class => 'iconic'
+                  %h3 Need help?
+                  %p
+                    = mail_to 'mremsik@gmail.com', "Send Veez an email"
+                    if you're having trouble. He'll get you sorted out in no time.
+          #leftcolumn
+            = yield :leftcolumn
+          #rightcolumn
+            %h2 Tweets
+            %p
+              This box will contain recent tweets that include either vurl.me or vurlme.
+            %p
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut diam magna. Pellentesque tempor tincidunt lacus, sed condimentum erat iaculis condimentum. Ut eu justo augue, vel dictum lorem. Nullam est ligula, lobortis sed dapibus eu, imperdiet vitae massa. Pellentesque tempus ipsum quis quam vestibulum scelerisque. Integer rutrum dignissim quam sit amet vulputate. Duis in neque ac ligula vulputate commodo. Nulla facilisi. Maecenas posuere congue tincidunt. Ut congue felis vitae nulla tincidunt sed dignissim magna lobortis. Proin ultricies, enim vel tincidunt ultricies, sem ligula sodales mi, hendrerit tincidunt sem arcu vitae leo. Donec quis lorem ac nisl viverra tempor. Fusce vitae vehicula nisl. Fusce tortor turpis, vestibulum ut pharetra a, pharetra at urna. Duis ultrices, mauris quis convallis semper, dui sapien convallis nulla, at suscipit elit ante in quam. Nulla mattis ligula ut nibh tincidunt ut blandit ipsum tempus. Quisque id diam metus, quis suscipit lectus. Maecenas lacus orci, faucibus eget tempor ut, dignissim et magna. Maecenas tempor justo ut sem congue laoreet.
 
-    %script{ :type => "text/javascript" }
-      var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-      document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    %script{ :type => "text/javascript" }
-      try {
-      var pageTracker = _gat._getTracker("UA-7239606-1");
-      pageTracker._trackPageview();
-      } catch(err) {}
+            %p
+              Vivamus dui nisl, faucibus non elementum at, egestas eu ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam velit lorem, fermentum sit amet gravida nec, pellentesque ac ligula. Etiam sagittis interdum urna, vel condimentum turpis pharetra condimentum. Proin a libero sem, auctor pulvinar nisl. Proin quis ornare nunc. Vestibulum condimentum congue nulla, id ultricies lectus commodo vel. Proin magna tellus, facilisis et iaculis non, adipiscing vitae risus. Vivamus non enim id tortor sodales venenatis a sit amet nisi. Sed consectetur viverra lacinia. Sed vitae turpis ut tortor fringilla pellentesque. Curabitur vel feugiat nisi. Nam vel elementum lectus. Vestibulum posuere urna sed ante consectetur consequat. Donec sit amet diam a metus ullamcorper venenatis a id ipsum. Mauris suscipit volutpat risus sed commodo. Duis nec dui in dolor posuere volutpat.
+          .clear
+      #footer
+        Copyright &copy; 2008 - 2010 Veezus Kreist &bull; The URL Shortener by Veezus Kreist
+
+    -# #page_container
+      -# #header_container.vertical_element
+        -# .section
+          -# .span-18.last
+            -# - if current_user.has_vurls?
+              -# = link_to 'History', vurls_path, :id => 'layout_history_link'
+            -# = link_to "", root_path, :id => 'logo_link'
+      -# #body_container.vertical_element
+        -# .section
+          -# .span-18.last
+            -# = yield
+          -# %br{:style => 'clear:both'}
+      -# #footer_container.vertical_element
+        -# .section
+          -# .span-18.last
+            -# .js_widget.span-9
+              -# #bookmarklet
+                -# .text
+                  -# bookmarklet
+                -# .button
+                  -# = link_to image_tag('bookmarklet.png'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))", :id => 'target'
+                -# .help
+                  -# What is this?
+            -# .span-9.last
+              -# .feedback
+                -# Questions? Comments?
+                -# = mail_to 'mremsik@gmail.com', 'Contact Veezus'
+            -# #sponsors.span-18.last
+              -# .sponsor= link_to image_tag('hashrocket.png'), 'http://hashrocket.com/'
+              -# .sponsor= link_to image_tag('ruby_trends.gif'), 'http://rubytrends.com/styles/project/trends/371'
+
+    -# %script{ :type => "text/javascript" }
+      -# var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+      -# document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    -# %script{ :type => "text/javascript" }
+      -# try {
+      -# var pageTracker = _gat._getTracker("UA-7239606-1");
+      -# pageTracker._trackPageview();
+      -# } catch(err) {}

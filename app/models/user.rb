@@ -1,7 +1,7 @@
 require 'digest'
 
 class User < ActiveRecord::Base
-  has_many :vurls, :order => 'created_at DESC'
+  has_many :vurls, :order => 'created_at DESC', :include => :clicks
 
   before_create :generate_claim_code, :set_default_name
 

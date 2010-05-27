@@ -1,16 +1,13 @@
-#vurls_show_container.span-13
-  %h2 History
+- content_for :featured do
+  .contentdiv
+    .header
+      .message
+        %h2 A brief history of your vurls
+        %p
+          On this page you can see all the vurls we know that you've made. Vurl currently keeps track of your vurls with a cookie; clear your cookies to clear this page. We'll add proper user accounts Real Soon Now.
+- content_for :leftcolumn do
+  #vurls_show_container.span-13
+    %h2 Vurls you've created
 
-  %ul.history
-    - current_vurls.each do |vurl|
-      = summary_for vurl
-
-#vurls_show_vertical_ad.span-5.last
-  %script{ :type => "text/javascript" }
-    /
-      google_ad_client = "pub-7786221017043842";
-      \/* 160x600, created 7/24/09 */
-      google_ad_slot = "1026335280";
-      google_ad_width = 160;
-      google_ad_height = 600;
-  %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js" }
+    %ul.history
+      = render :partial => 'summary', :collection => current_vurls

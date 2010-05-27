@@ -1,33 +1,25 @@
 - content_for :seo_data do
   %meta{:type => 'keywords', :content => default_keywords}
   %meta{:type => 'description', :content => default_description}
-.span-18{:style => 'padding-top:30px;'}
-- if new_vurl.errors.any?
-  .clear
-  = error_messages_for :new_vurl
-- else
-  .did_you_know.clear
-    You can #{link_to "use Vurl with Tweetie2", tweetie_pages_path} on your iPhone.
-    You can also
-    = link_to "follow us on twitter", "http://twitter.com/vurlme"
-    to see the most popular vurl each day.
-- form_for(new_vurl) do |f|
-  .span-18.last
-    = f.text_field :url
-  .span-18.button_container.last
-    = f.submit "Vurlify!", :class => 'button right'
-    = link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link button left'
-.recent_popular.span-18.last
-  .recent_popular_header
-    popular this
+- content_for :featured do
+  .contentdiv
+    .header3
+      .message
+        - if new_vurl.errors.empty?
+          %h2 Shorten your URL
+        - else
+          .errors
+            = new_vurl.errors.full_messages.map{|e| content_tag(:div, "&bull; #{e}") }
+        - form_for(new_vurl) do |f|
+          = f.text_field :url
+          = f.submit "Vurlify!", :class => 'button left'
+          %button.button.right.lucky_link{:url => random_vurls_path} I'm Feeling Lucky
+- content_for :leftcolumn do
+  %h2
+    Recent popular vurls in the last
     = popular_period_links
-  - if recent_popular_vurls.blank?
-    == No vurls have been created in the last #{current_period}.
-  - else
-    %dl
-      - recent_popular_vurls.each do |vurl|
-        %dt
-          = link_to vurl.title, vurl.url
-        %dd
-          %span.small
-            = link_to pluralize(vurl.clicks_count, 'click'), stats_path(vurl.slug)
+  .recent_popular
+    - if recent_popular_vurls.blank?
+      == No vurls have been clicked in the last #{current_period}!
+    - else
+      = render :partial => 'summary', :collection => recent_popular_vurls

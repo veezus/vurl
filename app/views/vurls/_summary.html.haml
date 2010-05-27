@@ -1,0 +1,10 @@
+- vurl = summary
+%ul.team
+  %li.member
+    %ul
+      %li.member-name= link_to vurl.title, vurl.url
+      %li.member-position
+        == #{vurl.total_clicks} total clicks &bull;
+        == #{vurl.clicks_count} in the last #{current_period} &bull;
+        == #{link_to 'View stats', stats_path(vurl.slug)}
+      %li.member-info= vurl.description

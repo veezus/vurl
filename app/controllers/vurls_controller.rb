@@ -2,10 +2,10 @@ class VurlsController < ApplicationController
 
   expose(:current_vurls) { current_user.vurls }
   expose(:new_vurl) do
-    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url]) 
+    vurl_params = (params[:vurl] || {}).reverse_merge!(:url => params[:url])
     Vurl.new vurl_params
   end
-  expose(:recent_popular_vurls) { Vurl.popular_since current_period_ago }
+  expose(:recent_popular_vurls) { Vurl.popular_since current_period_ago, :limit => 8 }
   expose(:most_popular_vurls) { Vurl.most_popular }
 
   skip_before_filter :verify_authenticity_token, :only => :create

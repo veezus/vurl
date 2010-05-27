@@ -1,52 +1,35 @@
-#vurls_show_container.span-13
-  - content_for :seo_data do
-    = render :partial => 'seo_data'
-
-  #vurl_link.field_name.span-13.last
-    Your new vurl is...
-  #vurl_link.field_value.span-13.last
+- content_for :seo_data do
+  = render :partial => 'seo_data'
+- content_for :featured do
+  .contentdiv
+    .header
+      .message
+        %h2 This is your vurl's stats page
+        %p
+          On this page you can see in real time when people click your vurl or when your vurl hits twitter. Share your vurl by clicking the icon next to your new vurl, or right-clicking it and selecting 'Copy Link'.
+        .share
+          Your new vurl:
+          = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
+          = clippy(redirect_url(current_vurl.slug))
+- content_for :leftcolumn do
+  %h2 Share your vurl
+  %p
+    Click the icon next to your new vurl to automatically copy it to the clipboard. Or, right-click the link to your vurl and select 'Copy Link'.
+  .share
+    Your new vurl:
     = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
     = clippy(redirect_url(current_vurl.slug))
-
-  #stats_link.field_name.span-13.last
-    View your stats at...
-  #stats_link.field_value.span-13.last
-    = link_to stats_url(current_vurl.slug), stats_url(current_vurl.slug)
-    = clippy(stats_url(current_vurl.slug))
-
-  .field_value.span-13.summary.last{:style => 'margin-top:40px;'}
-    Your original link to
-    = link_to current_vurl.title.present? ? current_vurl.title : current_vurl.url, current_vurl.url
-    has been clicked
-    %span.click_count
-      = current_vurl.clicks_count
-    times.
-    [
-    = link_to "Refresh to update total", stats_path(current_vurl.slug)
-    ]
-
-  .span-13.last{:style => 'margin-top:40px;'}
-    .field_name
-      Real-time updates for last
-      = link_to_period 'hour'
-      = link_to_period 'day'
-      = link_to_period 'week'
-    %p The chart below shows real-time clicks over the last #{current_period} and will update every few seconds.
-    #clicks_chart.chart
-      %strong
-        Loading real-time click chart
-      %p
-        If you don't see a chart, you probably need to install or update Adobe Flash. Contact Veezus if you have questions.
-
-
-#vurls_show_vertical_ad.span-5.last
-  %script{ :type => "text/javascript" }
-    /
-      google_ad_client = "pub-7786221017043842";
-      \/* 160x600, created 7/24/09 */
-      google_ad_slot = "1026335280";
-      google_ad_width = 160;
-      google_ad_height = 600;
-  %script{ :type => "text/javascript", :src => "http://pagead2.googlesyndication.com/pagead/show_ads.js" }
-
-= render :partial => 'real_time_clicks_include'
+  %h2
+    Real-time clicks for the last
+    = link_to_period 'hour'
+    |
+    = link_to_period 'day'
+    |
+    = link_to_period 'week'
+  %p Watch as folks on the web click your vurl! The chart below will update every few seconds, showing the number of clicks your vurl receives.
+  #clicks_chart.chart
+    %strong
+      Loading real-time click chart
+    %p
+      If you don't see a chart, you probably need to install or update Adobe Flash. Contact Veezus if you have questions.
+  = render :partial => 'real_time_clicks_include'

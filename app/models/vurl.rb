@@ -59,6 +59,10 @@ class Vurl < ActiveRecord::Base
     read_attribute(:recent_clicks_count) || read_attribute(:clicks_count)
   end
 
+  def total_clicks
+    read_attribute(:clicks_count)
+  end
+
   def last_sixty_minutes(start_time=Time.now)
     minutes = []
     60.times do |i|
