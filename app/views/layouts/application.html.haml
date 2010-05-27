@@ -5,9 +5,9 @@
     = yield :seo_data
     %title
       == Vurl.me: #{page_title}
-    = javascript_include_tag %w(jquery-1.3.2 jquery.simpletip-1.3.1 /amcolumn/swfobject)
-    = javascript_include_tag %w(cufon-yui jquery.color general Myriad_Pro_400-Myriad_Pro_700-Myriad_Pro_italic_400-Myriad_Pro_italic_700.font contentslider jquery.form jquery.lightbox-0.5.min)
     = stylesheet_link_tag %w(style application)
+    = javascript_include_tag %w(jquery-1.3.2 /amcolumn/swfobject)
+    = javascript_include_tag %w(cufon-yui jquery.color general Myriad_Pro_400-Myriad_Pro_700-Myriad_Pro_italic_400-Myriad_Pro_italic_700.font contentslider jquery.form jquery.lightbox-0.5.min jquery.tweet)
     = javascript_include_tag %w(application)
   %body
     #preloader
@@ -50,12 +50,8 @@
           #rightcolumn
             %h2 Tweets
             %p
-              This box will contain recent tweets that include either vurl.me or vurlme.
-            %p
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ut diam magna. Pellentesque tempor tincidunt lacus, sed condimentum erat iaculis condimentum. Ut eu justo augue, vel dictum lorem. Nullam est ligula, lobortis sed dapibus eu, imperdiet vitae massa. Pellentesque tempus ipsum quis quam vestibulum scelerisque. Integer rutrum dignissim quam sit amet vulputate. Duis in neque ac ligula vulputate commodo. Nulla facilisi. Maecenas posuere congue tincidunt. Ut congue felis vitae nulla tincidunt sed dignissim magna lobortis. Proin ultricies, enim vel tincidunt ultricies, sem ligula sodales mi, hendrerit tincidunt sem arcu vitae leo. Donec quis lorem ac nisl viverra tempor. Fusce vitae vehicula nisl. Fusce tortor turpis, vestibulum ut pharetra a, pharetra at urna. Duis ultrices, mauris quis convallis semper, dui sapien convallis nulla, at suscipit elit ante in quam. Nulla mattis ligula ut nibh tincidunt ut blandit ipsum tempus. Quisque id diam metus, quis suscipit lectus. Maecenas lacus orci, faucibus eget tempor ut, dignissim et magna. Maecenas tempor justo ut sem congue laoreet.
-
-            %p
-              Vivamus dui nisl, faucibus non elementum at, egestas eu ipsum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam velit lorem, fermentum sit amet gravida nec, pellentesque ac ligula. Etiam sagittis interdum urna, vel condimentum turpis pharetra condimentum. Proin a libero sem, auctor pulvinar nisl. Proin quis ornare nunc. Vestibulum condimentum congue nulla, id ultricies lectus commodo vel. Proin magna tellus, facilisis et iaculis non, adipiscing vitae risus. Vivamus non enim id tortor sodales venenatis a sit amet nisi. Sed consectetur viverra lacinia. Sed vitae turpis ut tortor fringilla pellentesque. Curabitur vel feugiat nisi. Nam vel elementum lectus. Vestibulum posuere urna sed ante consectetur consequat. Donec sit amet diam a metus ullamcorper venenatis a id ipsum. Mauris suscipit volutpat risus sed commodo. Duis nec dui in dolor posuere volutpat.
+              See recent tweets from vurl or about vurl!
+            #vurlme_tweets
           .clear
       #footer
         Copyright &copy; 2008 - 2010 Veezus Kreist &bull; The URL Shortener by Veezus Kreist
