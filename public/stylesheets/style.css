@@ -589,6 +589,9 @@ font-style:italic;
 		font-size:11px;
 	}
 /* === About Page - Meet The Team List === */
+        h2.team {
+          padding-top: 20px;
+        }
 	ul.team{
 		list-style:none;
 		padding:0;
