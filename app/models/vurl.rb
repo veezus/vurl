@@ -59,6 +59,10 @@ class Vurl < ActiveRecord::Base
     read_attribute(:recent_clicks_count) || read_attribute(:clicks_count)
   end
 
+  def summary_text
+    [description, keywords].join(' ').first(255)
+  end
+
   def total_clicks
     read_attribute(:clicks_count)
   end

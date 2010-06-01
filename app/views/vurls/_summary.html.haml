@@ -7,4 +7,4 @@
         == #{vurl.total_clicks} total clicks &bull;
         == #{vurl.clicks_count} in the last #{current_period} &bull;
         == #{link_to 'View stats', stats_path(vurl.slug)}
-      %li.member-info= vurl.description
+      %li.member-info= vurl.summary_text

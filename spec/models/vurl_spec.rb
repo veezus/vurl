@@ -124,6 +124,42 @@ describe "Vurl" do
     end
   end
 
+  describe "#summary_text" do
+    let(:chars_255) { 'A' * 255 }
+    let(:chars_50) { 'B' * 50 }
+    let(:vurl) { @vurl }
+    context "when the description is filled out" do
+      before do
+        vurl.description = chars_255
+        vurl.keywords = chars_50
+      end
+      it "uses the description" do
+        vurl.summary_text.should == chars_255
+      end
+    end
+    context "with partial description and loads of keywords" do
+      before do
+        vurl.description = chars_50
+        vurl.keywords = chars_255
+      end
+      it "should return 255 characters" do
+        vurl.summary_text.size.should == 255
+      end
+      it "returns the description plus keywords" do
+        vurl.summary_text.should == (chars_50 + ' ' + chars_255).first(255)
+      end
+    end
+    context "with partial description and a few keywords" do
+      before do
+        vurl.description = chars_50
+        vurl.keywords = chars_50
+      end
+      it "returns description and keywords" do
+        vurl.summary_text.should == chars_50 + ' ' + chars_50
+      end
+    end
+  end
+
   describe "#fetch_url_data" do
     before do
       @vurl.stub!(:construct_url).and_return(RAILS_ROOT + '/spec/data/nytimes_article.html')
