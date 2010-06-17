@@ -129,6 +129,7 @@ class VurlsController < ApplicationController
   def current_period_ago
     period_ago current_period
   end
+  helper_method :current_period_ago
 
   def period_ago period
     1.send(period).ago

@@ -119,6 +119,9 @@ describe "Vurl" do
       vurl.write_attribute(:recent_clicks_count, 12)
       vurl.clicks_count.should == 12
     end
+    it "returns the number of clicks in the period passed" do
+      vurl.clicks_count(1.hour.ago).should == 0
+    end
     it "returns clicks_count otherwise" do
       vurl.clicks_count.should == 17
     end

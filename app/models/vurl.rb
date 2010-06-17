@@ -55,8 +55,10 @@ class Vurl < ActiveRecord::Base
     end
   end
 
-  def clicks_count
-    read_attribute(:recent_clicks_count) || read_attribute(:clicks_count)
+  def clicks_count(since=nil)
+    return read_attribute(:recent_clicks_count) if read_attribute(:recent_clicks_count)
+    return clicks.since(since).count if since
+    read_attribute(:clicks_count)
   end
 
   def summary_text

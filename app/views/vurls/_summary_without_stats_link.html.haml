@@ -5,5 +5,5 @@
       %li.member-name= link_to vurl.title, vurl.url
       %li.member-position
         == #{vurl.total_clicks} total clicks &bull;
-        == #{vurl.clicks_count} in the last #{current_period}
+        == #{vurl.clicks_count(current_period_ago)} in the last #{current_period}
       %li.member-info= vurl.description
