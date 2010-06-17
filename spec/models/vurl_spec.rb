@@ -2,9 +2,7 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe "Vurl" do
 
-  before do
-    @vurl = Vurl.new
-  end
+  before { @vurl = Vurl.new }
 
   describe "validations and associations" do
     before { @vurl.user = Factory(:user) }
@@ -17,6 +15,8 @@ describe "Vurl" do
     it { should validate_presence_of(:user) }
 
     it { should allow_value('http://sub-domain.mattremsik.com').for(:url) }
+    it { should allow_value('http://localhost/monkeys').for(:url) }
+    it { should allow_value('http://localhost:3000/monkeys').for(:url) }
     it { should_not allow_value('invalid_url').for(:url) }
     it { should_not allow_value('http://vurl.me').for(:url) }
     it { should_not allow_value('https://vurl.me').for(:url) }
