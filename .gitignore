@@ -5,3 +5,4 @@ config/settings.yml
 config/database.yml
 .*.sw?
 tmp/
+.bundle

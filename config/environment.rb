@@ -7,9 +7,6 @@ if File.dirname(__FILE__).include? 'staging'
   ENV['RAILS_ENV'] = 'staging'
 end
 
-# Specifies gem version of Rails to use when vendor/rails is not present
-RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
-
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -52,17 +49,6 @@ Rails::Initializer.run do |config|
     :session_key => '_vurl_session',
     :secret      => '176424d37789192152a4757bd076fb8980abb71610602ec532fa6703e2ffbb2fcfe4c29555cbf1f97bc422d0d85e7a4835747f6faa1ce62f6ac1626dea6cae12'
   }
-
-  config.gem 'haml', :version => '3.0.6'
-  config.gem 'newrelic_rpm', :version => '2.9.8'
-  config.gem 'sitemap_generator', :version => '0.2.2', :lib => false
-
-  #For TEST Environment
-  config.gem 'factory_girl', :lib => false, :version => '1.2.4'
-  config.gem 'rspec-rails', :lib => false, :version => '1.3.2'
-  config.gem 'shoulda', :version => '2.10.3', :lib => false
-  config.gem 'capybara', :version => '0.3.7'
-  config.gem 'decent_exposure', :version => '0.2.3'
 
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
