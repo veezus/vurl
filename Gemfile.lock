@@ -18,14 +18,14 @@ dependencies:
     group: 
     - :default
     version: = 2.3.5
-  haml: 
-    group: 
-    - :default
-    version: = 3.0.6
   mysql: 
     group: 
     - :default
     version: ">= 0"
+  haml: 
+    group: 
+    - :default
+    version: = 3.0.6
   newrelic_rpm: 
     group: 
     - :default
@@ -46,6 +46,10 @@ dependencies:
     group: 
     - :test
     version: = 0.3.7
+  twitter: 
+    group: 
+    - :default
+    version: = 0.9.8
 specs: 
 - rake: 
     version: 0.8.7
@@ -79,6 +83,8 @@ specs:
     version: 0.3.7
 - cgi_multipart_eof_fix: 
     version: 2.5.0
+- crack: 
+    version: 0.1.6
 - daemons: 
     version: 1.1.0
 - decent_exposure: 
@@ -91,12 +97,18 @@ specs:
     version: 0.2.3
 - haml: 
     version: 3.0.6
+- hashie: 
+    version: 0.2.1
+- httparty: 
+    version: 0.5.2
 - mongrel: 
     version: 1.1.5
 - mysql: 
     version: 2.8.1
 - newrelic_rpm: 
     version: 2.9.8
+- oauth: 
+    version: 0.4.1
 - rails: 
     version: 2.3.5
 - rspec: 
@@ -107,7 +119,11 @@ specs:
     version: 2.10.3
 - sitemap_generator: 
     version: 0.2.2
-hash: 5930a722c251ee5adff3b711914be07a7f389d00
+- yajl-ruby: 
+    version: 0.7.6
+- twitter: 
+    version: 0.9.8
+hash: cdcaf6b6074174cb77fb24fd65a2339c05205f0f
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

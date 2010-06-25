@@ -5,7 +5,7 @@ $(document).ready(function() {
     return false;
   });
   loadTweets();
-  setInterval(loadTweets, 20000);
+  setInterval(loadTweets, 10000);
   setupCopyToClipboardPopup();
 });
 
@@ -14,13 +14,21 @@ function set_focus_on_url_input() {
 }
 
 function loadTweets() {
-  $("#vurlme_tweets").empty();
-  $("#vurlme_tweets").tweet({
-    query: "vurl.me OR vurlme",
-    avatar_size: 48,
-    count: 10,
-    loading_text: "Searching twitter..."
+  $('#tweet_spinner').show();
+  var latestTweetId = $("#vurlme_tweets").children(".tweet").attr("id");
+  var url = "/twitter"
+  if (latestTweetId)
+    url += "?tweet_id=" + latestTweetId.split('_').pop();
+  $.get(url, function(data) {
+    $("#vurlme_tweets").prepend(data);
+    $("#vurlme_tweets .new_tweet").each(function() {
+      $(this).slideDown();
+    });
   });
+  $(".new_tweet").each(function() {
+    $(this).removeClass('new_tweet');
+  });
+  $('#tweet_spinner').hide();
 }
 
 function setupCopyToClipboardPopup() {
