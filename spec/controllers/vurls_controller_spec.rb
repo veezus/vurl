@@ -4,7 +4,7 @@ describe VurlsController do
   integrate_views
 
   before do
-    @vurl = Factory.build(:vurl)
+    @vurl = Fabricate(:vurl)
   end
 
   describe "when displaying an index of vurls" do
@@ -33,7 +33,7 @@ describe VurlsController do
 
   describe "when destroying vurls" do
     it "should redirect to the new vurls path" do
-      post :destroy, :id => Factory.create(:vurl).id
+      post :destroy, :id => Fabricate(:vurl).id
       response.should redirect_to(new_vurl_path)
     end
   end
@@ -61,7 +61,7 @@ describe VurlsController do
       post :create, :vurl => @vurl.attributes
     end
     it "assigns the current user as the vurls user" do
-      user = Factory(:user)
+      user = Fabricate(:user)
       controller.stub!(:current_user).and_return(user)
       post :create, :vurl => @vurl.attributes
       @vurl.user.should == user
@@ -99,7 +99,7 @@ describe VurlsController do
 
   describe "when viewing stats" do
     before do
-      @vurl = Factory(:vurl)
+      @vurl = Fabricate(:vurl)
       Vurl.stub!(:find_by_slug).and_return(@vurl)
     end
     it "find the vurl by the slug" do

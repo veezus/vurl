@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "View stats" do
-  let(:vurl) { Factory(:vurl) }
+  let(:vurl) { Fabricate(:vurl) }
 
   it "displays the new vurl" do
     visit stats_path(vurl.slug)
@@ -10,7 +10,7 @@ describe "View stats" do
 
   context "with clicks more than an hour old" do
     before do
-      3.times { Factory(:click, :vurl => vurl) }
+      3.times { Fabricate(:click, :vurl => vurl) }
       vurl.clicks.last.update_attribute(:created_at, 2.hours.ago)
       visit stats_path(vurl.slug)
     end

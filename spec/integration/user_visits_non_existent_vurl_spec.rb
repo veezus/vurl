@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe "new vurl page" do
-  let(:vurl) { Factory(:vurl_with_clicks) }
+  let(:vurl) { Fabricate(:vurl_with_clicks) }
   before do
     vurl
     visit redirect_url("no-such-slug")

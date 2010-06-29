@@ -15,7 +15,7 @@ group :development do
 end
 
 group :test do
-  gem "factory_girl", "1.2.4"
+  gem "fabrication", "0.2.2"
   gem "rspec-rails", "1.3.2"
   gem "shoulda", "2.10.3"
   gem "capybara", "0.3.7"
