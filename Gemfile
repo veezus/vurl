@@ -11,6 +11,7 @@ gem "decent_exposure", "0.2.3"
 
 group :development do
   gem "mongrel"
+  gem "ruby-debug"
 end
 
 group :test do
