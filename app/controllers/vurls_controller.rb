@@ -6,7 +6,7 @@ class VurlsController < ApplicationController
     Vurl.new vurl_params
   end
   expose(:recent_popular_vurls) { Vurl.popular_since current_period_ago, :limit => 8 }
-  expose(:most_popular_vurls) { Vurl.most_popular }
+  expose(:most_popular_vurls) { Vurl.most_popular.not_spam }
 
   skip_before_filter :verify_authenticity_token, :only => :create
   def show

@@ -38,6 +38,7 @@ class Vurl < ActiveRecord::Base
           LIMIT #{limit}
         ) AS counts
         ON counts.vurl_id = vurls.id
+        WHERE status <> 'flagged_as_spam'
       "
     end
 
