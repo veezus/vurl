@@ -3,11 +3,11 @@ source :gemcutter
 gem "rails", "2.3.5"
 gem "mysql"
 
+gem "decent_exposure", "0.2.3"
 gem "haml", "3.0.6"
 gem "newrelic_rpm", "2.9.8"
 gem "sitemap_generator", "0.2.2", :require => false
 gem "twitter", "0.9.8"
-gem "decent_exposure", "0.2.3"
 
 group :development do
   gem "mongrel"
