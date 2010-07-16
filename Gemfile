@@ -12,6 +12,7 @@ gem "twitter", "0.9.8"
 group :development do
   gem "mongrel"
   gem "ruby-debug"
+  gem "launchy"
 end
 
 group :test do
