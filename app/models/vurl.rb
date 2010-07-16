@@ -2,6 +2,12 @@ class Vurl < ActiveRecord::Base
   require 'open-uri'
   require 'nokogiri'
 
+  state_machine :status, :initial => :nominal do
+    event :flag_as_spam do
+      transition :nominal => :flagged_as_spam
+    end
+  end
+
   belongs_to :user
   has_many :clicks
 
@@ -15,6 +21,7 @@ class Vurl < ActiveRecord::Base
   before_create :set_slug
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
+  named_scope :not_spam, { :conditions => "status <> 'flagged_as_spam'" }
 
   class << self
     def popular_since(period_ago, options={})
