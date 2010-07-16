@@ -11,7 +11,7 @@ class Vurl < ActiveRecord::Base
   validate :not_a_spam_site
 
   before_validation :format_url
-  before_validation :fetch_url_data
+  before_validation_on_create :fetch_url_data
   before_create :set_slug
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
