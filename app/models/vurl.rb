@@ -2,6 +2,12 @@ class Vurl < ActiveRecord::Base
   require 'open-uri'
   require 'nokogiri'
 
+  has_attached_file :screenshot,
+                    :styles => {:full => "1024x768", :half => "501x384", :thumb => "102x77"},
+                    :default_style => :thumb,
+                    :url => "/screenshots/:slug-:style.png",
+                    :default_url => "/images/missing-:style.png"
+
   state_machine :status, :initial => :nominal do
     event :flag_as_spam do
       transition :nominal => :flagged_as_spam
@@ -19,6 +25,7 @@ class Vurl < ActiveRecord::Base
   before_validation :format_url
   before_validation_on_create :fetch_url_data
   before_create :set_slug
+  after_create :take_screenshot!
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
   named_scope :not_spam, { :conditions => "status <> 'flagged_as_spam'" }
@@ -61,6 +68,11 @@ class Vurl < ActiveRecord::Base
       base = Twitter::Base.new(httpauth)
       base.update("#{intro}#{description}#{link}")
     end
+  end
+
+  def take_screenshot!
+    self.screenshot = Screenshot.new(:vurl => self).snap!
+    save
   end
 
   def clicks_count(since=nil)

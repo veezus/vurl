@@ -40,6 +40,15 @@ describe "Vurl" do
     vurl.valid?
   end
 
+  context "after creation" do
+    it "takes a screenshot when it is created" do
+      vurl.should_receive(:take_screenshot!)
+      vurl.save(false)
+      vurl.should_not_receive(:take_screenshot!)
+      vurl.save(false)
+    end
+  end
+
   it "handles the switch to AAA" do
     vurl.save_without_validation
     vurl.update_attribute(:slug, 'ZZ')
@@ -110,6 +119,31 @@ describe "Vurl" do
     end
     it "returns an array with only one result" do
       Vurl.popular_since(1.minute.ago, :limit => 1).should be_a_kind_of(Array)
+    end
+  end
+
+  describe "#take_screenshot!" do
+    let(:vurl) { Fabricate(:vurl) }
+    before do
+      class Vurl
+        def take_screenshot!
+          self.screenshot = Screenshot.new(:vurl => self).snap!
+          save
+        end
+      end
+    end
+
+    after do
+      class Vurl
+        def take_screenshot!
+        end
+      end
+    end
+    it "delegates to Screenshot" do
+      screenshot = stub
+      Screenshot.should_receive(:new).and_return(screenshot)
+      screenshot.should_receive(:snap!)
+      vurl.save
     end
   end
 

@@ -6,3 +6,4 @@ config/database.yml
 .*.sw?
 tmp/
 .bundle
+public/screenshots/*
