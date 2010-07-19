@@ -42,6 +42,7 @@ task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink 
   run "cd #{release_path} && bundle install --relock"
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
+  run "ln -nfs #{shared_path}/screenshots #{release_path}/public/screenshots"
 end
 
 namespace :deploy do
