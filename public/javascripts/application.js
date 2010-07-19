@@ -7,6 +7,7 @@ $(document).ready(function() {
   loadTweets();
   setInterval(loadTweets, 10000);
   setupCopyToClipboardPopup();
+  $('a.screenshot').fancybox({'titleShow' : false});
 });
 
 function set_focus_on_url_input() {

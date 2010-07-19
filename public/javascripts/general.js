@@ -21,7 +21,7 @@ $(" #nav ul li").hover(function(){
         }//preloader
         window.onload = preloader;
 	//Preserves the mouse-over on top-level menu elements when hovering over children
-    $('.portfolio-thumb a').lightBox();
+    $('.portfolio-thumb a').fancybox();
 	$("#nav ul li ul").each(function(i){
       $(this).hover(function(){
         $(this).parent().find("a").slice(0,1).addClass("active");
