@@ -23,7 +23,7 @@ class Vurl < ActiveRecord::Base
   validate :not_a_spam_site
 
   before_validation :format_url
-  before_validation_on_create :fetch_url_data
+  before_validation_on_create :fetch_metadata
   before_create :set_slug
   after_create :take_screenshot!
 
@@ -144,7 +144,7 @@ class Vurl < ActiveRecord::Base
 
   private
 
-  def fetch_url_data
+  def fetch_metadata
     begin
       document = Nokogiri::HTML(open(construct_url))
 

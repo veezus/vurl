@@ -36,7 +36,7 @@ describe "Vurl" do
   end
 
   it "should fetch url data before validating" do
-    vurl.should_receive(:fetch_url_data)
+    vurl.should_receive(:fetch_metadata)
     vurl.valid?
   end
 
@@ -196,25 +196,25 @@ describe "Vurl" do
     end
   end
 
-  describe "#fetch_url_data" do
+  describe "#fetch_metadata" do
     before do
       vurl.stub!(:construct_url).and_return(RAILS_ROOT + '/spec/data/nytimes_article.html')
     end
     it "assigns a title" do
       vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')
-      vurl.send(:fetch_url_data)
+      vurl.send(:fetch_metadata)
     end
     it "assigns keywords" do
       vurl.should_receive(:keywords=).with('Iraq,Iraq War (2003- ),United States Defense and Military Forces,Terrorism,Bombs and Explosives')
-      vurl.send(:fetch_url_data)
+      vurl.send(:fetch_metadata)
     end
     it "assigns a description" do
       vurl.should_receive(:description=).with('The bombing of a Mosul police headquarters on Friday was the deadliest attack against American soldiers in 13 months.')
-      vurl.send(:fetch_url_data)
+      vurl.send(:fetch_metadata)
     end
     it "truncates metadata" do
       vurl.should_receive(:truncate_metadata)
-      vurl.send(:fetch_url_data)
+      vurl.send(:fetch_metadata)
     end
   end
 
