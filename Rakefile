@@ -8,5 +8,6 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+require 'resque/tasks'
 
 require 'sitemap_generator/tasks' rescue LoadError
