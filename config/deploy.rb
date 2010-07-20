@@ -38,7 +38,7 @@ set :use_sudo, true
 
 
 after "deploy:update_code", "vurl_custom"
-after "deploy:update_code", "resque:start"
+after "deploy:restart", "resque:restart"
 
 task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
   run "cd #{release_path} && bundle install --relock"
@@ -49,11 +49,8 @@ end
 
 
 namespace :resque do
-  task :start, :roles => :app, :except => {:no_release => true} do
-    run "cd #{release_path} &&
-         RAILS_ENV=#{rails_env} QUEUE=take_screenshot,fetch_metadata rake environment resque:work &&
-         disown",
-         :shell => "/bin/bash"
+  task :restart, :roles => :app do
+    run %Q(cd #{release_path} && RAILS_ENV=#{rails_env} rake resque:restart)
   end
 end
 
