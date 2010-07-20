@@ -35,16 +35,10 @@ describe "Vurl" do
     vurl.valid?
   end
 
-  it "should fetch url data before validating" do
-    vurl.should_receive(:fetch_metadata)
-    vurl.valid?
-  end
-
   context "after creation" do
-    it "takes a screenshot when it is created" do
-      vurl.should_receive(:take_screenshot!)
-      vurl.save(false)
-      vurl.should_not_receive(:take_screenshot!)
+    it "adds itself to queues" do
+      vurl.should_receive(:add_to_queue).with(TakeScreenshot)
+      vurl.should_receive(:add_to_queue).with(FetchMetadata)
       vurl.save(false)
     end
   end
@@ -143,7 +137,7 @@ describe "Vurl" do
       screenshot = stub
       Screenshot.should_receive(:new).and_return(screenshot)
       screenshot.should_receive(:snap!)
-      vurl.save
+      vurl.take_screenshot!
     end
   end
 

@@ -23,9 +23,8 @@ class Vurl < ActiveRecord::Base
   validate :not_a_spam_site
 
   before_validation :format_url
-  before_validation_on_create :fetch_metadata
   before_create :set_slug
-  after_create :take_screenshot!
+  after_create :add_to_queues
 
   named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
   named_scope :not_spam, { :conditions => "status <> 'flagged_as_spam'" }
@@ -191,5 +190,16 @@ class Vurl < ActiveRecord::Base
         errors.add(attr, "shouldn't reference TRAMADOL")
       end
     end
+  end
+
+  private
+
+  def add_to_queue(worker_class)
+   Resque.enqueue worker_class, self.id
+  end
+
+  def add_to_queues
+    add_to_queue FetchMetadata
+    add_to_queue TakeScreenshot
   end
 end
