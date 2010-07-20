@@ -149,6 +149,8 @@ class Vurl < ActiveRecord::Base
       self.keywords = document.at("meta[@name*=eywords]/@content").to_s
       self.description = document.at("meta[@name*=escription]/@content").to_s
       truncate_metadata
+
+      save
     rescue
       logger.warn "Could not fetch data for #{construct_url}."
     end
