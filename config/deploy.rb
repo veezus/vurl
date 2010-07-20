@@ -38,11 +38,23 @@ set :use_sudo, true
 
 
 after "deploy:update_code", "vurl_custom"
+after "deploy:update_code", "resque:start"
+
 task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
   run "cd #{release_path} && bundle install --relock"
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
   run "ln -nfs #{shared_path}/screenshots #{release_path}/public/screenshots"
+end
+
+
+namespace :resque do
+  task :start, :roles => :app, :except => {:no_release => true} do
+    run "cd #{release_path} &&
+         RAILS_ENV=#{rails_env} QUEUE=take_screenshot,fetch_metadata rake environment resque:work &&
+         disown",
+         :shell => "/bin/bash"
+  end
 end
 
 namespace :deploy do
