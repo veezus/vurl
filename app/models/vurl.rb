@@ -141,8 +141,6 @@ class Vurl < ActiveRecord::Base
     clicks.last
   end
 
-  private
-
   def fetch_metadata
     begin
       document = Nokogiri::HTML(open(construct_url))
@@ -155,6 +153,8 @@ class Vurl < ActiveRecord::Base
       logger.warn "Could not fetch data for #{construct_url}."
     end
   end
+
+  private
 
   def construct_url
     url
@@ -191,8 +191,6 @@ class Vurl < ActiveRecord::Base
       end
     end
   end
-
-  private
 
   def add_to_queue(worker_class)
    Resque.enqueue worker_class, self.id
