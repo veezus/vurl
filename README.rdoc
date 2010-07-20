@@ -24,6 +24,12 @@ will return a json response with the shortened url:
 
 You can view development efforts by visiting Vurl's Tracker project at {http://www.pivotaltracker.com/projects/12552}[http://www.pivotaltracker.com/projects/12552]
 
+== Development requirements
+
+To take screenshots and gather metadata locally, you'll need redis running. After installation, you can start it with the following command:
+
+  redis-server /usr/local/etc/redis.conf
+
 == Credits
 
 See contributors file

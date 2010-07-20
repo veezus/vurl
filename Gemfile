@@ -7,6 +7,7 @@ gem "decent_exposure", "0.2.3"
 gem "haml", "3.0.6"
 gem "newrelic_rpm", "2.9.8"
 gem "paperclip", "2.3.3"
+gem "resque", "1.9.7"
 gem "sitemap_generator", "0.2.2", :require => false
 gem "state_machine", "0.9.3"
 gem "twitter", "0.9.8"
