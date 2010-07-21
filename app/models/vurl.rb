@@ -3,7 +3,11 @@ class Vurl < ActiveRecord::Base
   require 'nokogiri'
 
   has_attached_file :screenshot,
-                    :styles => {:full => "1024x768", :half => "501x384", :thumb => "102x77"},
+                    :styles => {
+                      :full => "1024x768",
+                      :half => "512x384",
+                      :thumb => "102x77"
+                    },
                     :default_style => :thumb,
                     :url => "/screenshots/:slug-:style.png",
                     :default_url => "/images/missing-:style.png"
