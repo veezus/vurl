@@ -6,6 +6,7 @@ $(document).ready(function() {
   });
   loadTweets();
   setInterval(loadTweets, 10000);
+  setInterval(reloadScreenshots, 3000);
   setupCopyToClipboardPopup();
   $('a.screenshot').fancybox({'titleShow' : false});
 });
@@ -34,4 +35,15 @@ function loadTweets() {
 
 function setupCopyToClipboardPopup() {
   $(".clippy").tipsy({gravity: 'w', fallback: 'copy to clipboard'});
+}
+
+function reloadScreenshots() {
+  $('li.member-thumb a.refresh').reloadScreenshot();
+}
+
+$.fn.reloadScreenshot = function() {
+  parentUl = $(this).parents('ul')[0];
+  vurl_id = parentUl.id.split('_')[1];
+  url = "/vurls/" + vurl_id + "/screenshot";
+  $(this).parent().load(url);
 }

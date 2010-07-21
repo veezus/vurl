@@ -1,7 +1,7 @@
 - vurl = summary
 %ul.team
   %li.member
-    %ul
+    %ul[vurl]
       %li.member-thumb
         = render :partial => 'screenshot', :locals => {:vurl => vurl}
       %li.member-name= link_to vurl.title, vurl.url
