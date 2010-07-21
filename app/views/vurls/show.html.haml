@@ -24,7 +24,7 @@
     = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
     = clippy(redirect_url(current_vurl.slug))
   %h2 Summary of your vurl
-  = render :partial => 'summary_without_stats_link', :object => current_vurl
+  = render :partial => 'summary', :object => current_vurl
   %h2.team
     Real-time clicks for the last
     = link_to_period 'hour'

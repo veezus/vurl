@@ -6,4 +6,8 @@ module VurlsHelper
   def default_description
     'Vurl shortens your long URLs - an app by Veezus Kreist'
   end
+
+  def display_stats_link?
+    !(controller_name == 'vurls' && action_name == 'stats')
+  end
 end

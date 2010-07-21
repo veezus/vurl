@@ -6,7 +6,8 @@
         = link_to image_tag(vurl.screenshot.url), vurl.screenshot.url(:original), :class => 'screenshot'
       %li.member-name= link_to vurl.title, vurl.url
       %li.member-position
-        == #{vurl.total_clicks} total clicks &bull;
-        == #{vurl.clicks_count} in the last #{current_period} &bull;
-        == #{link_to 'View stats', stats_path(vurl.slug)}
+        == #{vurl.total_clicks} total clicks
+        == &bull; #{vurl.clicks_count(current_period_ago)} in the last #{current_period}
+        - if display_stats_link?
+          == &bull; #{link_to 'View stats', stats_path(vurl.slug)}
       %li.member-info= vurl.summary_text
