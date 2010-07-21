@@ -9,6 +9,7 @@ class Vurl < ActiveRecord::Base
                       :thumb => "102x77"
                     },
                     :default_style => :thumb,
+                    :convert_options => {:all => '-quality 70'},
                     :url => "/screenshots/:slug-:style.png",
                     :default_url => "/images/missing-:style.png"
 
