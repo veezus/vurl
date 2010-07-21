@@ -4,8 +4,7 @@ class Vurl < ActiveRecord::Base
 
   has_attached_file :screenshot,
                     :styles => {
-                      :full => "1024x768",
-                      :half => "512x384",
+                      :original => "512x384",
                       :thumb => "102x77"
                     },
                     :default_style => :thumb,
