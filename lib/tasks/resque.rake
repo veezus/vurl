@@ -19,7 +19,7 @@ namespace :resque do
   task :start => :environment do
     child = fork do
       Process.setsid
-      ENV["QUEUE"] = "*"
+      ENV["QUEUE"] = "take_screenshot,fetch_metadata"
       Rake::Task["resque:work"].invoke
     end
 
