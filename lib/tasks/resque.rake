@@ -9,7 +9,8 @@ namespace :resque do
   task :stop => :environment do
     begin
       pid_file = File.new("tmp/pids/resque.pid", "r")
-      Process.kill('SIGHUP', pid_file.read.to_i)
+      pid = pid_file.read
+      Process.kill('SIGHUP', pid.to_i) unless pid.blank?
     ensure
       pid_file.close
     end
