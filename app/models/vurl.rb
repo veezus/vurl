@@ -74,9 +74,14 @@ class Vurl < ActiveRecord::Base
   end
 
   def take_screenshot!
+    update_attribute(:screenshot_taken, true)
     self.screenshot = Screenshot.new(:vurl => self).snap!
-    self.screenshot_taken = true
     save
+  end
+
+  def screenshot_taken?
+    add_to_queue TakeScreenshot unless screenshot_taken
+    screenshot_taken
   end
 
   def clicks_count(since=nil)
