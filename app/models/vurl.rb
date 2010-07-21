@@ -75,6 +75,7 @@ class Vurl < ActiveRecord::Base
 
   def take_screenshot!
     self.screenshot = Screenshot.new(:vurl => self).snap!
+    self.screenshot_taken = true
     save
   end
 

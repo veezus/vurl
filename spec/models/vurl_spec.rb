@@ -122,6 +122,7 @@ describe "Vurl" do
       class Vurl
         def take_screenshot!
           self.screenshot = Screenshot.new(:vurl => self).snap!
+          self.screenshot_taken = true
           save
         end
       end
@@ -137,6 +138,13 @@ describe "Vurl" do
       screenshot = stub
       Screenshot.should_receive(:new).and_return(screenshot)
       screenshot.should_receive(:snap!)
+      vurl.take_screenshot!
+    end
+
+    it "notes that it has taken its screenshot" do
+      screenshot = stub(:snap! => true)
+      Screenshot.stub(:new).and_return(screenshot)
+      vurl.should_receive(:screenshot_taken=).with(true)
       vurl.take_screenshot!
     end
   end
