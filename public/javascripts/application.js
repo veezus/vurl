@@ -38,7 +38,9 @@ function setupCopyToClipboardPopup() {
 }
 
 function reloadScreenshots() {
-  $('li.member-thumb a.refresh').reloadScreenshot();
+  $('li.member-thumb a.refresh').each(function() {
+    $(this).reloadScreenshot();
+  });
 }
 
 $.fn.reloadScreenshot = function() {
