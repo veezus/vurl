@@ -45,7 +45,7 @@ function reloadScreenshots() {
 
 $.fn.reloadScreenshot = function() {
   parentUl = $(this).parents('ul')[0];
-  vurl_id = parentUl.id.split('_')[1];
+  vurl_id = $(parentUl).attr('id').split('_')[1];
   url = "/vurls/" + vurl_id + "/screenshot";
   $(this).parent().load(url);
 }
