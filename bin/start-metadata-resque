@@ -1,0 +1,12 @@
+#!/usr/local/bin/ruby
+
+app_name = 'vurl'
+app_name += '-staging' if ENV['RAILS_ENV'] = 'staging'
+rails_env = ENV['RAILS_ENV'] == 'staging' ? 'staging' : 'production'
+child = fork do
+  `cd /var/www/apps/#{app_name}/current && RAILS_ENV=#{ENV['RAILS_ENV']} VERBOSE=1 QUEUE=fetch_metadata rake environment resque:work`
+end
+File.open("/var/tmp/metadata-resque-#{rails_env}.pid", "w") do |f|
+  f << child
+end
+Process.detach(child)

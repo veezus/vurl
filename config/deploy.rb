@@ -41,7 +41,7 @@ after "deploy:update_code", "vurl_custom"
 after "deploy:restart", "resque:restart"
 
 task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
-  run "cd #{release_path} && bundle install --relock"
+  # run "cd #{release_path} && bundle install --relock"
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
   run "ln -nfs #{shared_path}/screenshots #{release_path}/public/screenshots"
@@ -50,7 +50,8 @@ end
 
 namespace :resque do
   task :restart, :roles => :app do
-    run %Q(cd #{release_path} && RAILS_ENV=#{rails_env} rake resque:restart)
+    # run %Q(cd #{release_path} && RAILS_ENV=#{rails_env} rake resque:restart)
+    run "monit restart -g redis-#{rails_env.downcase}"
   end
 end
 
