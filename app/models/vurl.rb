@@ -74,8 +74,9 @@ class Vurl < ActiveRecord::Base
   end
 
   def take_screenshot!
-    update_attributes(:screenshot_taken => true, :screenshot_queued => false)
     self.screenshot = Screenshot.new(:vurl => self).snap!
+    self.screenshot_taken = true
+    self.screenshot_queued = false
     save
   end
 
