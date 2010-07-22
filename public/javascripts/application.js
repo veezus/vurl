@@ -11,7 +11,9 @@ $(document).ready(function() {
   setInterval(reloadDescription, 3000);
   setupCopyToClipboardPopup();
   $('li.member-thumb a.refresh').live('click', function() {
-    $('a.screenshot').fancybox({'titleShow' : false});
+    $.fancybox({
+      'href'   : $(this).attr('href')
+    });
     return false;
   });
 });
