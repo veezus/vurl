@@ -177,6 +177,10 @@ class Vurl < ActiveRecord::Base
     add_to_queue TakeScreenshot
   end
 
+  def metadata_fetched?
+    title.present? || description.present?
+  end
+
   private
 
   def construct_url

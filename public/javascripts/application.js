@@ -7,6 +7,8 @@ $(document).ready(function() {
   loadTweets();
   setInterval(loadTweets, 10000);
   setInterval(reloadScreenshots, 3000);
+  setInterval(reloadTitle, 3000);
+  setInterval(reloadDescription, 3000);
   setupCopyToClipboardPopup();
   $('a.screenshot').fancybox({'titleShow' : false});
 });
@@ -39,13 +41,25 @@ function setupCopyToClipboardPopup() {
 
 function reloadScreenshots() {
   $('li.member-thumb a.refresh').each(function() {
-    $(this).reloadScreenshot();
+    $(this).refreshContent('screenshot');
   });
 }
 
-$.fn.reloadScreenshot = function() {
+function reloadTitle() {
+  $('li.member-name a.refresh').each(function() {
+    $(this).refreshContent('title');
+  });
+}
+
+function reloadDescription() {
+  $('li.member-info .refresh').each(function() {
+    $(this).refreshContent('description');
+  });
+}
+
+$.fn.refreshContent = function(action) {
   parentUl = $(this).parents('ul')[0];
   vurl_id = $(parentUl).attr('id').split('_')[1];
-  url = "/vurls/" + vurl_id + "/screenshot";
+  url = "/vurls/" + vurl_id + "/" + action;
   $(this).parent().load(url);
 }

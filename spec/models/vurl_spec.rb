@@ -310,4 +310,18 @@ describe "Vurl" do
       end
     end
   end
+
+  describe "#metadata_fetched?" do
+    it "returns true if the title is present" do
+      vurl.title = 'title'
+      vurl.metadata_fetched?.should be_true
+    end
+    it "returns true if the description is present" do
+      vurl.description = 'description'
+      vurl.metadata_fetched?.should be_true
+    end
+    it "returns false if title and description are blank" do
+      vurl.metadata_fetched?.should be_false
+    end
+  end
 end

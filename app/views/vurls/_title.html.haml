@@ -1,5 +1,1 @@
-- unless vurl.title.blank?
-  .field_name.span-4
-    Title:
-  .field_value.span-9.last
-    = h vurl.title
+= link_to vurl.title, vurl.url, :class => "#{'refresh' unless vurl.metadata_fetched?}"

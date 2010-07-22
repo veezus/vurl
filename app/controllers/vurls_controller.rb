@@ -27,6 +27,14 @@ class VurlsController < ApplicationController
     render :partial => 'screenshot', :locals => {:vurl => current_vurl}
   end
 
+  def title
+    render :partial => 'title', :locals => {:vurl => current_vurl}
+  end
+
+  def description
+    render :partial => 'description', :locals => {:vurl => current_vurl}
+  end
+
   def stats
     if current_vurl.nil?
       render :template => 'vurls/not_found' and return
