@@ -74,13 +74,13 @@ class Vurl < ActiveRecord::Base
   end
 
   def take_screenshot!
-    update_attribute(:screenshot_taken, true)
+    update_attributes(:screenshot_taken => true, :screenshot_queued => false)
     self.screenshot = Screenshot.new(:vurl => self).snap!
     save
   end
 
   def screenshot_taken?
-    add_to_queue TakeScreenshot unless screenshot_taken
+    add_to_queue TakeScreenshot unless (screenshot_taken || screenshot_queued)
     screenshot_taken
   end
 
@@ -166,6 +166,16 @@ class Vurl < ActiveRecord::Base
     end
   end
 
+  def add_to_queue(worker_class)
+    update_attribute(:screenshot_queued, true) if worker_class == TakeScreenshot
+    Resque.enqueue worker_class, self.id
+  end
+
+  def add_to_queues
+    add_to_queue FetchMetadata
+    add_to_queue TakeScreenshot
+  end
+
   private
 
   def construct_url
@@ -202,14 +212,5 @@ class Vurl < ActiveRecord::Base
         errors.add(attr, "shouldn't reference TRAMADOL")
       end
     end
-  end
-
-  def add_to_queue(worker_class)
-   Resque.enqueue worker_class, self.id
-  end
-
-  def add_to_queues
-    add_to_queue FetchMetadata
-    add_to_queue TakeScreenshot
   end
 end

@@ -118,14 +118,33 @@ describe "Vurl" do
 
   describe "#take_screenshot!" do
     let(:vurl) { Fabricate(:vurl) }
+    let(:screenshot) { stub(:snap! => true) }
     before do
+      Screenshot.stub(:new).and_return(screenshot)
+
       class Vurl
         def take_screenshot!
+          update_attributes(:screenshot_taken => true, :screenshot_queued => false)
           self.screenshot = Screenshot.new(:vurl => self).snap!
-          self.screenshot_taken = true
           save
         end
       end
+    end
+
+    it "delegates to Screenshot" do
+      screenshot.should_receive(:snap!)
+      vurl.take_screenshot!
+    end
+
+    it "notes that it has taken its screenshot" do
+      vurl.take_screenshot!
+      vurl.screenshot_taken.should be_true
+    end
+
+    it "notes that it is no longer queued" do
+      vurl.screenshot_queued = true
+      vurl.take_screenshot!
+      vurl.screenshot_queued.should be_false
     end
 
     after do
@@ -134,18 +153,20 @@ describe "Vurl" do
         end
       end
     end
-    it "delegates to Screenshot" do
-      screenshot = stub
-      Screenshot.should_receive(:new).and_return(screenshot)
-      screenshot.should_receive(:snap!)
-      vurl.take_screenshot!
-    end
+  end
 
-    it "notes that it has taken its screenshot" do
-      screenshot = stub(:snap! => true)
-      Screenshot.stub(:new).and_return(screenshot)
-      vurl.should_receive(:screenshot_taken=).with(true)
-      vurl.take_screenshot!
+  describe "#add_to_queue" do
+    context "when adding to the screenshot queue" do
+      it "notes that it has been enqueued" do
+        vurl.add_to_queue TakeScreenshot
+        vurl.screenshot_queued.should be_true
+      end
+    end
+    context "when adding to the metadata queue" do
+      it "does not mark us as being in the screenshot queue" do
+        vurl.add_to_queue FetchMetadata
+        vurl.screenshot_queued.should be_false
+      end
     end
   end
 
@@ -249,6 +270,42 @@ describe "Vurl" do
       vurl.last_sixty_minutes.size.should == 60
       vurl.last_sixty_minutes.each do |minute|
         minute.should be_close(time_now.change(:hour => time_now.hour, :minute => time_now.min), 1.hour + 2.seconds)
+      end
+    end
+  end
+
+  describe "#screenshot_taken?" do
+    let(:vurl) { Vurl.new }
+    context "when a screenshot has been taken" do
+      before { vurl.screenshot_taken = true }
+      it "does not queue a screenshot job" do
+        vurl.should_not_receive(:add_to_queue).with(TakeScreenshot)
+        vurl.screenshot_taken?
+      end
+      it "returns true" do
+        vurl.screenshot_taken?.should be_true
+      end
+    end
+    context "when a screenshot has not been taken" do
+      before { vurl.screenshot_taken = false }
+      context "and the job is already queued" do
+        before { vurl.screenshot_queued = true }
+        it "does not queue a screenshot job" do
+          vurl.should_not_receive(:add_to_queue).with(TakeScreenshot)
+          vurl.screenshot_taken?
+        end
+        it "returns false" do
+          vurl.screenshot_taken?.should be_false
+        end
+      end
+      context "and the job is not already queued" do
+        it "enqueues a screenshot job" do
+          vurl.should_receive(:add_to_queue).with(TakeScreenshot)
+          vurl.screenshot_taken?
+        end
+        it "returns false" do
+          vurl.screenshot_taken?.should be_false
+        end
       end
     end
   end
