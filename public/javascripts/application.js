@@ -10,7 +10,10 @@ $(document).ready(function() {
   setInterval(reloadTitle, 3000);
   setInterval(reloadDescription, 3000);
   setupCopyToClipboardPopup();
-  $('a.screenshot').fancybox({'titleShow' : false});
+  $('li.member-thumb a.refresh').live('click', function() {
+    $('a.screenshot').fancybox({'titleShow' : false});
+    return false;
+  });
 });
 
 function set_focus_on_url_input() {
