@@ -9,20 +9,27 @@ describe User do
     should respond_to(:vurls)
   end
 
-  it "generates a claim code before saving" do
-    subject.should_receive(:generate_claim_code)
-    subject.save_without_validation
+  context "before creation" do
+    it "generates a claim code before saving" do
+      subject.should_receive(:generate_claim_code)
+      subject.save(false)
+    end
+    it "sets the name to Anonymous" do
+      subject.should_receive(:set_default_name)
+      subject.save(false)
+    end
+    it "creates an api token" do
+      subject.should_receive(:generate_api_token)
+      subject.save(false)
+    end
   end
 
-  it "sets the name to Anonymous" do
-    subject.should_receive(:set_default_name)
-    subject.save_without_validation
-  end
-
-  it "does not set the name to Anonymous if the user already has a name" do
-    subject.name = "API"
-    subject.save_without_validation
-    subject.name.should == "API"
+  describe "#set_default_name" do
+    it "does not set the name to Anonymous if the user already has a name" do
+      subject.name = "API"
+      subject.save_without_validation
+      subject.name.should == "API"
+    end
   end
 
   describe "#claimed?" do
@@ -48,6 +55,26 @@ describe User do
   end
 
   describe "#generate_claim_code" do
-    # TODO: Find a decent way to test this implementation
+    it "delegates to new_hash" do
+      subject.should_receive(:new_hash).and_return('a8d6777a8f898e09c08870f070')
+      subject.send(:generate_claim_code)
+    end
+    it "uses the first 8 characters" do
+      subject.stub(:new_hash).and_return('a8d6777a8f898e09c08870f070')
+      subject.send(:generate_claim_code)
+      subject.claim_code.should == 'a8d6777a'
+    end
+  end
+
+  describe "#generate_api_token" do
+    it "delegates to new_hash" do
+      subject.should_receive(:new_hash).and_return('a8d6777a8f898e09c08870f070')
+      subject.generate_api_token
+    end
+    it "uses the first 8 characters" do
+      subject.stub(:new_hash).and_return('a8d6777a8f898e09c08870f070')
+      subject.generate_api_token
+      subject.api_token.should == 'a8d6777a'
+    end
   end
 end

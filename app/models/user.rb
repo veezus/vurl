@@ -3,7 +3,9 @@ require 'digest'
 class User < ActiveRecord::Base
   has_many :vurls, :order => 'created_at DESC', :include => :clicks
 
-  before_create :generate_claim_code, :set_default_name
+  before_create :generate_api_token,
+                :generate_claim_code,
+                :set_default_name
 
   def claimed?
     claim_code.blank?
@@ -25,6 +27,16 @@ class User < ActiveRecord::Base
     vurls.count
   end
 
+  def generate_api_token
+    self.api_token = new_hash.first(8)
+  end
+
+  protected
+
+  def new_hash
+    Digest::SHA1.hexdigest(Time.now.to_s + (rand * 10_000).to_s)
+  end
+
   private
 
   def set_default_name
@@ -32,6 +44,6 @@ class User < ActiveRecord::Base
   end
 
   def generate_claim_code
-    self.claim_code = Digest::SHA1.hexdigest(Time.now.to_s + (rand * 10_000).to_s)
+    self.claim_code = new_hash.first(8)
   end
 end
