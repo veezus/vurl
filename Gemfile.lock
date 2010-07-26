@@ -1,51 +1,55 @@
 --- 
 dependencies: 
-  ruby-debug: 
-    group: 
-    - :development
-    version: ">= 0"
-  decent_exposure: 
-    group: 
-    - :default
-    version: = 0.2.3
   sitemap_generator: 
     group: 
     - :default
     version: = 0.2.2
     require: []
 
-  rails: 
+  decent_exposure: 
     group: 
     - :default
-    version: = 2.3.5
+    version: = 0.2.3
+  ruby-debug: 
+    group: 
+    - :development
+    version: ">= 0"
+  unencumbered: 
+    group: 
+    - :test
+    version: ">= 0"
   mongrel: 
     group: 
     - :development
     version: ">= 0"
-  mysql: 
+  rails: 
     group: 
     - :default
-    version: ">= 0"
+    version: = 2.3.5
   haml: 
     group: 
     - :default
     version: = 3.0.6
-  shoulda: 
+  mysql: 
     group: 
-    - :test
-    version: = 2.10.3
+    - :default
+    version: ">= 0"
   newrelic_rpm: 
     group: 
     - :default
     version: = 2.9.8
-  resque: 
+  shoulda: 
     group: 
-    - :default
-    version: = 1.9.7
+    - :test
+    version: = 2.10.3
   rspec-rails: 
     group: 
     - :test
     version: = 1.3.2
+  resque: 
+    group: 
+    - :default
+    version: = 1.9.7
   paperclip: 
     group: 
     - :default
@@ -58,18 +62,18 @@ dependencies:
     group: 
     - :test
     version: = 0.2.3
-  launchy: 
-    group: 
-    - :development
-    version: ">= 0"
-  twitter: 
-    group: 
-    - :default
-    version: = 0.9.8
   capybara: 
     group: 
     - :test
     version: = 0.3.7
+  twitter: 
+    group: 
+    - :default
+    version: = 0.9.8
+  launchy: 
+    group: 
+    - :development
+    version: ">= 0"
 specs: 
 - rake: 
     version: 0.8.7
@@ -100,7 +104,7 @@ specs:
 - rubyzip: 
     version: 0.9.4
 - selenium-webdriver: 
-    version: 0.0.26
+    version: 0.0.27
 - capybara: 
     version: 0.3.7
 - cgi_multipart_eof_fix: 
@@ -146,7 +150,7 @@ specs:
 - rails: 
     version: 2.3.5
 - redis: 
-    version: 2.0.3
+    version: 2.0.4
 - redis-namespace: 
     version: 0.7.0
 - sinatra: 
@@ -173,7 +177,9 @@ specs:
     version: 0.7.7
 - twitter: 
     version: 0.9.8
-hash: c12824cf1ad22899ffea7b794c9f47a247c44b68
+- unencumbered: 
+    version: 0.1.1
+hash: 474b8428314b8866dc1a15e8dd9674723d419329
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
