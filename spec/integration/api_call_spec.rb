@@ -16,6 +16,14 @@ describe "Create Vurls via the API" do
       visit shorten_path(:url => 'http://veez.us')
       page.body.should == redirect_url(Vurl.last.slug)
     end
+
+    context "with an api token provided" do
+      it "associates the vurl with the provided user" do
+        user = Fabricate(:user)
+        visit shorten_path(:url => 'http://coreyhaines.com', :api_token => user.api_token)
+        user.should have_vurls
+      end
+    end
   end
 
   context "when unsuccessful" do

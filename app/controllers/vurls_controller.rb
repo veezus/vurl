@@ -62,7 +62,11 @@ class VurlsController < ApplicationController
 
   def api
     new_vurl.ip_address = request.remote_ip
-    new_vurl.user = User.create!(:name => 'API')
+    new_vurl.user = if api_token && user = User.find_by_api_token(api_token)
+                      user
+                    else
+                      User.create!(:name => 'API')
+                    end
 
     respond_to do |format|
       if suspected_spam_user?
@@ -148,4 +152,8 @@ class VurlsController < ApplicationController
   end
   helper_method :period_ago
 
+  private 
+  def api_token
+    params[:api_token]
+  end
 end
