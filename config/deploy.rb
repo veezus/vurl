@@ -37,21 +37,30 @@ set :scm_username, "veez"
 set :use_sudo, true
 
 
-after "deploy:update_code", "vurl_custom"
+after "deploy:update_code", "create_symlinks"
+after "deploy:update_code", "bundle_install"
 after "deploy:restart", "resque:restart"
 
-task :vurl_custom, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
-  # run "cd #{release_path} && bundle install --relock"
+task :create_symlinks, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
   run "ln -nfs #{shared_path}/screenshots #{release_path}/public/screenshots"
 end
 
+task :bundle_install, :roles => :app do
+  run "cd #{release_path} && bundle install --relock"
+end
+
 
 namespace :resque do
   task :restart, :roles => :app do
-    # run %Q(cd #{release_path} && RAILS_ENV=#{rails_env} rake resque:restart)
-    run "monit restart -g redis-#{rails_env.downcase}"
+    run "sudo god restart resque-#{rails_env.downcase}"
+  end
+end
+
+namespace :redis do
+  task :restart, :roles => :app do
+    run "sudo monit restart -g redis"
   end
 end
 
