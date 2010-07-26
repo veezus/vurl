@@ -2,16 +2,14 @@
   %meta{:type => 'keywords', :content => 'shorten url vurl long tinyurl rubyurl is.gd bit.ly ruby rails'}
   %meta{:type => 'description', :content => 'Vurl shortens your lengthy URLs'}
 - content_for :featured do
-  .contentdiv
-    = render 'shared/user_information'
-    .header
-      .message
-        %h2 Not Found
-        %p
-          The vurl you entered could not be found.  If you feel this is an error, please
-          = mail_to 'mremsik@gmail.com', 'contact Veez'
-          and let him know what's up.
-          You can also check below for other things to do on the site.
+  .header
+    .message
+      %h2 Not Found
+      %p
+        The vurl you entered could not be found.  If you feel this is an error, please
+        = mail_to 'mremsik@gmail.com', 'contact Veez'
+        and let him know what's up.
+        You can also check below for other things to do on the site.
 
 - content_for :leftcolumn do
   %h2 Other actions that might help

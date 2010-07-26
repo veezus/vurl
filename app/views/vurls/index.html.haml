@@ -1,11 +1,9 @@
 - content_for :featured do
-  .contentdiv
-    = render 'shared/user_information'
-    .header
-      .message
-        %h2 A brief history of your vurls
-        %p
-          On this page you can see all the vurls we know that you've made. Vurl currently keeps track of your vurls with a cookie; clear your cookies to clear this page. We'll add proper user accounts Real Soon Now.
+  .header
+    .message
+      %h2 A brief history of your vurls
+      %p
+        On this page you can see all the vurls we know that you've made. Vurl currently keeps track of your vurls with a cookie; clear your cookies to clear this page. We'll add proper user accounts Real Soon Now.
 - content_for :leftcolumn do
   #vurls_show_container.span-13
     %h2 Vurls you've created

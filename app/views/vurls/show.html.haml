@@ -1,17 +1,15 @@
 - content_for :seo_data do
   = render :partial => 'seo_data'
 - content_for :featured do
-  .contentdiv
-    = render 'shared/user_information'
-    .header
-      .message
-        %h2 This is your vurl's stats page
-        %p
-          On this page you can see in real time when people click your vurl or when your vurl hits twitter. Share your vurl by clicking the icon next to your new vurl, or right-clicking it and selecting 'Copy Link'.
-        .share
-          Your new vurl:
-          = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
-          = clippy(redirect_url(current_vurl.slug))
+  .header
+    .message
+      %h2 This is your vurl's stats page
+      %p
+        On this page you can see in real time when people click your vurl or when your vurl hits twitter. Share your vurl by clicking the icon next to your new vurl, or right-clicking it and selecting 'Copy Link'.
+      .share
+        Your new vurl:
+        = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
+        = clippy(redirect_url(current_vurl.slug))
 - content_for :leftcolumn do
   - if current_vurl.flagged_as_spam?
     %h2{:style => 'color: #C00;'} Flagged as spam

@@ -2,19 +2,17 @@
   %meta{:type => 'keywords', :content => default_keywords}
   %meta{:type => 'description', :content => default_description}
 - content_for :featured do
-  .contentdiv
-    = render 'shared/user_information'
-    .header3
-      .message
-        - if new_vurl.errors.empty?
-          %h2 Shorten your URL
-        - else
-          .errors
-            = new_vurl.errors.full_messages.map{|e| content_tag(:div, "&bull; #{e}") }
-        - form_for(new_vurl) do |f|
-          = f.text_field :url
-          = f.submit "Vurlify!", :class => 'button left'
-          %button.button.right.lucky_link{:url => random_vurls_path} I'm Feeling Lucky
+  .header3
+    .message
+      - if new_vurl.errors.empty?
+        %h2 Shorten your URL
+      - else
+        .errors
+          = new_vurl.errors.full_messages.map{|e| content_tag(:div, "&bull; #{e}") }
+      - form_for(new_vurl) do |f|
+        = f.text_field :url
+        = f.submit "Vurlify!", :class => 'button left'
+        %button.button.right.lucky_link{:url => random_vurls_path} I'm Feeling Lucky
 - content_for :leftcolumn do
   %h2
     Recent popular vurls in the last
