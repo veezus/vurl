@@ -11,5 +11,6 @@
         == &bull; #{vurl.clicks_count(current_period_ago)} in the last #{current_period}
         - if display_stats_link?
           == &bull; #{link_to 'View stats', stats_path(vurl.slug)}
+        == &bull; #{clippy(redirect_url(vurl.slug))}
       %li.member-info
         = render :partial => 'description', :locals => {:vurl => vurl}

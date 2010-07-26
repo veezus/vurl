@@ -17,4 +17,10 @@ describe "User views homepage" do
     visit root_path
     page.body.should_not have_tag("a[href=?]", vurl.url, 'New Title')
   end
+  it "has a copy to clipboard link for each vurl" do
+    visit root_path
+    within(:css, "ul#vurl_#{vurl.id}") do
+      page.should have_css("span.clippy")
+    end
+  end
 end

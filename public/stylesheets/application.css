@@ -83,3 +83,8 @@ form#new_vurl .button.left {
 #vurlme_tweets .tweet.new_tweet {
   display: none;
 }
+
+li.member-position span.clippy {
+  position:relative;
+  top: 3px;
+}
