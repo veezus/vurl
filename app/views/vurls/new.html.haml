@@ -3,6 +3,7 @@
   %meta{:type => 'description', :content => default_description}
 - content_for :featured do
   .contentdiv
+    = render 'shared/user_information'
     .header3
       .message
         - if new_vurl.errors.empty?

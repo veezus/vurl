@@ -6,6 +6,8 @@ ActionController::Routing::Routes.draw do |map|
   map.redirect  ':slug', :controller => 'vurls', :action => 'redirect'
   map.preview   '/p/:slug', :controller => 'vurls', :action => 'preview'
 
+  map.resources :users, :only => [:edit, :update]
+
   map.resources :pages, :collection => {:tweetie => :get}
 
   map.root :controller => 'vurls', :action => 'new'
