@@ -34,6 +34,11 @@ To take screenshots and gather metadata locally, you'll need redis running. Afte
 
   redis-server /usr/local/etc/redis.conf
 
-== Credits
+== Apostles of Veezus and His URL Shortener (or, Credits)
 
-See contributors file
+* Credit for the original design goes to Alex Daskalov (@andpersand)
+* Tweetie endpoints graciously donated by Wes Gibbs (@wesgibbs / github: wgibbs)
+* Stats page and bug fixes supplied by Corey Haines (@coreyhaines / github: coreyhaines)
+* Initial implementation of twitter searching by Jim Remsik (@jremsikjr / github: bigtiger)
+* Bugfixes and conversion to bundler by Paul Elliott (@p_elliott / github: paulelliott)
+* Database indexes and performance tuning by Rafa Garcia (@leptom / github: rgo)
