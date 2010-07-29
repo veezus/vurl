@@ -55,7 +55,7 @@ module ApplicationHelper
     when 'Home'
       'active' if controller_name == 'vurls' && action_name == 'new'
     when 'History'
-      'active' if controller_name == 'vurls' && action_name = 'index'
+      'active' if controller_name == 'vurls' && action_name == 'index'
     when 'My Account'
       'active' if controller_name == 'users'
     end
