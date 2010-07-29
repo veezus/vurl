@@ -3,6 +3,7 @@ source :gemcutter
 gem "mysql"
 gem "rails", "2.3.5"
 
+gem "authlogic", "2.1.5"
 gem "decent_exposure", "0.2.3"
 gem "haml", "3.0.6"
 gem "newrelic_rpm", "2.9.8"

@@ -12,22 +12,22 @@ describe User do
   context "before creation" do
     it "generates a claim code before saving" do
       subject.should_receive(:generate_claim_code)
-      subject.save(false)
+      subject.save
     end
     it "sets the name to Anonymous" do
       subject.should_receive(:set_default_name)
-      subject.save(false)
+      subject.save
     end
     it "creates an api token" do
       subject.should_receive(:generate_api_token)
-      subject.save(false)
+      subject.save
     end
   end
 
   describe "#set_default_name" do
     it "does not set the name to Anonymous if the user already has a name" do
       subject.name = "API"
-      subject.save_without_validation
+      subject.save
       subject.name.should == "API"
     end
   end
@@ -75,6 +75,29 @@ describe User do
       subject.stub(:new_hash).and_return('a8d6777a8f898e09c08870f070')
       subject.generate_api_token
       subject.api_token.should == 'a8d6777a'
+    end
+  end
+
+  describe "#set_default_password" do
+    context "when there is no password or crypted password" do
+      it "sets a default password" do
+        subject.send(:set_default_password)
+        subject.password.should_not be_blank
+      end
+    end
+    context "when a password is being set" do
+      it "doesn't set the default password" do
+        subject.password = 'a password'
+        subject.send(:set_default_password)
+        subject.password.should == 'a password'
+      end
+    end
+    context "when a password has previously been set" do
+      it "doesn't set the default password" do
+        subject.crypted_password = 'a crypted password'
+        subject.should_not_receive(:password=)
+        subject.send(:set_default_password)
+      end
     end
   end
 end

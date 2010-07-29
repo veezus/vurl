@@ -30,6 +30,10 @@ dependencies:
     group: 
     - :default
     version: = 3.0.6
+  authlogic: 
+    group: 
+    - :default
+    version: = 2.1.5
   mysql: 
     group: 
     - :default
@@ -89,6 +93,8 @@ specs:
     version: 2.3.5
 - activeresource: 
     version: 2.3.5
+- authlogic: 
+    version: 2.1.5
 - culerity: 
     version: 0.2.10
 - mime-types: 
@@ -128,7 +134,7 @@ specs:
 - haml: 
     version: 3.0.6
 - hashie: 
-    version: 0.2.1
+    version: 0.2.2
 - httparty: 
     version: 0.5.2
 - json: 
@@ -179,7 +185,7 @@ specs:
     version: 0.9.8
 - unencumbered: 
     version: 0.1.1
-hash: 474b8428314b8866dc1a15e8dd9674723d419329
+hash: ba022f41e761463f3094d96e520be82019cda330
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

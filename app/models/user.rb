@@ -1,8 +1,14 @@
 require 'digest'
 
 class User < ActiveRecord::Base
+  acts_as_authentic do |config|
+    config.validate_email_field false
+    config.require_password_confirmation false
+  end
+
   has_many :vurls, :order => 'created_at DESC', :include => :clicks
 
+  before_validation :set_default_password
   before_create :generate_api_token,
                 :generate_claim_code,
                 :set_default_name
@@ -45,5 +51,9 @@ class User < ActiveRecord::Base
 
   def generate_claim_code
     self.claim_code = new_hash.first(8)
+  end
+
+  def set_default_password
+    self.password = new_hash.first(8) unless crypted_password.present? || password.present?
   end
 end
