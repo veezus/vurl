@@ -5,6 +5,8 @@ end
 
 Fabricator(:user) do
   name 'Anonymous'
+  email {|u| "#{u.new_hash}@example.com"}
+  password 'password'
 end
 
 Fabricator(:vurl) do

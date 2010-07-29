@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
   validates_format_of :blog,
     :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
     :allow_blank => true
+  validates_uniqueness_of :email, :allow_blank => true
 
   has_many :vurls, :order => 'created_at DESC', :include => :clicks
 
@@ -44,8 +45,6 @@ class User < ActiveRecord::Base
   def generate_api_token
     self.api_token = new_hash.first(8)
   end
-
-  protected
 
   def new_hash
     Digest::SHA1.hexdigest(Time.now.to_s + (rand * 10_000).to_s)

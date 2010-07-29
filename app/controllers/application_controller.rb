@@ -4,19 +4,26 @@
 class ApplicationController < ActionController::Base
   helper :all # include all helpers, all the time
 
+  filter_parameter_logging :password
+
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store
   protect_from_forgery # :secret => '5ee0c1f9ce72a776ebba8a8c3338e3d2'
 
   expose(:current_period) { params[:period].present? ? params[:period] : 'hour' }
   expose(:current_vurl) { params[:slug] ? Vurl.find_by_slug(params[:slug]) : Vurl.find_by_id(params[:id]) }
+  expose(:authlogic_user_session) { UserSession.find }
 
   protected
 
   def current_user
-    @current_user ||= (load_user_from_cookie || create_user)
+    @current_user ||= (load_user_from_authlogic || load_user_from_cookie || create_user)
   end
   helper_method :current_user
+
+  def load_user_from_authlogic
+    authlogic_user_session && authlogic_user_session.record
+  end
 
   def load_user_from_cookie
     User.find_by_id(cookies[:user_id]) if cookies[:user_id]

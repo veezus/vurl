@@ -8,10 +8,6 @@
         You can also get your API token for using Vurl.me with third-party applications.
 - content_for :leftcolumn do
   %h2 Edit account details
-  - [:success, :error].each do |message_type|
-    - if flash[message_type]
-      %div{:class => message_type}
-        = flash[message_type]
   - if current_user.errors.any?
     %ul.errors
       - current_user.errors.each do |field, error|

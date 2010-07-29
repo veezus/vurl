@@ -6,9 +6,15 @@ describe ApplicationController do
 
   describe "#current_user" do
     subject { controller.send(:current_user) }
+    before { controller.stub(:load_user_from_authlogic) }
     it "references a previously loaded user" do
       controller.instance_variable_set(:@current_user, @user)
       should == @user
+    end
+    it "loads the user from a login attempt" do
+      authlogic_user = stub
+      controller.stub(:load_user_from_authlogic).and_return(authlogic_user)
+      should == authlogic_user
     end
     it "loads the user from the cookie" do
       controller.should_receive(:load_user_from_cookie).and_return(@user)

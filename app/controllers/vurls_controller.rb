@@ -152,7 +152,7 @@ class VurlsController < ApplicationController
   end
   helper_method :period_ago
 
-  private 
+  private
   def api_token
     params[:api_token]
   end

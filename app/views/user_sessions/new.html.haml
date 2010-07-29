@@ -1,0 +1,24 @@
+- content_for :featured do
+  .header
+    .message
+      %h2
+        Log in
+      %p
+        If you've already claimed a Vurl.me account, please use the form below to log in.
+- content_for :leftcolumn do
+  - form_for user_session do |f|
+    %ul
+      %li.forminput
+        %ul
+          %li.formleft
+            = f.label :email
+          %li.formright
+            = f.text_field :email
+      %li.forminput
+        %ul
+          %li.formleft
+            = f.label :password
+          %li.formright
+            = f.password_field :password
+      %li
+        = f.submit "Log in", :class => 'button'

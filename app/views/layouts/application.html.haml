@@ -49,6 +49,10 @@
                     = mail_to 'mremsik@gmail.com', "Send Veez an email"
                     if you're having trouble. He'll get you sorted out in no time.
           #leftcolumn
+            - [:success, :error].each do |message_type|
+              - if flash[message_type]
+                %div{:class => message_type}
+                  = flash[message_type]
             = yield :leftcolumn
           #rightcolumn
             %h2 Tweets
