@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   acts_as_authentic do |config|
     config.validate_email_field false
     config.require_password_confirmation false
+    config.logged_in_timeout 5.years
   end
 
   validates_format_of :email, :with => /^.+@.+\..+$/, :allow_blank => true
