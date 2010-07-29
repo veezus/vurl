@@ -49,4 +49,15 @@ module ApplicationHelper
   def period_link period
     current_period == period ? period : link_to(period, root_path(:period => period))
   end
+
+  def tab_class_for(link_name)
+    case link_name
+    when 'Home'
+      'active' if controller_name == 'vurls' && action_name == 'new'
+    when 'History'
+      'active' if controller_name == 'vurls' && action_name = 'index'
+    when 'My Account'
+      'active' if controller_name == 'users'
+    end
+  end
 end
