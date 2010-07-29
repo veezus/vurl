@@ -61,10 +61,17 @@ form#new_vurl .button.left {
   text-align: center;
   margin: 10px 0 30px;
 }
-
 .chart, #leftcolumn .share {
   background-color: #FFFFFF;
   border: 1px solid #CCCCCC;
+}
+
+.shorten_url {
+  font-size: 1.3em;
+  padding: 10px;
+  background-color: #FFFFFF;
+  border: 1px solid #CCCCCC;
+  margin: 10px 0;
 }
 
 #services .box-center img#hashrocket_logo {

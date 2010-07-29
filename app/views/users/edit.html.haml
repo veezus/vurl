@@ -2,10 +2,12 @@
   .header
     .message
       %h2
-        Edit your account
+        My Account
       %p
         On this page you can specify an email address and password to login to your account. Don't worry - we won't spam you... much.
+        You can also get your API token for using Vurl.me with third-party applications.
 - content_for :leftcolumn do
+  %h2 Edit account details
   - [:success, :error].each do |message_type|
     - if flash[message_type]
       %div{:class => message_type}
@@ -45,3 +47,13 @@
             = f.text_field :blog
       %li
         = f.submit 'Save changes', :class => 'button'
+  %h2 API key
+  %p
+    You can use your API key when shortening URLs from third-party applications to add them to your history &ndash; just add your URL to this location:
+  %h4 With JSON
+  .shorten_url
+    http://vurl.me/shorten.json?api_token=#{current_user.api_token}&url=YOUR_URL
+  %h4 With plain HTML
+  .shorten_url
+    http://vurl.me/shorten?api_token=#{current_user.api_token}&url=YOUR_URL
+
