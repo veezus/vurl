@@ -30,7 +30,7 @@ You can view development efforts by visiting Vurl's Tracker project at {http://w
 
 == Development requirements
 
-The screenshot code requires the wkthmltoimage executable. You can find more information at the "Google Code page":http://vurl.me/TLA. If you don't have wkhtmltoimage the site will work normally, but you won't have any screenshots generated.
+The screenshot code requires the wkthmltoimage executable. You can find more information at the Google Code page (http://vurl.me/TLA). If you don't have wkhtmltoimage the site will work normally, but you won't have any screenshots generated.
 
 Screenshots and metadata are fetched out of process - you'll need redis and resque running to process those. After installing redis, you can start it with the following command:
 
