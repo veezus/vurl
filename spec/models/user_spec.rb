@@ -5,6 +5,11 @@ describe User do
     User.new
   end
 
+  it { should allow_value('hey@example.com').for(:email) }
+  it { should allow_value('user+sitename@example.com').for(:email) }
+  it { should_not allow_value('@example.com').for(:email) }
+  it { should_not allow_value('http://something.com').for(:email) }
+
   it "has vurls" do
     should respond_to(:vurls)
   end

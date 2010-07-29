@@ -6,6 +6,14 @@ class User < ActiveRecord::Base
     config.require_password_confirmation false
   end
 
+  validates_format_of :email, :with => /^.+@.+\..+$/, :allow_blank => true
+  validates_format_of :website,
+    :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
+    :allow_blank => true
+  validates_format_of :blog,
+    :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
+    :allow_blank => true
+
   has_many :vurls, :order => 'created_at DESC', :include => :clicks
 
   before_validation :set_default_password

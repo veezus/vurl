@@ -60,4 +60,8 @@ module ApplicationHelper
       'active' if controller_name == 'users'
     end
   end
+
+  def error_class_for(object, attr)
+    'error' if object.errors.on(attr)
+  end
 end

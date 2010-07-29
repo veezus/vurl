@@ -30,10 +30,15 @@ form#new_vurl .button.left {
 }
 .errors {
   font-weight: bold;
-  color: #BB0000;
+  color: #B00;
 }
 .errors div {
   padding: 1px;
+}
+
+.error ul li{
+  display:inline;
+  color: #B00;
 }
 
 .recent_popular dt {
