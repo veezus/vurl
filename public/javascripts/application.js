@@ -10,9 +10,13 @@ $(document).ready(function() {
   setInterval(reloadTitle, 3000);
   setInterval(reloadDescription, 3000);
   setupCopyToClipboardPopup();
+  $('li.member-thumb a.screenshot').fancybox({
+    'titleShow'   : false
+  });
   $('li.member-thumb a.refresh').live('click', function() {
     $.fancybox({
-      'href'   : $(this).attr('href')
+      'href'        : $(this).attr('href'),
+      'titleShow'   : false
     });
     return false;
   });
