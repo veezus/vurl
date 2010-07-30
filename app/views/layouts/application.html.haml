@@ -20,7 +20,7 @@
             - if current_user.has_vurls?
               %li= link_to 'History', vurls_path, :class => tab_class_for('History')
             %li
-              = link_to "My Account", edit_user_path(current_user), :class => tab_class_for('My Account')
+              = link_to "My Account", edit_user_path, :class => tab_class_for('My Account')
         #navright
       #logo
         %h1= link_to 'Vurl.me', root_path

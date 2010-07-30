@@ -47,8 +47,12 @@ class User < ActiveRecord::Base
     self.api_token = new_hash.first(8)
   end
 
-  def new_hash
+  def self.new_hash
     Digest::SHA1.hexdigest(Time.now.to_s + (rand * 10_000).to_s)
+  end
+
+  def new_hash
+    self.class.new_hash
   end
 
   private

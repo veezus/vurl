@@ -3,7 +3,10 @@ require 'spec_helper'
 Feature "User logs in" do
   Given "I'm a user with a previous account and I've cleared my cookies" do
     let(:user) { Fabricate(:user) }
-    executes { user }
+    executes do
+      user
+      page.cleanup!
+    end
     When "I go to the home page" do
       executes { visit root_path }
       Then "I should see an option to log in as a different user" do
