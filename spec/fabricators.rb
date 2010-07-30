@@ -9,6 +9,12 @@ Fabricator(:user) do
   password 'password'
 end
 
+Fabricator(:claimed_user, :from => :user) do
+  after_create do |user|
+    user.claim({:password => 'password'})
+  end
+end
+
 Fabricator(:vurl) do
   after_create do |vurl|
     vurl.user = Fabricate(:user)

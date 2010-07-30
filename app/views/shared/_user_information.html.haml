@@ -1,7 +1,11 @@
-- unless current_user.claimed?
-  .api_token_display
+.api_token_display
+  - if current_user.claimed?
+    Welcome back, #{current_user.email}... We're glad to see you again!
+    .action
+      = link_to "not you?", new_user_session_path
+  - else
     Hey there! We've created user account ##{current_user.api_token} for you. Claiming it will allow you to set a login and password to track all the vurls you create.
-    %div{:style=>'text-align:right;'}
+    .action
       = link_to "claim this account", edit_user_path
       or
       = link_to "log in as another user", new_user_session_path
