@@ -135,3 +135,6 @@ div.api_token_display {
 div.api_token_display a {
   color: #333;
 }
+div.api_token_display .action {
+  text-align: right;
+}
