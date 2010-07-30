@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   def update
-    if current_user.update_attributes(params[:user])
-      current_user.claim!
+    if current_user.claim(params[:user])
       flash[:success] = "Successfully saved your changes"
       redirect_to edit_user_path
     else

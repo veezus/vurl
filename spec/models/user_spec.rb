@@ -5,10 +5,36 @@ describe User do
     User.new
   end
 
-  it { should allow_value('hey@example.com').for(:email) }
-  it { should allow_value('user+sitename@example.com').for(:email) }
-  it { should_not allow_value('@example.com').for(:email) }
-  it { should_not allow_value('http://something.com').for(:email) }
+  context "validations" do
+    it { should allow_value('hey@example.com').for(:email) }
+    it { should allow_value('user+sitename@example.com').for(:email) }
+    it { should_not allow_value('@example.com').for(:email) }
+    it { should_not allow_value('http://something.com').for(:email) }
+
+    context "on email" do
+      it "doesn't require an email to create a user" do
+        subject.valid?
+        should have(0).errors_on(:email)
+      end
+      it "requires an email to update a user" do
+        user = Fabricate(:user, :email => nil)
+        user.valid?
+        user.should have(1).error_on(:email)
+      end
+    end
+  end
+
+  describe "#claim" do
+    let(:user) { User.find(Fabricate(:user).id) }
+    it "requires a password" do
+      user.claim(:password => '')
+      user.should have(1).error_on(:password)
+    end
+    it "clears the claim code" do
+      user.claim({})
+      user.claim_code.should be_nil
+    end
+  end
 
   it "has vurls" do
     should respond_to(:vurls)
