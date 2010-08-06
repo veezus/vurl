@@ -5,7 +5,6 @@ Feature "User logs in" do
     let(:user) { Fabricate(:user) }
     executes do
       user
-      page.cleanup!
     end
     When "I go to the home page" do
       executes { visit root_path }
