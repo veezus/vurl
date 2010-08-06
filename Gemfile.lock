@@ -1,43 +1,43 @@
 --- 
 dependencies: 
+  ruby-debug: 
+    group: 
+    - :development
+    version: ">= 0"
+  decent_exposure: 
+    group: 
+    - :default
+    version: = 0.2.3
   sitemap_generator: 
     group: 
     - :default
     version: = 0.2.2
     require: []
 
-  decent_exposure: 
-    group: 
-    - :default
-    version: = 0.2.3
-  ruby-debug: 
-    group: 
-    - :development
-    version: ">= 0"
   unencumbered: 
     group: 
     - :test
-    version: ">= 0"
-  mongrel: 
-    group: 
-    - :development
     version: ">= 0"
   rails: 
     group: 
     - :default
     version: = 2.3.5
-  haml: 
+  mongrel: 
     group: 
-    - :default
-    version: = 3.0.6
-  authlogic: 
-    group: 
-    - :default
-    version: = 2.1.5
+    - :development
+    version: ">= 0"
   mysql: 
     group: 
     - :default
     version: ">= 0"
+  authlogic: 
+    group: 
+    - :default
+    version: = 2.1.5
+  haml: 
+    group: 
+    - :default
+    version: = 3.0.6
   newrelic_rpm: 
     group: 
     - :default
@@ -58,6 +58,10 @@ dependencies:
     group: 
     - :default
     version: = 2.3.3
+  akephalos: 
+    group: 
+    - :test
+    version: = 0.2.2
   state_machine: 
     group: 
     - :default
@@ -69,15 +73,15 @@ dependencies:
   capybara: 
     group: 
     - :test
-    version: = 0.3.7
-  twitter: 
-    group: 
-    - :default
-    version: = 0.9.8
+    version: = 0.3.8
   launchy: 
     group: 
     - :development
     version: ">= 0"
+  twitter: 
+    group: 
+    - :default
+    version: = 0.9.8
 specs: 
 - rake: 
     version: 0.8.7
@@ -93,26 +97,30 @@ specs:
     version: 2.3.5
 - activeresource: 
     version: 2.3.5
-- authlogic: 
-    version: 2.1.5
 - culerity: 
     version: 0.2.10
 - mime-types: 
     version: "1.16"
 - nokogiri: 
-    version: 1.4.2
+    version: 1.4.3.1
 - rack-test: 
     version: 0.5.4
 - ffi: 
     version: 0.6.3
 - json_pure: 
-    version: 1.4.3
+    version: 1.4.4
 - rubyzip: 
     version: 0.9.4
 - selenium-webdriver: 
     version: 0.0.27
 - capybara: 
-    version: 0.3.7
+    version: 0.3.8
+- jruby-jars: 
+    version: 1.5.1
+- akephalos: 
+    version: 0.2.2
+- authlogic: 
+    version: 2.1.5
 - cgi_multipart_eof_fix: 
     version: 2.5.0
 - columnize: 
@@ -138,7 +146,7 @@ specs:
 - httparty: 
     version: 0.5.2
 - json: 
-    version: 1.4.3
+    version: 1.4.4
 - launchy: 
     version: 0.3.7
 - linecache: 
@@ -156,7 +164,7 @@ specs:
 - rails: 
     version: 2.3.5
 - redis: 
-    version: 2.0.4
+    version: 2.0.5
 - redis-namespace: 
     version: 0.7.0
 - sinatra: 
@@ -185,7 +193,7 @@ specs:
     version: 0.9.8
 - unencumbered: 
     version: 0.1.1
-hash: ba022f41e761463f3094d96e520be82019cda330
+hash: 62df82b7e96d76d964a2adc8ed72d274a87909ba
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org
