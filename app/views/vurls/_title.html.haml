@@ -1,1 +1,1 @@
-= link_to vurl.title, vurl.url, :class => "#{'refresh' unless vurl.metadata_fetched?}"
+= link_to title_or_truncated_url(vurl), vurl.url, :class => "#{'refresh' unless vurl.metadata_fetched?}"

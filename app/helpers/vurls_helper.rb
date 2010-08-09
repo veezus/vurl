@@ -10,4 +10,8 @@ module VurlsHelper
   def display_stats_link?
     !(controller_name == 'vurls' && action_name == 'stats')
   end
+
+  def title_or_truncated_url(vurl)
+    vurl.title.present? ? vurl.title : truncate(vurl.url, :length => 50)
+  end
 end
