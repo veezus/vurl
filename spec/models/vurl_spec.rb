@@ -222,7 +222,7 @@ describe "Vurl" do
 
   describe "#fetch_metadata" do
     before do
-      vurl.stub!(:construct_url).and_return(RAILS_ROOT + '/spec/data/nytimes_article.html')
+      vurl.stub(:get_page => File.read(RAILS_ROOT + '/spec/data/nytimes_article.html'))
     end
     it "assigns a title" do
       vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')

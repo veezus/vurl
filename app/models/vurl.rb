@@ -1,5 +1,4 @@
 class Vurl < ActiveRecord::Base
-  require 'open-uri'
   require 'nokogiri'
 
   has_attached_file :screenshot,
@@ -153,17 +152,21 @@ class Vurl < ActiveRecord::Base
   end
 
   def fetch_metadata
-    begin
-      document = Nokogiri::HTML(open(construct_url))
+    document = Nokogiri::HTML(get_page)
+    self.title = document.at('title').text
+    self.keywords = document.at("meta[@name*=eywords]/@content").to_s
+    self.description = document.at("meta[@name*=escription]/@content").to_s
+    truncate_metadata
 
-      self.title = document.at('title').text
-      self.keywords = document.at("meta[@name*=eywords]/@content").to_s
-      self.description = document.at("meta[@name*=escription]/@content").to_s
-      truncate_metadata
+    save
+  rescue
+    logger.warn "Could not fetch data for #{construct_url}."
+  end
 
-      save
-    rescue
-      logger.warn "Could not fetch data for #{construct_url}."
+  def get_page
+    uri = URI.parse(construct_url)
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      http.get(uri.request_uri, "User-Agent" => "Vurl.me Metadata Fetcher drone #9fc3po").body
     end
   end
 
