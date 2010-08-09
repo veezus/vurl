@@ -7,7 +7,8 @@
       %li.member-name
         = render :partial => 'title', :locals => {:vurl => vurl}
       %li.member-position
-        == #{vurl.total_clicks} total clicks
+        = render :partial => 'user_summary', :locals => {:user => vurl.user}
+        == &bull; #{vurl.total_clicks} total clicks
         == &bull; #{vurl.clicks_count(current_period_ago)} in the last #{current_period}
         - if display_stats_link?
           == &bull; #{link_to 'View stats', stats_path(vurl.slug)}

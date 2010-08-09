@@ -1,0 +1,7 @@
+== By #{user.name}
+- if user.blog? && user.website?
+  == (#{link_to "blog", user.blog} | #{link_to "website", user.website})
+- elsif user.blog?
+  == (#{link_to "blog", user.blog})
+- elsif user.website?
+  == (#{link_to "website", user.website})
