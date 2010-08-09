@@ -12,7 +12,10 @@ describe "Create Vurls" do
   end
 
   context "when unsuccessful" do
-    before { submit_vurl 'whatthe?' }
+    before do
+      Vurl.destroy_all
+      submit_vurl 'whatthe?'
+    end
     it "re-renders the new vurl page" do
       current_path.should == vurls_path
     end
