@@ -1,3 +1,7 @@
+- content_for :twitter_search_text do
+  See recent tweets containing your vurl!
+- content_for :twitter_search_for do
+  = hidden_field_tag :search_for, redirect_url(current_vurl.slug)
 - content_for :seo_data do
   = render :partial => 'seo_data'
 - content_for :featured do

@@ -57,8 +57,9 @@
           #rightcolumn
             %h2 Tweets
             %p
-              See recent tweets from vurl or about vurl!
+              = yield(:twitter_search_text) || "See recent tweets from vurl or about vurl!"
             #vurlme_tweets
+            = yield :twitter_search_for
           .clear
       #footer
         Copyright &copy; 2008 - 2010 Veezus Kreist &bull; The URL Shortener by Veezus Kreist

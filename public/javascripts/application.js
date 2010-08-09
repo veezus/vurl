@@ -29,10 +29,12 @@ function set_focus_on_url_input() {
 function loadTweets() {
   $('#tweet_spinner').show();
   var latestTweetId = $("#vurlme_tweets").children(".tweet").attr("id");
-  var url = "/twitter"
+  var url = "/twitter";
+  var params = {};
   if (latestTweetId)
-    url += "?tweet_id=" + latestTweetId.split('_').pop();
-  $.get(url, function(data) {
+    params.tweet_id = latestTweetId.split('_').pop();
+  params.search_for = $("input[name=search_for]").val() || "";
+  $.get(url + "?" + $.param(params), function(data) {
     $("#vurlme_tweets").prepend(data);
     $("#vurlme_tweets .new_tweet").each(function() {
       $(this).slideDown();
