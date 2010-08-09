@@ -56,7 +56,7 @@ describe Screenshot do
     context "when vurl is an image" do
       it "returns the image_screenshot url" do
         vurl.stub(:image? => true)
-        screenshot.url.should == "http://test.host/vurls/image_screenshot?url=#{CGI.escape("http://veez.us")}"
+        screenshot.url.should == Shellwords.escape("http://test.host/vurls/image_screenshot?url=#{CGI.escape("http://veez.us")}")
       end
     end
     context "when not an image" do

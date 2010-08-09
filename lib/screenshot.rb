@@ -32,7 +32,8 @@ class Screenshot
   end
 
   def url
-    vurl.image? ? image_screenshot_vurls_url(:url => vurl.url) : vurl.url
+    url = vurl.image? ? image_screenshot_vurls_url(:url => vurl.url) : vurl.url
+    Shellwords.escape(url)
   end
 
   private
