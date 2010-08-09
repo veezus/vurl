@@ -4,6 +4,7 @@ Feature "User logs in" do
   Given "I'm a user with a previous account and I've cleared my cookies" do
     let(:user) { Fabricate(:user) }
     executes do
+      User.destroy_all
       user
     end
     When "I go to the home page" do
