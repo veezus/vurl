@@ -11,4 +11,16 @@ describe VurlsHelper do
       helper.display_stats_link?.should be_true
     end
   end
+
+  describe "#absolute_url_for" do
+    it "prepends http:// if not present" do
+      helper.absolute_url_for('coreyhaines.com').should == "http://coreyhaines.com"
+    end
+    it "doesn't prepend http:// if present" do
+      helper.absolute_url_for('http://coreyhaines.com').should == "http://coreyhaines.com"
+    end
+    it "doesn't prepend http:// if https:// present" do
+      helper.absolute_url_for('https://coreyhaines.com').should == "https://coreyhaines.com"
+    end
+  end
 end
