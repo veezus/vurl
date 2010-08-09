@@ -108,7 +108,7 @@ specs:
 - ffi: 
     version: 0.6.3
 - json_pure: 
-    version: 1.4.4
+    version: 1.4.6
 - rubyzip: 
     version: 0.9.4
 - selenium-webdriver: 
@@ -146,7 +146,7 @@ specs:
 - httparty: 
     version: 0.5.2
 - json: 
-    version: 1.4.4
+    version: 1.4.6
 - launchy: 
     version: 0.3.7
 - linecache: 
