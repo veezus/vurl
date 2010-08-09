@@ -54,9 +54,13 @@ class VurlsController < ApplicationController
   end
 
   def new
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => new_vurl }
+    if params[:url].present?
+      create
+    else
+      respond_to do |format|
+        format.html
+        format.xml  { render :xml => new_vurl }
+      end
     end
   end
 
