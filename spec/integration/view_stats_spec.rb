@@ -9,6 +9,10 @@ describe "View stats" do
     page.should have_css("a[href='#{redirect_url(vurl.slug)}']", :text => redirect_url(vurl.slug))
   end
 
+  it "displays the date the vurl was created" do
+    page.should have_content("less than a minute ago")
+  end
+
   context "when the user has profile information" do
     executes do
       user.update_attributes(:name => 'My Name', :blog => 'http://blog.oinopa.com', :website => 'http://oinopa.com')

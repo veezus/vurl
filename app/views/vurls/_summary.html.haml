@@ -8,6 +8,7 @@
         = render :partial => 'title', :locals => {:vurl => vurl}
       %li.member-position
         = render :partial => 'user_summary', :locals => {:user => vurl.user}
+        #{time_ago_in_words(vurl.created_at)} ago
         %br
         == #{vurl.total_clicks} total clicks
         == &bull; #{vurl.clicks_count(current_period_ago)} in the last #{current_period}
