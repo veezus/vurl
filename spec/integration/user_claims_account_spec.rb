@@ -10,6 +10,7 @@ Feature "User claims account" do
       When "I follow the link to claim my account" do
         executes { click_link "claim this account" }
         Then "I should see a form with email, password, website, and blog options" do
+          page.should have_css("input#user_name[type=text]")
           page.should have_css("input#user_email[type=text]")
           page.should have_css("input#user_password[type=password]")
           page.should have_css("input#user_website[type=text]")
@@ -18,6 +19,7 @@ Feature "User claims account" do
         When "I fill in all fields and submit the form" do
           let(:new_email) { "#{User.new_hash}@example.com" }
           executes do
+            fill_in "Name", :with => 'Veezus Kreist'
             fill_in "Email", :with => new_email
             fill_in "New password", :with => '1234'
             fill_in "Website address", :with => 'http://veez.us'
@@ -31,6 +33,7 @@ Feature "User claims account" do
             page.should have_content("Successfully saved your changes")
           end
           And "I should see my values updated" do
+            page.should have_css("input#user_name[type=text]", 'Veezus Kreist')
             page.should have_css("input#user_email[type=text]", new_email)
             page.should have_css("input#user_website[type=text]", 'some spam nonsense')
             page.should have_css("input#user_blog[type=text]", 'an offer to buy viagra')

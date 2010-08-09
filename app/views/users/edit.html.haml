@@ -10,6 +10,13 @@
   %h2 Edit account details
   - form_for current_user, :url => user_path do |f|
     %ul
+      %li.forminput{:class => error_class_for(current_user, :name)}
+        %ul
+          %li.formleft
+            = f.label :name
+          %li
+            = f.text_field :name
+
       %li.forminput{:class => error_class_for(current_user, :email)}
         %ul
           %li.formleft
