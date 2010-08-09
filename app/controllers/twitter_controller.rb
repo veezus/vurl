@@ -12,6 +12,8 @@ class TwitterController < ApplicationController
     else
       search
     end
+  rescue Timeout::Error, Crack::ParseError, EOFError, SocketError, SystemCallError
+    render :nothing => true
   end
   helper_method :tweets
   hide_action   :tweets
