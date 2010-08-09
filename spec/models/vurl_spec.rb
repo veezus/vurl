@@ -2,11 +2,10 @@ require File.dirname(__FILE__) + '/../spec_helper'
 
 describe "Vurl" do
 
-  let(:vurl) { Vurl.new }
+  let(:vurl) { Fabricate.build(:vurl) }
 
   describe "validations and associations" do
-    before { vurl.user = Fabricate(:user) }
-    subject { vurl }
+    subject { Vurl.new }
 
     it { should belong_to(:user) }
     it { should have_many(:clicks) }
@@ -321,6 +320,7 @@ describe "Vurl" do
       vurl.metadata_fetched?.should be_true
     end
     it "returns false if title and description are blank" do
+      vurl.title = vurl.description = ''
       vurl.metadata_fetched?.should be_false
     end
   end
@@ -359,5 +359,9 @@ describe "Vurl" do
       before { vurl.url = "http://google.com/something.bmp" }
       it { should be_true}
     end
+  end
+
+  after(:all) do
+    Vurl.destroy_all
   end
 end

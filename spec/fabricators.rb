@@ -16,10 +16,7 @@ Fabricator(:claimed_user, :from => :user) do
 end
 
 Fabricator(:vurl) do
-  after_create do |vurl|
-    vurl.user = Fabricate(:user)
-    vurl.save
-  end
+  user! { Fabricate(:user) }
   url 'http://veez.us'
   title 'Veezus Kreist'
 end
