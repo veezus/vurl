@@ -26,7 +26,7 @@ describe Screenshot do
       screenshot.command.should match(%r{#{Screenshot::PATH_TO_EXECUTABLE}})
     end
     it "includes the url as the second to last argument" do
-      screenshot.command.split[-2].should == vurl.url
+      screenshot.command.split[-2].should == screenshot.url
     end
     it "outputs to STDOUT" do
       screenshot.command.split[-1].should == '-'
@@ -49,6 +49,20 @@ describe Screenshot do
   describe "method_missing madness" do
     it "returns values in the options hash when present" do
       screenshot.vurl.should == vurl
+    end
+  end
+
+  describe "#url" do
+    context "when vurl is an image" do
+      it "returns the image_screenshot url" do
+        vurl.stub(:image? => true)
+        screenshot.url.should == "http://test.host/vurls/image_screenshot?url=#{CGI.escape("http://veez.us")}"
+      end
+    end
+    context "when not an image" do
+      it "returns the vurl's url" do
+        screenshot.url.should == "http://veez.us"
+      end
     end
   end
 end

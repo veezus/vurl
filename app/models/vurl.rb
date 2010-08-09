@@ -181,6 +181,10 @@ class Vurl < ActiveRecord::Base
     title.present? || description.present?
   end
 
+  def image?
+    %w(jpg jpeg gif png bmp).include? File.extname(url)[1..-1]
+  end
+
   private
 
   def construct_url

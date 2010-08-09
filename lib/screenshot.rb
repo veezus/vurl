@@ -1,4 +1,5 @@
 class Screenshot
+  include ActionController::UrlWriter
   PATH_TO_EXECUTABLE = "/usr/local/bin/wkhtmltoimage"
 
   attr_accessor :options, :tempfile
@@ -15,7 +16,7 @@ class Screenshot
   end
 
   def command
-    "#{PATH_TO_EXECUTABLE} #{command_options} #{vurl.url} -"
+    "#{PATH_TO_EXECUTABLE} #{command_options} #{url} -"
   end
 
   def command_options
@@ -28,6 +29,10 @@ class Screenshot
     else
       super(method, *args)
     end
+  end
+
+  def url
+    vurl.image? ? image_screenshot_vurls_url(:url => vurl.url) : vurl.url
   end
 
   private

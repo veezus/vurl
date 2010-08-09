@@ -324,4 +324,40 @@ describe "Vurl" do
       vurl.metadata_fetched?.should be_false
     end
   end
+
+  describe "#image?" do
+    subject { vurl.image? }
+    context "when extension is pdf" do
+      before { vurl.url = "http://google.com/something.pdf" }
+      it { should be_false }
+    end
+    context "when extension is html" do
+      before { vurl.url = "http://google.com/something.html" }
+      it { should be_false }
+    end
+    context "when extension is aspx" do
+      before { vurl.url = "http://google.com/something.aspx" }
+      it { should be_false }
+    end
+    context "when extension is jpg" do
+      before { vurl.url = "http://google.com/something.jpg" }
+      it { should be_true}
+    end
+    context "when extension is jpeg" do
+      before { vurl.url = "http://google.com/something.jpeg" }
+      it { should be_true}
+    end
+    context "when extension is gif" do
+      before { vurl.url = "http://google.com/something.gif" }
+      it { should be_true}
+    end
+    context "when extension is png" do
+      before { vurl.url = "http://google.com/something.png" }
+      it { should be_true}
+    end
+    context "when extension is bmp" do
+      before { vurl.url = "http://google.com/something.bmp" }
+      it { should be_true}
+    end
+  end
 end

@@ -23,6 +23,10 @@ class VurlsController < ApplicationController
     end
   end
 
+  def image_screenshot
+    render :layout => false
+  end
+
   def screenshot
     render :partial => 'screenshot', :locals => {:vurl => current_vurl}
   end
