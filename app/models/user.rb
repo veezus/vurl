@@ -9,10 +9,10 @@ class User < ActiveRecord::Base
 
   validates_format_of :email, :with => /^.+@.+\..+$/, :allow_blank => true
   validates_format_of :website,
-    :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
+    :with => /^((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
     :allow_blank => true
   validates_format_of :blog,
-    :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
+    :with => /^((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
     :allow_blank => true
 
   validates_presence_of :password, :on => :update, :if => :claim_code_changed?

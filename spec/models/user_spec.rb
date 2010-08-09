@@ -6,12 +6,19 @@ describe User do
   end
 
   context "validations" do
-    it { should allow_value('hey@example.com').for(:email) }
-    it { should allow_value('user+sitename@example.com').for(:email) }
-    it { should_not allow_value('@example.com').for(:email) }
-    it { should_not allow_value('http://something.com').for(:email) }
+
+    context "on website" do
+      it { should allow_value("http://veez.us").for(:website) }
+      it { should allow_value("http://blog.veez.us").for(:blog) }
+      it { should allow_value("veez.us").for(:website) }
+      it { should allow_value("blog.veez.us").for(:blog) }
+    end
 
     context "on email" do
+      it { should allow_value('hey@example.com').for(:email) }
+      it { should allow_value('user+sitename@example.com').for(:email) }
+      it { should_not allow_value('@example.com').for(:email) }
+      it { should_not allow_value('http://something.com').for(:email) }
       it "doesn't require an email to create a user" do
         subject.valid?
         should have(0).errors_on(:email)
