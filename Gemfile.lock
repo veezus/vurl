@@ -69,7 +69,7 @@ dependencies:
   fabrication: 
     group: 
     - :test
-    version: = 0.2.3
+    version: = 0.6.0
   capybara: 
     group: 
     - :test
@@ -134,7 +134,7 @@ specs:
 - decent_exposure: 
     version: 0.2.3
 - fabrication: 
-    version: 0.2.3
+    version: 0.6.0
 - fastthread: 
     version: 1.0.7
 - gem_plugin: 
@@ -193,7 +193,7 @@ specs:
     version: 0.9.8
 - unencumbered: 
     version: 0.1.1
-hash: 62df82b7e96d76d964a2adc8ed72d274a87909ba
+hash: 5cd2567cf78e6f1d0aaafd3308c0a938a981e439
 sources: 
 - Rubygems: 
     uri: http://gemcutter.org

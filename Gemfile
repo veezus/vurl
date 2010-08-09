@@ -22,7 +22,7 @@ end
 group :test do
   gem "akephalos", "0.2.2"
   gem "capybara", "0.3.8"
-  gem "fabrication", "0.2.3"
+  gem "fabrication", "0.6.0"
   gem "rspec-rails", "1.3.2"
   gem "shoulda", "2.10.3"
   gem "unencumbered"
