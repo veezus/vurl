@@ -43,14 +43,12 @@ describe "Vurl" do
   end
 
   it "handles the switch to AAA" do
-    vurl.save_without_validation
-    vurl.update_attribute(:slug, 'ZZ')
-    other_vurl = Vurl.new
-    other_vurl.save_without_validation
-    other_vurl.write_attribute(:slug, 'AAA')
-    new_vurl = Vurl.new
-    new_vurl.save_without_validation
-    new_vurl.slug.should == 'AAB'
+    zz = Fabricate(:vurl)
+    zz.update_attribute(:slug, 'ZZ')
+    aaa = Fabricate(:vurl)
+    aaa.slug.should == 'AAA'
+    aab = Fabricate(:vurl)
+    aab.slug.should == 'AAB'
   end
 
   describe "#clicks_for_last" do
@@ -304,6 +302,7 @@ describe "Vurl" do
           vurl.screenshot_taken?
         end
         it "returns false" do
+          vurl.stub(:add_to_queue)
           vurl.screenshot_taken?.should be_false
         end
       end
@@ -359,9 +358,5 @@ describe "Vurl" do
       before { vurl.url = "http://google.com/something.bmp" }
       it { should be_true}
     end
-  end
-
-  after(:all) do
-    Vurl.destroy_all
   end
 end
