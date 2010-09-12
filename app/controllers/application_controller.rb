@@ -11,7 +11,14 @@ class ApplicationController < ActionController::Base
   protect_from_forgery # :secret => '5ee0c1f9ce72a776ebba8a8c3338e3d2'
 
   expose(:current_period) { params[:period].present? ? params[:period] : 'hour' }
-  expose(:current_vurl) { params[:slug] ? Vurl.find_by_slug(params[:slug]) : Vurl.find_by_id(params[:id]) }
+  expose(:current_vurl) do
+    if slug = params[:slug]
+      slug = slug[/^\w+/]
+      Vurl.find_by_slug(slug)
+    else
+      Vurl.find_by_id(params[:id])
+    end
+  end
   expose(:authlogic_user_session) { UserSession.find }
 
   protected
