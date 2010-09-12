@@ -62,6 +62,10 @@ describe VurlsController do
       before do
         Vurl.stub!(:find_by_slug).and_return(vurl)
       end
+      it "redirects to the vurl's url" do
+        get :redirect, :slug => vurl.slug
+        response.should redirect_to(vurl.url)
+      end
       it "creates a click" do
         Click.should_receive(:new).with(:vurl => vurl, :ip_address => '0.0.0.0', :user_agent => 'Rails Testing', :referer => nil).and_return(mock('click', :save => true))
         get :redirect, :slug => 'AA'
@@ -72,6 +76,14 @@ describe VurlsController do
         Click.stub!(:new).and_return(click)
         controller.logger.should_receive(:warn).with("Couldn't create Click for Vurl (#{vurl.inspect}) because it had the following errors: #{click.errors}")
         get :redirect, :slug => 'some slug'
+      end
+    end
+
+    describe "when the slug contains non-slug characters" do
+      it "finds the vurl only by the slug characters" do
+        Vurl.should_receive(:find_by_slug).with("AAA").and_return(vurl)
+        get :redirect, :slug => "AAA,"
+        response.should redirect_to(vurl.url)
       end
     end
 
