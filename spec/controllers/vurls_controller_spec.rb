@@ -136,4 +136,19 @@ describe VurlsController do
       get :random
     end
   end
+
+  describe "#safe_url_for" do
+    let(:vurl) { Fabricate(:vurl) }
+    context "when the vurl is flagged as spam" do
+      before { vurl.flag_as_spam! }
+      it "returns the stats page URL" do
+        controller.safe_url_for(vurl).should == spam_url(:slug => vurl.slug)
+      end
+    end
+    context "when the vurl is not flagged as spam" do
+      it "returns the original URL" do
+        controller.safe_url_for(vurl).should == vurl.url
+      end
+    end
+  end
 end

@@ -129,7 +129,7 @@ class VurlsController < ApplicationController
       unless click.save
         logger.warn "Couldn't create Click for Vurl (#{current_vurl.inspect}) because it had the following errors: #{click.errors}"
       end
-      redirect_to current_vurl.url
+      redirect_to safe_url_for(current_vurl)
     else
       render :template => 'vurls/not_found'
     end
@@ -138,6 +138,11 @@ class VurlsController < ApplicationController
   def random
     redirect_to Vurl.random.url
   end
+
+  def safe_url_for(vurl)
+    vurl.flagged_as_spam? ? spam_url(:slug => vurl.slug) : vurl.url
+  end
+  hide_action :safe_url_for
 
   protected
 
