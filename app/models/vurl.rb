@@ -44,10 +44,10 @@ class Vurl < ActiveRecord::Base
           WHERE clicks.created_at >= '#{period_ago.to_s(:db)}'
           GROUP BY vurl_id
           ORDER BY recent_clicks_count DESC
-          LIMIT #{limit}
         ) AS counts
         ON counts.vurl_id = vurls.id
         WHERE status <> 'flagged_as_spam'
+        LIMIT #{limit}
       "
     end
 
