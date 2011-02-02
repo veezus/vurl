@@ -88,6 +88,7 @@ describe "Vurl" do
     let(:exa) { Fabricate(:vurl, :url => 'http://example.com') }
     let(:nyt) { Fabricate(:vurl, :url => 'http://nytimes.com') }
     before do
+      Vurl.destroy_all
       3.times { Fabricate(:click, :vurl => vzs) }
       9.times { Fabricate(:click, :vurl => nyt) }
       5.times { Fabricate(:click, :vurl => exa) }

@@ -2,6 +2,7 @@ require 'spec_helper'
 
 Feature "User claims account" do
   Given "an unclaimed account" do
+    before { logout }
     When "I visit the home page" do
       executes { visit root_path }
       Then "I should see an option to claim my account" do

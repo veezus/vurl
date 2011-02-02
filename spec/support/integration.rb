@@ -11,6 +11,10 @@ class ActiveSupport::TestCase
     click_button 'Log in'
   end
 
+  def logout
+    page.cleanup!
+  end
+
   def submit_vurl url
     visit root_path
     fill_in "vurl_url", :with => url
