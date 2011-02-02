@@ -12,6 +12,9 @@
         %br
         == #{vurl.total_clicks} total clicks
         == &bull; #{vurl.clicks_count(current_period_ago)} in the last #{current_period}
+        - if current_user.admin?
+          &bull;
+          = link_to "Flag as spam", flag_as_spam_vurl_path(vurl)
         - if display_stats_link?
           == &bull; #{link_to 'View stats', stats_path(vurl.slug)}
         == &bull; #{clippy(redirect_url(vurl.slug))}

@@ -53,4 +53,10 @@ describe "User views homepage" do
     page.should have_content("Vurl-8")
     page.should_not have_content("Vurl-spam")
   end
+  it "does not have an option to flag as spam" do
+    visit root_path
+    within(:css, "ul#vurl_#{vurl.id}") do
+      page.should have_no_css("a[href='#{flag_as_spam_vurl_path(vurl)}']")
+    end
+  end
 end

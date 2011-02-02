@@ -23,6 +23,16 @@ class VurlsController < ApplicationController
     end
   end
 
+  def flag_as_spam
+    if current_user.admin?
+      current_vurl.flag_as_spam!
+      flash[:success] = "Successfully flagged vurl as spam"
+    else
+      flash[:error] = "You must be an admin to perform that function"
+    end
+    redirect_to root_path
+  end
+
   def image_screenshot
     render :layout => false
   end
