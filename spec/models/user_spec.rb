@@ -30,6 +30,13 @@ describe User do
     end
   end
 
+  context "#admin?" do
+    it "should default to false" do
+      User.new.should_not be_admin
+      Fabricate(:user).should_not be_admin
+    end
+  end
+
   describe "#claim" do
     let(:user) { User.find(Fabricate(:user).id) }
     it "requires a password" do
