@@ -139,7 +139,7 @@ class VurlsController < ApplicationController
       unless click.save
         logger.warn "Couldn't create Click for Vurl (#{current_vurl.inspect}) because it had the following errors: #{click.errors}"
       end
-      redirect_to safe_url_for(current_vurl)
+      redirect_to safe_url_for(current_vurl), :status => :moved_permanently
     else
       render :template => 'vurls/not_found'
     end

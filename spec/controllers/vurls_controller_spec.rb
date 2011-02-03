@@ -62,9 +62,10 @@ describe VurlsController do
       before do
         Vurl.stub!(:find_by_slug).and_return(vurl)
       end
-      it "redirects to the vurl's url" do
+      it "redirects to the vurl's url with a 301 redirect" do
         get :redirect, :slug => vurl.slug
         response.should redirect_to(vurl.url)
+        response.status.should == "301 Moved Permanently"
       end
       it "creates a click" do
         Click.should_receive(:new).with(:vurl => vurl, :ip_address => '0.0.0.0', :user_agent => 'Rails Testing', :referer => nil).and_return(mock('click', :save => true))
