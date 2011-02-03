@@ -15,6 +15,7 @@ gem "twitter", "0.9.8"
 
 group :development do
   gem "capistrano", "2.5.19"
+  gem "eycap", "0.5.9"
   gem "launchy"
   gem "mongrel"
   gem "ruby-debug"

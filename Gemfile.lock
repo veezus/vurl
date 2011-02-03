@@ -38,6 +38,8 @@ GEM
     culerity (0.2.12)
     daemons (1.1.0)
     decent_exposure (0.2.3)
+    eycap (0.5.9)
+      capistrano (>= 2.2.0)
     fabrication (0.6.0)
     fastthread (1.0.7)
     ffi (0.6.3)
@@ -133,6 +135,7 @@ DEPENDENCIES
   capistrano (= 2.5.19)
   capybara (= 0.3.8)
   decent_exposure (= 0.2.3)
+  eycap (= 0.5.9)
   fabrication (= 0.6.0)
   haml (= 3.0.6)
   launchy
