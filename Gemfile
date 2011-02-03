@@ -14,6 +14,7 @@ gem "state_machine", "0.9.3"
 gem "twitter", "0.9.8"
 
 group :development do
+  gem "capistrano", "2.5.19"
   gem "launchy"
   gem "mongrel"
   gem "ruby-debug"
