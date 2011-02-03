@@ -28,4 +28,5 @@ group :test do
   gem "rspec-rails", "1.3.2"
   gem "shoulda", "2.10.3"
   gem "unencumbered"
+  gem "watchr"
 end

@@ -124,6 +124,7 @@ GEM
     unencumbered (0.1.1)
     vegas (0.1.8)
       rack (>= 1.0.0)
+    watchr (0.7)
     yajl-ruby (0.7.8)
 
 PLATFORMS
@@ -152,3 +153,4 @@ DEPENDENCIES
   state_machine (= 0.9.3)
   twitter (= 0.9.8)
   unencumbered
+  watchr
