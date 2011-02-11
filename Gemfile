@@ -11,7 +11,7 @@ gem "paperclip", "2.3.3"
 gem "resque", "1.9.7"
 gem "sitemap_generator", "0.2.2", :require => false
 gem "state_machine", "0.9.3"
-gem "twitter", "0.9.8"
+gem "twitter", "0.9.12"
 
 group :development do
   gem "capistrano", "2.5.19"
