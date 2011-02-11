@@ -1,6 +1,9 @@
 :twitter: &default_twitter
-  :login: vurlme_test
-  :password: passwordz
+  :consumer_key: Ckun6DMN0HxS3RkvHRTj3w
+  :consumer_secret: ExUZI709psLbA2kmpHtSu9Pl9mCfxw9trZgg4Avazg
+  :access_token: 65903555-VPpwAqLGZzSIJVZk8ShPgiz2P8OvEfcHoNx16PUsz
+  :access_secret: xYGDX0yoJZVQcCTUyI48VhPn3RsahvHvr7i8qZf18
+
 
 development:
   :twitter:

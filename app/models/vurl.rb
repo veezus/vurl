@@ -66,8 +66,9 @@ class Vurl < ActiveRecord::Base
       description_length = 140 - intro.length - link.length
       description = vurl.title.first(description_length) unless vurl.title.blank?
 
-      httpauth = Twitter::HTTPAuth.new(APP_CONFIG[:twitter][:login], APP_CONFIG[:twitter][:password], :ssl => true)
-      base = Twitter::Base.new(httpauth)
+      oauth = Twitter::OAuth.new APP_CONFIG[:twitter][:consumer_key], APP_CONFIG[:twitter][:consumer_secret]
+      oauth.authorize_from_access APP_CONFIG[:twitter][:access_token], APP_CONFIG[:twitter][:access_secret]
+      base = Twitter::Base.new(oauth)
       base.update("#{intro}#{description}#{link}")
     end
   end
