@@ -3,6 +3,8 @@ require 'spec_helper'
 describe "new vurl page" do
   let(:vurl) { Fabricate(:vurl_with_clicks) }
   before do
+    # FIXME: An invalid vurl is being created somewhere in the test suite
+    Vurl.destroy_all
     vurl
     visit redirect_url("no-such-slug")
   end
