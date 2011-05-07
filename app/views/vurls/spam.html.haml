@@ -1,10 +1,10 @@
 - content_for :seo_data do
-  %meta{:type => 'keywords', :content => 'shorten url vurl long tinyurl rubyurl is.gd bit.ly ruby rails'}
-  %meta{:type => 'description', :content => 'Vurl shortens your lengthy URLs'}
+  %meta{type: 'keywords', content: 'shorten url vurl long tinyurl rubyurl is.gd bit.ly ruby rails'}
+  %meta{type: 'description', content: 'Vurl shortens your lengthy URLs'}
 - content_for :featured do
   .header
     .message
-      %h2{:style => 'color: #C00;'} This vurl has been flagged as spam
+      %h2{style: 'color: #C00;'} This vurl has been flagged as spam
       %p
         The vurl you clicked on has been flagged as spam.  If you'd like, you can
         still follow the link below, but be aware the doing so may subject you
@@ -13,7 +13,7 @@
         if you'd like to file a complaint regarding this vurl.
 
 - content_for :leftcolumn do
-  %h2{:style => 'color: #C00;'} Flagged as spam
+  %h2{style: 'color: #C00;'} Flagged as spam
   %p#spam_warning
     USE CAUTION WHEN FOLLOWING THE LINK BELOW. This vurl has been flagged as
     spam by the system and may also contain malware.
@@ -24,10 +24,10 @@
   %p While you're here, why don't you try the I'm Feeling Lucky feature? It will redirect you to a random vurl from the archives. You may also want to create a new vurl.
   %ul
     %li= link_to 'Create a new vurl', new_vurl_path
-    %li= link_to "I'm Feeling Lucky", random_vurls_path, :class => 'lucky_link'
+    %li= link_to "I'm Feeling Lucky", random_vurls_path, class: 'lucky_link'
 
   %h2 All-time most popular vurls
-  = render :partial => 'summary', :collection => most_popular_vurls
+  = render partial: 'summary', collection: most_popular_vurls
 
   %h2.team== Popular vurls in the last #{popular_period_links}
-  = render :partial => 'summary', :collection => recent_popular_vurls
+  = render partial: 'summary', collection: recent_popular_vurls

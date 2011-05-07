@@ -3,11 +3,11 @@
   %li.member
     %ul[vurl]
       %li.member-thumb
-        = render :partial => 'screenshot', :locals => {:vurl => vurl}
+        = render partial: 'screenshot', locals: {:vurl => vurl}
       %li.member-name
-        = render :partial => 'title', :locals => {:vurl => vurl}
+        = render partial: 'title', locals: {:vurl => vurl}
       %li.member-position
-        = render :partial => 'user_summary', :locals => {:user => vurl.user}
+        = render partial: 'user_summary', locals: {:user => vurl.user}
         #{time_ago_in_words(vurl.created_at)} ago
         %br
         == #{vurl.total_clicks} total clicks
@@ -19,4 +19,4 @@
           == &bull; #{link_to 'View stats', stats_path(vurl.slug)}
         == &bull; #{clippy(redirect_url(vurl.slug))}
       %li.member-info
-        = render :partial => 'description', :locals => {:vurl => vurl}
+        = render partial: 'description', locals: {:vurl => vurl}

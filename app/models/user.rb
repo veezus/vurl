@@ -7,20 +7,20 @@ class User < ActiveRecord::Base
     config.logged_in_timeout 5.years
   end
 
-  validates_format_of :email, :with => /^.+@.+\..+$/, :allow_blank => true
+  validates_format_of :email, with: /^.+@.+\..+$/, allow_blank: true
   validates_format_of :website,
-    :with => /^((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
-    :allow_blank => true
+    with: /^((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
+    allow_blank: true
   validates_format_of :blog,
-    :with => /^((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
-    :allow_blank => true
+    with: /^((http|https):\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix,
+    allow_blank: true
 
-  validates_presence_of :password, :on => :update, :if => :claim_code_changed?
+  validates_presence_of :password, on: :update, if: :claim_code_changed?
 
-  validates_presence_of :email, :on => :update
-  validates_uniqueness_of :email, :allow_blank => true
+  validates_presence_of :email, on: :update
+  validates_uniqueness_of :email, allow_blank: true
 
-  has_many :vurls, :order => 'created_at DESC', :include => :clicks
+  has_many :vurls, order: 'created_at DESC', include: :clicks
 
   before_validation_on_create :set_default_password
   before_create :generate_api_token,
@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   end
 
   def claim(attrs)
-    update_attributes(attrs.merge(:claim_code => nil))
+    update_attributes(attrs.merge(claim_code: nil))
   end
 
   def unclaimed?

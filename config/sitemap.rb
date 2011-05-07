@@ -28,6 +28,6 @@ SitemapGenerator::Sitemap.add_links do |sitemap|
   # sitemap.add '/purchase', :priority => 0.7, :host => "https://www.example.com"
 
   Vurl.all.each do |vurl|
-    sitemap.add stats_path(vurl.slug), :lastmod => vurl.updated_at, :changefreq => 'never'
+    sitemap.add stats_path(vurl.slug), lastmod: vurl.updated_at, changefreq: 'never'
   end
 end

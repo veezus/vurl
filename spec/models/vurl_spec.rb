@@ -57,7 +57,7 @@ describe "Vurl" do
 
     context "hour" do
       it "returns a hash of minute => clicks" do
-        click = Fabricate(:click, :vurl => vurl)
+        click = Fabricate(:click, vurl: vurl)
         vurl.clicks_for_last('hour').size.should == 1
         vurl.clicks_for_last('hour')[click.created_at.min.to_s].size.should == 1
       end
@@ -82,17 +82,17 @@ describe "Vurl" do
 
   describe ".popular_since" do
     let(:vzs) {
-      vurl = Fabricate(:vurl, :url => 'http://veez.us')
+      vurl = Fabricate(:vurl, url: 'http://veez.us')
       vurl.update_attribute(:created_at, 1.month.ago)
       vurl
     }
-    let(:exa) { Fabricate(:vurl, :url => 'http://example.com') }
-    let(:nyt) { Fabricate(:vurl, :url => 'http://nytimes.com') }
+    let(:exa) { Fabricate(:vurl, url: 'http://example.com') }
+    let(:nyt) { Fabricate(:vurl, url: 'http://nytimes.com') }
     before do
       Vurl.destroy_all
-      3.times { Fabricate(:click, :vurl => vzs) }
-      9.times { Fabricate(:click, :vurl => nyt) }
-      5.times { Fabricate(:click, :vurl => exa) }
+      3.times { Fabricate(:click, vurl: vzs) }
+      9.times { Fabricate(:click, vurl: nyt) }
+      5.times { Fabricate(:click, vurl: exa) }
     end
     it "returns the vurls with clicks from today" do
       Vurl.popular_since(1.day.ago).size.should == 3
@@ -108,22 +108,22 @@ describe "Vurl" do
       vurl.clicks_count.should == '3'
     end
     it "limits results correctly" do
-      Vurl.popular_since(1.day.ago, :limit => 2).size.should == 2
+      Vurl.popular_since(1.day.ago, limit: 2).size.should == 2
     end
     it "returns an array with only one result" do
-      Vurl.popular_since(1.minute.ago, :limit => 1).should be_a_kind_of(Array)
+      Vurl.popular_since(1.minute.ago, limit: 1).should be_a_kind_of(Array)
     end
   end
 
   describe "#take_screenshot!" do
     let(:vurl) { Fabricate(:vurl) }
-    let(:screenshot) { stub(:snap! => true) }
+    let(:screenshot) { stub(snap!: true) }
     before do
       Screenshot.stub(:new).and_return(screenshot)
 
       class Vurl
         def take_screenshot!
-          self.screenshot = Screenshot.new(:vurl => self).snap!
+          self.screenshot = Screenshot.new(vurl: self).snap!
           self.screenshot_taken = true
           self.screenshot_queued = false
           save
@@ -171,7 +171,7 @@ describe "Vurl" do
   end
 
   describe "#clicks_count" do
-    let(:vurl) { Vurl.new(:clicks_count => 17) }
+    let(:vurl) { Vurl.new(clicks_count: 17) }
     it "returns recent_clicks_count when present" do
       vurl.write_attribute(:recent_clicks_count, 12)
       vurl.clicks_count.should == 12
@@ -221,7 +221,7 @@ describe "Vurl" do
 
   describe "#fetch_metadata" do
     before do
-      vurl.stub(:get_page => File.read(RAILS_ROOT + '/spec/data/nytimes_article.html'))
+      vurl.stub(get_page: File.read(RAILS_ROOT + '/spec/data/nytimes_article.html'))
     end
     it "assigns a title" do
       vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')
@@ -269,7 +269,7 @@ describe "Vurl" do
       time_now = Time.now
       vurl.last_sixty_minutes.size.should == 60
       vurl.last_sixty_minutes.each do |minute|
-        minute.should be_close(time_now.change(:hour => time_now.hour, :minute => time_now.min), 1.hour + 2.seconds)
+        minute.should be_close(time_now.change(hour: time_now.hour, minute: time_now.min), 1.hour + 2.seconds)
       end
     end
   end

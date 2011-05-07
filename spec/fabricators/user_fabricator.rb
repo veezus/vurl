@@ -4,8 +4,8 @@ Fabricator(:user) do
   password 'password'
 end
 
-Fabricator(:claimed_user, :from => :user) do
+Fabricator(:claimed_user, from: :user) do
   after_create do |user|
-    user.claim({:password => 'password'})
+    user.claim({password: 'password'})
   end
 end

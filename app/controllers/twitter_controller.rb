@@ -1,7 +1,7 @@
 class TwitterController < ApplicationController
   def index
     tweets
-    render :index, :layout => false
+    render :index, layout: false
   end
 
   def tweets
@@ -13,7 +13,7 @@ class TwitterController < ApplicationController
       search
     end
   rescue Timeout::Error, Crack::ParseError, EOFError, SocketError, SystemCallError
-    render :nothing => true
+    render nothing: true
   end
   helper_method :tweets
   hide_action   :tweets

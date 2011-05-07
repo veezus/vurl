@@ -38,7 +38,7 @@ Feature "User creates vurl" do
           visit stats_path(vurl.slug)
         end
         Then "it should display the full title" do
-          page.should have_css("a", :text => vurl.title)
+          page.should have_css("a", text: vurl.title)
         end
       end
     end

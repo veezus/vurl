@@ -30,7 +30,7 @@ set :scm, :git
 
 role :app, "li44-246.members.linode.com"
 role :web, "li44-246.members.linode.com"
-role :db,  "li44-246.members.linode.com", :primary => true
+role :db,  "li44-246.members.linode.com", primary: true
 
 set :user, "veez"
 set :scm_username, "veez"
@@ -41,25 +41,25 @@ after "deploy:update_code", "create_symlinks"
 after "deploy:update_code", "bundle_install"
 after "deploy:restart", "resque:restart"
 
-task :create_symlinks, :roles => :app, :except => {:no_release => true, :no_symlink => true} do
+task :create_symlinks, roles: :app, except: {no_release: true, no_symlink: true} do
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
   run "ln -nfs #{shared_path}/screenshots #{release_path}/public/screenshots"
 end
 
-task :bundle_install, :roles => :app do
+task :bundle_install, roles: :app do
   run "cd #{release_path} && bundle install --relock"
 end
 
 
 namespace :resque do
-  task :restart, :roles => :app do
+  task :restart, roles: :app do
     run "sudo god restart resque-#{rails_env.downcase}"
   end
 end
 
 namespace :redis do
-  task :restart, :roles => :app do
+  task :restart, roles: :app do
     run "sudo monit restart -g redis"
   end
 end

@@ -1,6 +1,6 @@
 - content_for :seo_data do
-  %meta{:type => 'keywords', :content => default_keywords}
-  %meta{:type => 'description', :content => default_description}
+  %meta{type: 'keywords', content: default_keywords}
+  %meta{type: 'description', content: default_description}
 - content_for :featured do
   .header3
     .message
@@ -11,8 +11,8 @@
           = new_vurl.errors.full_messages.map{|e| content_tag(:div, "&bull; #{e}") }
       - form_for(new_vurl) do |f|
         = f.text_field :url
-        = f.submit "Vurlify!", :class => 'button left'
-        %button.button.right.lucky_link{:url => random_vurls_path} I'm Feeling Lucky
+        = f.submit "Vurlify!", class: 'button left'
+        %button.button.right.lucky_link{url: random_vurls_path} I'm Feeling Lucky
 - content_for :leftcolumn do
   %h2
     Recent popular vurls in the last
@@ -21,4 +21,4 @@
     - if recent_popular_vurls.blank?
       == No vurls have been clicked in the last #{current_period}!
     - else
-      = render :partial => 'summary', :collection => recent_popular_vurls
+      = render partial: 'summary', collection: recent_popular_vurls

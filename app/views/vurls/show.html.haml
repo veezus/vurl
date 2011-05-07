@@ -3,7 +3,7 @@
 - content_for :twitter_search_for do
   = hidden_field_tag :search_for, redirect_url(current_vurl.slug)
 - content_for :seo_data do
-  = render :partial => 'seo_data'
+  = render partial: 'seo_data'
 - content_for :featured do
   .header
     .message
@@ -16,7 +16,7 @@
         = clippy(redirect_url(current_vurl.slug))
 - content_for :leftcolumn do
   - if current_vurl.flagged_as_spam?
-    %h2{:style => 'color: #C00;'} Flagged as spam
+    %h2{style: 'color: #C00;'} Flagged as spam
     %p#spam_warning
       Your vurl has been flagged as spam by the system. Your links will continue to work like you expect them to, but your vurl will be excluded from tweets made by the site and the list of popular vurls. If you feel this is incorrect, please #{mail_to "mremsik@gmail.com", "contact Veez"} and we'll look into your situation.
   %h2 Share your vurl
@@ -27,7 +27,7 @@
     = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
     = clippy(redirect_url(current_vurl.slug))
   %h2 Summary of your vurl
-  = render :partial => 'summary', :object => current_vurl
+  = render partial: 'summary', object: current_vurl
   %h2.team
     Real-time clicks for the last
     = link_to_period 'hour'
@@ -41,4 +41,4 @@
       Loading real-time click chart
     %p
       If you don't see a chart, you probably need to install or update Adobe Flash. Contact Veezus if you have questions.
-  = render :partial => 'real_time_clicks_include'
+  = render partial: 'real_time_clicks_include'

@@ -6,7 +6,7 @@ describe "View stats" do
 
   it "displays the new vurl" do
     visit stats_path(vurl.slug)
-    page.should have_css("a[href='#{redirect_url(vurl.slug)}']", :text => redirect_url(vurl.slug))
+    page.should have_css("a[href='#{redirect_url(vurl.slug)}']", text: redirect_url(vurl.slug))
   end
 
   it "displays the date the vurl was created" do
@@ -15,7 +15,7 @@ describe "View stats" do
 
   context "when the user has profile information" do
     executes do
-      user.update_attributes(:name => 'My Name', :blog => 'http://blog.oinopa.com', :website => 'http://oinopa.com')
+      user.update_attributes(name: 'My Name', blog: 'http://blog.oinopa.com', website: 'http://oinopa.com')
       visit stats_path(vurl.slug)
     end
     it "displays the user's blog" do
@@ -64,20 +64,20 @@ describe "View stats" do
     before { vurl.flag_as_spam }
     it "includes a notice" do
       visit stats_path(vurl.slug)
-      page.should have_css("#spam_warning", :text => /flagged as spam/)
+      page.should have_css("#spam_warning", text: /flagged as spam/)
     end
   end
 
   context "when the vurl is not spam" do
     it "doesn't include a spam notice" do
       visit stats_path(vurl.slug)
-      page.should_not have_css("#spam_warning", :text => /flagged as spam/)
+      page.should_not have_css("#spam_warning", text: /flagged as spam/)
     end
   end
 
   context "with clicks more than an hour old" do
     before do
-      3.times { Fabricate(:click, :vurl => vurl) }
+      3.times { Fabricate(:click, vurl: vurl) }
       vurl.clicks.last.update_attribute(:created_at, 2.hours.ago)
       visit stats_path(vurl.slug)
     end

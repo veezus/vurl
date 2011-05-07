@@ -12,7 +12,7 @@ module VurlsHelper
   end
 
   def title_or_truncated_url(vurl)
-    vurl.title.present? ? vurl.title : truncate(vurl.url, :length => 50)
+    vurl.title.present? ? vurl.title : truncate(vurl.url, length: 50)
   end
 
   def absolute_url_for(url)

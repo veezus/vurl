@@ -8,7 +8,7 @@ describe TwitterController do
         it "returns tweets containing vurlme since the tweet" do
           Twitter::Search.should_receive(:new).with('vurlme OR vurl.me').and_return(search)
           search.should_receive(:since).with('1234')
-          get :index, :tweet_id => '1234'
+          get :index, tweet_id: '1234'
         end
       end
       context "and no tweet id is provided" do

@@ -2,16 +2,16 @@ require 'spec_helper'
 
 describe Screenshot do
   let(:vurl) { Fabricate(:vurl) }
-  let(:screenshot) { Screenshot.new(:vurl => vurl) }
+  let(:screenshot) { Screenshot.new(vurl: vurl) }
   describe "#new" do
     it "takes a hash of options" do
       lambda { Screenshot.new({}) }.should_not raise_error
     end
     it "doesn't accept arbitrary keys" do
-      lambda { Screenshot.new :key => 'some value' }.should raise_error ArgumentError
+      lambda { Screenshot.new key: 'some value' }.should raise_error ArgumentError
     end
     it "accepts a vurl" do
-      lambda { Screenshot.new :vurl => vurl }.should_not raise_error
+      lambda { Screenshot.new vurl: vurl }.should_not raise_error
     end
   end
 
@@ -55,7 +55,7 @@ describe Screenshot do
   describe "#url" do
     context "when vurl is an image" do
       it "returns the image_screenshot url" do
-        vurl.stub(:image? => true)
+        vurl.stub(image?: true)
         screenshot.url.should == Shellwords.escape("http://test.host/vurls/image_screenshot?url=#{CGI.escape("http://veez.us")}")
       end
     end

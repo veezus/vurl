@@ -1,5 +1,5 @@
-.tweet.new_tweet{:id => "tweet_#{tweet.id}"}
+.tweet.new_tweet{id: "tweet_#{tweet.id}"}
   .profile_photo
-    = link_to image_tag(tweet.profile_image_url, :height => 48, :width => 48), "http://twitter.com/#{tweet.from_user}"
+    = link_to image_tag(tweet.profile_image_url, height: 48, width: 48), "http://twitter.com/#{tweet.from_user}"
   = link_to "#{DateTime.parse(tweet.created_at).in_time_zone('Central Time (US & Canada)').to_s(:short)} Central", "http://twitter.com/#{tweet.from_user}/statuses/#{tweet.id}"
   = auto_link tweet.text

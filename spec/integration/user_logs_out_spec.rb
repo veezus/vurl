@@ -13,7 +13,7 @@ Feature "User logs out" do
         page.should have_content(dave.email)
       end
       And "I should see a 'not you?' link" do
-        page.should have_css("a[href='#{new_user_session_path}']", :text => "not you?")
+        page.should have_css("a[href='#{new_user_session_path}']", text: "not you?")
       end
       When "I click 'not you?'" do
         executes { click_link "not you?" }
@@ -22,8 +22,8 @@ Feature "User logs out" do
         end
         When "I submit valid credentials" do
           executes do
-            fill_in 'Email', :with => my.email
-            fill_in 'Password', :with => my.password
+            fill_in 'Email', with: my.email
+            fill_in 'Password', with: my.password
             click_button 'Log in'
           end
           Then "I should be on the home page" do

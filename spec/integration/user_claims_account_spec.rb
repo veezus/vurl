@@ -6,7 +6,7 @@ Feature "User claims account" do
     When "I visit the home page" do
       executes { visit root_path }
       Then "I should see an option to claim my account" do
-        page.should have_css("a[href='#{edit_user_path}']", :text => "claim this account")
+        page.should have_css("a[href='#{edit_user_path}']", text: "claim this account")
       end
       When "I follow the link to claim my account" do
         executes { click_link "claim this account" }
@@ -20,11 +20,11 @@ Feature "User claims account" do
         When "I fill in all fields and submit the form" do
           let(:new_email) { "#{User.new_hash}@example.com" }
           executes do
-            fill_in "Name", :with => 'Veezus Kreist'
-            fill_in "Email", :with => new_email
-            fill_in "New password", :with => '1234'
-            fill_in "Website address", :with => 'http://veez.us'
-            fill_in "Blog address", :with => 'http://blog.veez.us'
+            fill_in "Name", with: 'Veezus Kreist'
+            fill_in "Email", with: new_email
+            fill_in "New password", with: '1234'
+            fill_in "Website address", with: 'http://veez.us'
+            fill_in "Blog address", with: 'http://blog.veez.us'
             click_button 'Save changes'
           end
           Then "I should be on the edit page" do

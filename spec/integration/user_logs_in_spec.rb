@@ -10,13 +10,13 @@ Feature "User logs in" do
     When "I go to the home page" do
       executes { visit root_path }
       Then "I should see an option to log in as a different user" do
-        page.should have_css("a[href='#{new_user_session_path}']", :text => 'log in as another user')
+        page.should have_css("a[href='#{new_user_session_path}']", text: 'log in as another user')
       end
       When "I login as a different user" do
         executes do
           click_link "log in as another user"
-          fill_in 'Email', :with => user.email
-          fill_in 'Password', :with => 'password'
+          fill_in 'Email', with: user.email
+          fill_in 'Password', with: 'password'
           click_button 'Log in'
         end
         Then "I should see a success message" do

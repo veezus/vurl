@@ -6,8 +6,8 @@ class ActiveSupport::TestCase
   def login_as(user)
     page.cleanup!
     visit new_user_session_path
-    fill_in 'Email', :with => user.email
-    fill_in 'Password', :with => 'password'
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: 'password'
     click_button 'Log in'
   end
 
@@ -17,7 +17,7 @@ class ActiveSupport::TestCase
 
   def submit_vurl url
     visit root_path
-    fill_in "vurl_url", :with => url
+    fill_in "vurl_url", with: url
     click 'Vurlify!'
   end
 end

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe "User views homepage" do
-  let(:vurl) { Fabricate(:vurl, :url => 'http://example.com') }
-  before { Fabricate(:click, :vurl => vurl) }
+  let(:vurl) { Fabricate(:vurl, url: 'http://example.com') }
+  before { Fabricate(:click, vurl: vurl) }
   it "has an I'm Feeling Lucky link" do
     visit root_path
     page.body.should have_tag("button[url=?]", random_vurls_path, "I'm Feeling Lucky")
@@ -29,16 +29,16 @@ describe "User views homepage" do
       Fabricate(:vurl).tap do |vurl|
         vurl.update_attribute(:title, "Vurl-#{i+1}")
         vurl.clicks.create! \
-          :ip_address => '0.0.0.0',
-          :user_agent => 'IE is here for your soul!'
+          ip_address: '0.0.0.0',
+          user_agent: 'IE is here for your soul!'
       end
     end
     spam_vurl = Fabricate(:vurl).tap do |vurl|
       vurl.update_attribute(:title, "Vurl-spam")
       2.times do
         vurl.clicks.create! \
-          :ip_address => '0.0.0.0',
-          :user_agent => 'IE is here for your soul!'
+          ip_address: '0.0.0.0',
+          user_agent: 'IE is here for your soul!'
       end
       vurl.flag_as_spam!
     end

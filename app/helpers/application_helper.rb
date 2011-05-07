@@ -31,14 +31,14 @@ module ApplicationHelper
     />
     </object>
     EOF
-    content_tag(:span, html, :class => 'clippy')
+    content_tag(:span, html, class: 'clippy')
   end
 
   def link_to_period period
     if period == current_period
-      content_tag :span, period.titleize, :class => 'selected_period period_link'
+      content_tag :span, period.titleize, class: 'selected_period period_link'
     else
-      link_to period.titleize, "?period=#{period}", :class => 'deselected_period period_link'
+      link_to period.titleize, "?period=#{period}", class: 'deselected_period period_link'
     end
   end
 
@@ -47,7 +47,7 @@ module ApplicationHelper
   end
 
   def period_link period
-    current_period == period ? period : link_to(period, root_path(:period => period))
+    current_period == period ? period : link_to(period, root_path(period: period))
   end
 
   def tab_class_for(link_name)

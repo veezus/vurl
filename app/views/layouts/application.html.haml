@@ -1,7 +1,7 @@
 !!!
-%html{ "xml:lang" => "en", :lang => "en", :xmlns => "http://www.w3.org/1999/xhtml" }
+%html{ "xml:lang" => "en", lang: "en", xmlns: "http://www.w3.org/1999/xhtml" }
   %head
-    %meta{ :content => "text/html;charset=UTF-8", "http-equiv" => "content-type" }/
+    %meta{ content: "text/html;charset=UTF-8", "http-equiv" => "content-type" }/
     = yield :seo_data
     %title
       == Vurl.me: #{page_title}
@@ -16,11 +16,11 @@
         #navleft
         #nav
           %ul
-            %li.first= link_to 'Home', root_path, :class => tab_class_for('Home')
+            %li.first= link_to 'Home', root_path, class: tab_class_for('Home')
             - if current_user.has_vurls?
-              %li= link_to 'History', vurls_path, :class => tab_class_for('History')
+              %li= link_to 'History', vurls_path, class: tab_class_for('History')
             %li
-              = link_to "My Account", edit_user_path, :class => tab_class_for('My Account')
+              = link_to "My Account", edit_user_path, class: tab_class_for('My Account')
         #navright
       #logo
         %h1= link_to 'Vurl.me', root_path
@@ -36,14 +36,14 @@
             .left
               .right
                 .box
-                  = link_to image_tag("vurlify.png", :width => '64', :height => '64', :class => 'iconic'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))"
+                  = link_to image_tag("vurlify.png", width: '64', height: '64', class: 'iconic'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))"
                   %h3 Bookmarklet
                   %p
                     Drag this image to your browser's toolbar. Then click it to vurlify any page you're browsing!
                 .box-center
-                  = link_to image_tag('hashrocket.png', :id => 'hashrocket_logo'), 'http://hashrocket.com/'
+                  = link_to image_tag('hashrocket.png', id: 'hashrocket_logo'), 'http://hashrocket.com/'
                 .box2
-                  = image_tag "help.png", :class => 'iconic'
+                  = image_tag "help.png", class: 'iconic'
                   %h3 Need help?
                   %p
                     = mail_to 'mremsik@gmail.com', "Send Veez an email"
@@ -51,7 +51,7 @@
           #leftcolumn
             - [:success, :error].each do |message_type|
               - if flash[message_type]
-                %div{:class => message_type}
+                %div{class: message_type}
                   = flash[message_type]
             = yield :leftcolumn
           #rightcolumn
@@ -63,10 +63,10 @@
           .clear
       #footer
         Copyright &copy; 2008 - 2010 Veezus Kreist &bull; The URL Shortener by Veezus Kreist
-        %script{ :type => "text/javascript" }
+        %script{ type: "text/javascript" }
           var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
           document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        %script{ :type => "text/javascript" }
+        %script{ type: "text/javascript" }
           try {
           var pageTracker = _gat._getTracker("UA-7239606-1");
           pageTracker._trackPageview();

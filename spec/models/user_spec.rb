@@ -23,7 +23,7 @@ describe User do
         should have(0).errors_on(:email)
       end
       it "requires an email to update a user" do
-        user = Fabricate(:user, :email => nil)
+        user = Fabricate(:user, email: nil)
         user.valid?
         user.should have(1).error_on(:email)
       end
@@ -40,7 +40,7 @@ describe User do
   describe "#claim" do
     let(:user) { User.find(Fabricate(:user).id) }
     it "requires a password" do
-      user.claim(:password => '')
+      user.claim(password: '')
       user.should have(1).error_on(:password)
     end
     it "clears the claim code" do

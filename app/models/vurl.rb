@@ -2,18 +2,18 @@ class Vurl < ActiveRecord::Base
   require 'nokogiri'
 
   has_attached_file :screenshot,
-                    :styles => {
+                    styles: {
                       :original => "512x384",
                       :thumb => "102x77"
                     },
-                    :default_style => :thumb,
-                    :convert_options => {:all => '-quality 70'},
-                    :url => "/screenshots/:slug-:style.png",
-                    :default_url => "/images/missing-:style.png"
+                    default_style: :thumb,
+                    convert_options: {:all => '-quality 70'},
+                    url: "/screenshots/:slug-:style.png",
+                    default_url: "/images/missing-:style.png"
 
-  state_machine :status, :initial => :nominal do
+  state_machine :status, initial: :nominal do
     event :flag_as_spam do
-      transition :nominal => :flagged_as_spam
+      transition nominal: :flagged_as_spam
     end
   end
 
@@ -21,7 +21,7 @@ class Vurl < ActiveRecord::Base
   has_many :clicks
 
   validates_presence_of :url, :user
-  validates_format_of   :url, :with => /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix
+  validates_format_of   :url, with: /^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.?[a-z]{2,5}((:[0-9]{1,5})?\/.*)?$/ix
   validate :appropriateness_of_url
   validate :not_a_spam_site
 
@@ -29,8 +29,8 @@ class Vurl < ActiveRecord::Base
   before_create :set_slug
   after_create :add_to_queues
 
-  named_scope :most_popular, lambda {|*args| { :order => 'clicks_count desc', :limit => args.first || 5 } }
-  named_scope :not_spam, { :conditions => "status <> 'flagged_as_spam'" }
+  named_scope :most_popular, lambda {|*args| { order: 'clicks_count desc', limit: args.first || 5 } }
+  named_scope :not_spam, { conditions: "status <> 'flagged_as_spam'" }
 
   class << self
     def popular_since(period_ago, options={})
@@ -52,13 +52,13 @@ class Vurl < ActiveRecord::Base
     end
 
     def random
-      find(:first, :offset => (Vurl.count * rand).to_i)
+      find(:first, offset: (Vurl.count * rand).to_i)
     end
 
     def tweet_most_popular_of_the_day
       require 'twitter'
 
-      vurl = Vurl.popular_since(1.day.ago, :limit => 1).first
+      vurl = Vurl.popular_since(1.day.ago, limit: 1).first
       return if vurl.nil?
 
       intro = 'Most popular vurl today? '
@@ -74,7 +74,7 @@ class Vurl < ActiveRecord::Base
   end
 
   def take_screenshot!
-    self.screenshot = Screenshot.new(:vurl => self).snap!
+    self.screenshot = Screenshot.new(vurl: self).snap!
     self.screenshot_taken = true
     self.screenshot_queued = false
     save
@@ -103,7 +103,7 @@ class Vurl < ActiveRecord::Base
     minutes = []
     60.times do |i|
       new_time = i.minutes.ago(start_time)
-      minutes << new_time.change(:hour => new_time.hour, :min => new_time.min)
+      minutes << new_time.change(hour: new_time.hour, min: new_time.min)
     end
     minutes.reverse
   end
@@ -112,7 +112,7 @@ class Vurl < ActiveRecord::Base
     hours = []
     24.times do |i|
       new_time = i.hours.ago(start_time)
-      hours << new_time.change(:hour => new_time.hour)
+      hours << new_time.change(hour: new_time.hour)
     end
     hours.reverse
   end
@@ -121,7 +121,7 @@ class Vurl < ActiveRecord::Base
     dates = []
     7.times do |i|
       new_date = i.days.ago(start_date)
-      dates << new_date.change(:hour => 0)
+      dates << new_date.change(hour: 0)
     end
     dates.reverse
   end
@@ -129,11 +129,11 @@ class Vurl < ActiveRecord::Base
   def clicks_for_last period
     case period
     when 'hour'
-      clicks.since(1.hour.ago).all(:select => 'clicks.*, MINUTE(clicks.created_at) AS minute').group_by(&:minute)
+      clicks.since(1.hour.ago).all(select: 'clicks.*, MINUTE(clicks.created_at) AS minute').group_by(&:minute)
     when 'day'
-      clicks.since(1.day.ago).all(:select => 'clicks.*, HOUR(clicks.created_at) AS hour').group_by(&:hour)
+      clicks.since(1.day.ago).all(select: 'clicks.*, HOUR(clicks.created_at) AS hour').group_by(&:hour)
     when 'week'
-      clicks.since(1.week.ago).all(:select => 'clicks.*, DAY(clicks.created_at) AS day').group_by(&:day)
+      clicks.since(1.week.ago).all(select: 'clicks.*, DAY(clicks.created_at) AS day').group_by(&:day)
     end
   end
 
@@ -196,7 +196,7 @@ class Vurl < ActiveRecord::Base
   end
 
   def set_slug
-    if vurl = Vurl.find(:first, :order => 'id DESC')
+    if vurl = Vurl.find(:first, order: 'id DESC')
       self.slug = vurl.slug.succ
     else
       self.slug = 'AA'

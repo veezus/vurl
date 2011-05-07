@@ -10,7 +10,7 @@ Feature "User edits account" do
     When "I visit the edit page" do
       executes { click_link 'My Account' }
       Then "I should see my information" do
-        page.should have_css("input#user_email[type=text]", :value => user.email)
+        page.should have_css("input#user_email[type=text]", value: user.email)
       end
     end
   end
