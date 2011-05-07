@@ -17,16 +17,16 @@ group :development do
   gem "capistrano", "2.5.19"
   gem "eycap", "0.5.9"
   gem "launchy"
-  gem "mongrel"
-  gem "ruby-debug"
+  gem "ruby-debug19"
 end
 
 group :test do
   gem "akephalos", "0.2.2"
   gem "capybara", "0.3.8"
-  gem "fabrication", "0.6.0"
+  gem "fabrication", "0.9.5"
   gem "rspec-rails", "1.3.2"
   gem "shoulda", "2.10.3"
+  gem "test-unit", "1.2.3"
   gem "unencumbered"
   gem "watchr"
 end

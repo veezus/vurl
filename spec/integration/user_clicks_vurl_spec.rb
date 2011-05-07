@@ -15,7 +15,7 @@ Feature "User clicks vurl" do
           page.should have_content("spam and/or malware")
         end
         And "I should see a link to the original URL" do
-          page.should have_css("a[href='http://example.com']", "http://example.com")
+          page.find(:css, "a[href='http://example.com']").text.should == "http://example.com"
         end
       end
     end

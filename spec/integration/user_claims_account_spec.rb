@@ -34,10 +34,10 @@ Feature "User claims account" do
             page.should have_content("Successfully saved your changes")
           end
           And "I should see my values updated" do
-            page.should have_css("input#user_name[type=text]", 'Veezus Kreist')
-            page.should have_css("input#user_email[type=text]", new_email)
-            page.should have_css("input#user_website[type=text]", 'some spam nonsense')
-            page.should have_css("input#user_blog[type=text]", 'an offer to buy viagra')
+            page.find(:css, "input#user_name").value.should == 'Veezus Kreist'
+            page.find(:css, "input#user_email").value.should == new_email
+            page.find(:css, "input#user_website").value.should == 'http://veez.us'
+            page.find(:css, "input#user_blog").value.should == 'http://blog.veez.us'
           end
         end
       end

@@ -34,7 +34,7 @@ describe "Create Vurls via the API" do
 
     it "returns a string with the errors for an html request" do
       visit shorten_path(:url => 'whatthe?')
-      page.body.should == 'Url is invalid'
+      page.body.should include('Url is invalid')
     end
   end
 

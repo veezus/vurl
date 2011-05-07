@@ -4,7 +4,6 @@ ENV["RAILS_ENV"] ||= 'test'
 require File.dirname(__FILE__) + "/../config/environment" unless defined?(RAILS_ROOT)
 require 'spec/autorun'
 require 'spec/rails'
-require 'spec/support/integration'
 
 require 'capybara/rails'
 require 'capybara/dsl'
