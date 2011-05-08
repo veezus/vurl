@@ -39,7 +39,7 @@ describe "Vurl" do
     it "adds itself to queues" do
       vurl.should_receive(:add_to_queue).with(TakeScreenshot)
       vurl.should_receive(:add_to_queue).with(FetchMetadata)
-      vurl.save(false)
+      vurl.save(valdate: false)
     end
   end
 
@@ -172,8 +172,8 @@ describe "Vurl" do
 
   describe "#clicks_count" do
     let(:vurl) { Vurl.new(clicks_count: 17) }
-    it "returns recent_clicks_count when present" do
-      vurl.write_attribute(:recent_clicks_count, 12)
+    it "returns scoped_clicks_count when present" do
+      vurl.stub(:scoped_clicks_count => 12)
       vurl.clicks_count.should == 12
     end
     it "returns the number of clicks in the period passed" do
@@ -221,7 +221,7 @@ describe "Vurl" do
 
   describe "#fetch_metadata" do
     before do
-      vurl.stub(get_page: File.read(RAILS_ROOT + '/spec/data/nytimes_article.html'))
+      vurl.stub(get_page: File.read(Rails.root.join("spec", "data", "nytimes_article.html")))
     end
     it "assigns a title" do
       vurl.should_receive(:title=).with('Suicide Attack Kills 5 G.I.’s and 2 Iraqis in Northern City - NYTimes.com')
@@ -269,7 +269,7 @@ describe "Vurl" do
       time_now = Time.now
       vurl.last_sixty_minutes.size.should == 60
       vurl.last_sixty_minutes.each do |minute|
-        minute.should be_close(time_now.change(hour: time_now.hour, minute: time_now.min), 1.hour + 2.seconds)
+        minute.should be_within(1.hour + 2.seconds).of(time_now.change(hour: time_now.hour, minute: time_now.min))
       end
     end
   end

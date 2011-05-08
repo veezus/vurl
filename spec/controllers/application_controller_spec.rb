@@ -30,7 +30,7 @@ describe ApplicationController do
   describe "#load_user_from_cookie" do
     subject { controller.send(:load_user_from_cookie) }
     it "loads a user with the id if there is one" do
-      cookies[:user_id] = 18
+      controller.stub(:cookies => {user_id: 18})
       User.should_receive(:find_by_id).with(18).and_return(user)
       should == user
     end

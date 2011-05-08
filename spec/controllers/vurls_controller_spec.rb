@@ -65,10 +65,10 @@ describe VurlsController do
       it "redirects to the vurl's url with a 301 redirect" do
         get :redirect, slug: vurl.slug
         response.should redirect_to(vurl.url)
-        response.status.should == "301 Moved Permanently"
+        response.status.should == 301
       end
       it "creates a click" do
-        Click.should_receive(:new).with(vurl: vurl, ip_address: '0.0.0.0', user_agent: 'Rails Testing', referer: nil).and_return(mock('click', save: true))
+        Click.should_receive(:new).with(vurl: vurl, ip_address: '0.0.0.0', user_agent: 'Rails Testing', referer: '/').and_return(stub(save: true))
         get :redirect, slug: 'AA'
       end
       it "logs the error if the click is not created" do

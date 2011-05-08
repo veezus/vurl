@@ -1,14 +1,5 @@
-# Filters added to this controller apply to all controllers in the application.
-# Likewise, all the methods added will be available for all controllers.
-
 class ApplicationController < ActionController::Base
-  helper :all # include all helpers, all the time
-
-  filter_parameter_logging :password
-
-  # See ActionController::RequestForgeryProtection for details
-  # Uncomment the :secret if you're not using the cookie session store
-  protect_from_forgery # :secret => '5ee0c1f9ce72a776ebba8a8c3338e3d2'
+  protect_from_forgery
 
   expose(:current_period) { params[:period].present? ? params[:period] : 'hour' }
   expose(:current_vurl) do
@@ -45,5 +36,4 @@ class ApplicationController < ActionController::Base
   def suspected_spam_user?
     %w(76.168.113.69 84.46.116.13).include? request.remote_ip
   end
-
 end

@@ -29,21 +29,21 @@ class Vurl < ActiveRecord::Base
   before_create :set_slug
   after_create :add_to_queues
 
-  named_scope :most_popular, lambda {|*args| { order: 'clicks_count desc', limit: args.first || 5 } }
-  named_scope :not_spam, { conditions: "status <> 'flagged_as_spam'" }
+  scope :most_popular, lambda {|*args| { order: 'clicks_count desc', limit: args.first || 5 } }
+  scope :not_spam, { conditions: "status <> 'flagged_as_spam'" }
 
   class << self
     def popular_since(period_ago, options={})
       limit = options[:limit] || 5
       find_by_sql "
-        SELECT vurls.*, counts.recent_clicks_count
+        SELECT vurls.*, counts.scoped_clicks_count
         FROM vurls
         INNER JOIN(
-          SELECT vurl_id, count(*) AS recent_clicks_count
+          SELECT vurl_id, count(*) AS scoped_clicks_count
           FROM clicks
           WHERE clicks.created_at >= '#{period_ago.to_s(:db)}'
           GROUP BY vurl_id
-          ORDER BY recent_clicks_count DESC
+          ORDER BY scoped_clicks_count DESC
         ) AS counts
         ON counts.vurl_id = vurls.id
         WHERE status <> 'flagged_as_spam'
@@ -73,6 +73,10 @@ class Vurl < ActiveRecord::Base
     end
   end
 
+  def scoped_clicks_count
+    attributes["scoped_clicks_count"]
+  end
+
   def take_screenshot!
     self.screenshot = Screenshot.new(vurl: self).snap!
     self.screenshot_taken = true
@@ -86,7 +90,7 @@ class Vurl < ActiveRecord::Base
   end
 
   def clicks_count(since=nil)
-    return read_attribute(:recent_clicks_count) if read_attribute(:recent_clicks_count)
+    return scoped_clicks_count if scoped_clicks_count
     return clicks.since(since).count if since
     read_attribute(:clicks_count)
   end

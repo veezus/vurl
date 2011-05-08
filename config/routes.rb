@@ -1,28 +1,31 @@
-ActionController::Routing::Routes.draw do |map|
-  map.stats     '/stats/:slug', controller: 'vurls', action: 'stats'
-  map.spam      '/spam/:slug', controller: 'vurls', action: 'spam'
-  map.twitter   '/twitter', controller: 'twitter', action: 'index', conditions: {method: :get}
-  map.shorten   '/shorten.:format', controller: 'vurls', action: 'api', conditions: {method: :get}
-  map.resources :vurls, except: :show,
-    member: {
-      description: :get,
-      flag_as_spam: :get,
-      real_time_clicks: :get,
-      redirect: :get,
-      screenshot: :get,
-      title: :get
-    },
-    collection: {
-      random: :get,
-      chart_settings: :get,
-      image_screenshot: :get
-  }
-  map.resources :user_sessions, only: [:create, :new]
-  map.resource  :user, only: [:edit, :update]
-  map.redirect  ':slug', controller: 'vurls', action: 'redirect'
-  map.preview   '/p/:slug', controller: 'vurls', action: 'preview'
+VurlApp::Application.routes.draw do
+  match "/stats/:slug", to: "vurls#stats", as: "stats"
+  match "/spam/:slug", to: "vurls#spam", as: "spam"
+  match "/twitter", to: "twitter#index", as: "twitter"
+  match "/shorten.:format", to: "vurls#api", as: "shorten"
 
-  map.resources :pages, collection: {tweetie: :get}
+  resources :pages do
+    collection { get :tweetie }
+  end
+  resources :vurls, except: :show do
+    member do
+      get :description
+      get :flag_as_spam
+      get :real_time_clicks
+      get :redirect
+      get :screenshot
+      get :title
+    end
+    collection do
+      get :random
+      get :chart_settings
+      get :image_screenshot
+    end
+  end
+  resource  :user, only: [:edit, :update]
+  resources :user_sessions, only: [:create, :new]
 
-  map.root controller: 'vurls', action: 'new'
+  match ":slug", to: "vurls#redirect", as: 'redirect'
+
+  root to: "vurls#new"
 end

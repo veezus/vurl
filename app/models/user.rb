@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
 
   has_many :vurls, order: 'created_at DESC', include: :clicks
 
-  before_validation_on_create :set_default_password
+  before_validation :set_default_password, on: :create
   before_create :generate_api_token,
                 :generate_claim_code,
                 :set_default_name
