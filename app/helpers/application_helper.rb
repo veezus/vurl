@@ -8,7 +8,7 @@ module ApplicationHelper
   # Thanks to mojombo for his clippy swf
   # http://github.com/mojombo/clippy
   def clippy(text, bgcolor='#FFFFFF')
-    html = <<-EOF
+    html = <<-EOF.html_safe
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
             width="14"
             height="14" >
