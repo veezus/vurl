@@ -19,6 +19,7 @@ group :development do
   gem "eycap", "0.5.17"
   gem "launchy"
   gem "ruby-debug19"
+  gem "thin"
 end
 
 group :test do
