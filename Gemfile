@@ -26,7 +26,10 @@ group :test do
   gem "akephalos", "0.2.5"
   gem "capybara", "0.4.1.2"
   gem "fabrication", "0.9.5"
-  gem "rspec-rails", "2.5.0"
   gem "shoulda", "2.11.3"
   gem "unencumbered", "0.2.0"
+end
+
+group :test, :development do
+  gem "rspec-rails", "2.5.0"
 end
