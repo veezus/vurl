@@ -8,7 +8,7 @@
         You can also get your API token for using Vurl.me with third-party applications.
 - content_for :leftcolumn do
   %h2 Edit account details
-  - form_for current_user, url: user_path do |f|
+  = form_for current_user, url: user_path do |f|
     %ul
       %li.forminput{class: error_class_for(current_user, :name)}
         %ul

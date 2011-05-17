@@ -62,6 +62,6 @@ module ApplicationHelper
   end
 
   def error_class_for(object, attr)
-    'error' if object.errors.on(attr)
+    'error' if object.errors.keys.include?(attr)
   end
 end
