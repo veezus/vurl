@@ -14,6 +14,11 @@ gem "sitemap_generator", "1.5.2", :require => false
 gem "state_machine", "0.10.4"
 gem "twitter", "1.4.1"
 
+group :test, :development do
+  gem "fabrication", :git => "https://github.com/paulelliott/fabrication.git"
+  gem "rspec-rails", "2.5.0"
+end
+
 group :development do
   gem "capistrano", "2.6.0"
   gem "eycap", "0.5.17"
@@ -23,13 +28,8 @@ group :development do
 end
 
 group :test do
-  gem "akephalos", "0.2.5"
   gem "capybara", "0.4.1.2"
-  gem "fabrication", "0.9.5"
+  gem "cucumber-rails", "0.4.1"
+  gem "database_cleaner"
   gem "shoulda", "2.11.3"
-  gem "unencumbered", "0.2.0"
-end
-
-group :test, :development do
-  gem "rspec-rails", "2.5.0"
 end
