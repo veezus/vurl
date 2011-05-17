@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /^that vurl's redirect page$/
+      redirect_path(@vurl.slug)
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #
