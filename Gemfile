@@ -31,5 +31,6 @@ group :test do
   gem "capybara", "0.4.1.2"
   gem "cucumber-rails", "0.4.1"
   gem "database_cleaner"
+  gem "resque_spec", "0.6.5"
   gem "shoulda", "2.11.3"
 end

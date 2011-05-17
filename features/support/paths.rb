@@ -14,6 +14,9 @@ module NavigationHelpers
     when /^that vurl's redirect page$/
       redirect_path(@vurl.slug)
 
+    when /^that vurl's stats page$/
+      stats_path(@vurl.slug)
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

@@ -157,7 +157,7 @@ class Vurl < ActiveRecord::Base
   end
 
   def fetch_metadata
-    document = Nokogiri::HTML(get_page)
+    document = Nokogiri::HTML(get_body)
     self.title = document.at('title').text
     self.keywords = document.at("meta[@name*=eywords]/@content").to_s
     self.description = document.at("meta[@name*=escription]/@content").to_s
@@ -168,11 +168,22 @@ class Vurl < ActiveRecord::Base
     logger.warn "Could not fetch data for #{construct_url}."
   end
 
-  def get_page
+  def get_body
     uri = URI.parse(construct_url)
-    Net::HTTP.start(uri.host, uri.port) do |http|
-      http.get(uri.request_uri, "User-Agent" => "Vurl.me Metadata Fetcher drone #9fc3po").body
+    response = get_response_for(uri)
+    while response["location"].present?
+      response = get_response_for(URI.parse(response["location"]))
     end
+    response.body
+  end
+
+  def get_response_for(uri)
+    http = Net::HTTP.new(uri.host, uri.port)
+    if uri.port == 443
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    end
+    http.request(Net::HTTP::Get.new(uri.request_uri))
   end
 
   def add_to_queue(worker_class)
