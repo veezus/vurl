@@ -1,3 +1,7 @@
+form#new_vurl label {
+  display: none;
+}
+
 form#new_vurl input#vurl_url {
   font-size: 32px;
   height: 35px;
@@ -25,9 +29,6 @@ form#new_vurl .button.left {
   width: 130px;
 }
 
-.errors:before {
-  content: "Errors:"
-}
 .errors {
   font-weight: bold;
   color: #B00;

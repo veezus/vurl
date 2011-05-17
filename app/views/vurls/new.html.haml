@@ -8,8 +8,10 @@
         %h2 Shorten your URL
       - else
         .errors
-          = new_vurl.errors.full_messages.map{|e| content_tag(:div, "&bull; #{e}") }
+          - new_vurl.errors.full_messages.each do |error_message|
+            %div= error_message
       = form_for(new_vurl) do |f|
+        = f.label :url, "URL"
         = f.text_field :url
         = f.submit "Vurlify!", class: 'button left'
         %button.button.right.lucky_link{url: random_vurls_path} I'm Feeling Lucky
