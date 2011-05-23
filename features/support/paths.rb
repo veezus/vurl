@@ -11,6 +11,9 @@ module NavigationHelpers
     when /the home\s?page/
       '/'
 
+    when /^that vurl's stats page$/
+      stats_path(@vurl.slug)
+
     when /^that vurl's redirect page$/
       redirect_path(@vurl.slug)
 
