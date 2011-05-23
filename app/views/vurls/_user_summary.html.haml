@@ -1,7 +1,7 @@
-== By #{user.name}
+By #{user.name}
 - if user.blog? && user.website?
-  == (#{link_to "blog", absolute_url_for(user.blog)} | #{link_to "website", absolute_url_for(user.website)})
+  (#{link_to "blog", absolute_url_for(user.blog)} | #{link_to "website", absolute_url_for(user.website)})
 - elsif user.blog?
-  == (#{link_to "blog", absolute_url_for(user.blog)})
+  (#{link_to "blog", absolute_url_for(user.blog)})
 - elsif user.website?
-  == (#{link_to "website", absolute_url_for(user.website)})
+  (#{link_to "website", absolute_url_for(user.website)})

@@ -21,6 +21,6 @@
     = popular_period_links
   .recent_popular
     - if recent_popular_vurls.blank?
-      == No vurls have been clicked in the last #{current_period}!
+      No vurls have been clicked in the last #{current_period}!
     - else
       = render partial: 'summary', collection: recent_popular_vurls
