@@ -9,7 +9,9 @@
     .message
       %h2 This is your vurl's stats page
       %p
-        On this page you can see in real time when people click your vurl or when your vurl hits twitter. Share your vurl by clicking the icon next to your new vurl, or right-clicking it and selecting 'Copy Link'.
+        On this page you can see in real time when people click your vurl or
+        when your vurl hits twitter. Share your vurl by clicking the icon next
+        to your new vurl, or right-clicking it and selecting 'Copy Link'.
       .share
         Your new vurl:
         = link_to redirect_url(current_vurl.slug), redirect_url(current_vurl.slug)
@@ -18,7 +20,12 @@
   - if current_vurl.flagged_as_spam?
     %h2{style: 'color: #C00;'} Flagged as spam
     %p#spam_warning
-      Your vurl has been flagged as spam by the system. Your links will continue to work like you expect them to, but your vurl will be excluded from tweets made by the site and the list of popular vurls. If you feel this is incorrect, please #{mail_to "mremsik@gmail.com", "contact Veez"} and we'll look into your situation.
+      Your vurl has been flagged as spam by the system. Users clicking your
+      link will be presented with an interstital warning page, and your vurl
+      will be excluded from tweets made by the site and the list of popular
+      vurls. If you feel this is incorrect, please
+      #{mail_to "mremsik@gmail.com", "contact Veez"}
+      and we'll look into your situation.
   %h2 Share your vurl
   %p
     Click the icon next to your new vurl to automatically copy it to the clipboard. Or, right-click the link to your vurl and select 'Copy Link'.
