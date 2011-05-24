@@ -1,5 +1,3 @@
-require 'eycap/recipes'
-
 default_run_options[:pty] = true
 set :application, "vurl"
 set :repository,  "git@github.com:veezus/vurl.git"
@@ -15,27 +13,26 @@ task :production do
   set :deploy_to, "/var/www/apps/#{application}"
   set :rails_env, 'production'
   set :branch, 'production'
+  set :user, "veez"
+  set :scm_username, "veez"
+  role :app, "vurl.me"
+  role :web, "vurl.me"
+  role :db,  "vurl.me", primary: true
 end
 
 task :staging do
-  set :deploy_to, "/var/www/apps/#{application}-staging"
+  set :deploy_to, "/srv/#{application}"
   set :rails_env, 'staging'
   set :branch, 'staging'
+  set :user, "vurl"
+  set :scm_username, "vurl"
+  role :app, "staging.vurl.me"
+  role :web, "staging.vurl.me"
+  role :db, "staging.vurl.me", primary: true
 end
 
-# If you aren't using Subversion to manage your source code, specify
-# your SCM below:
-# set :scm, :subversion
 set :scm, :git
-
-role :app, "li44-246.members.linode.com"
-role :web, "li44-246.members.linode.com"
-role :db,  "li44-246.members.linode.com", primary: true
-
-set :user, "veez"
-set :scm_username, "veez"
 set :use_sudo, true
-
 
 after "deploy:update_code", "create_symlinks"
 after "deploy:update_code", "bundle_install"
@@ -48,13 +45,12 @@ task :create_symlinks, roles: :app, except: {no_release: true, no_symlink: true}
 end
 
 task :bundle_install, roles: :app do
-  run "cd #{release_path} && bundle install --relock"
+  run "cd #{release_path} && bundle --without development:test"
 end
-
 
 namespace :resque do
   task :restart, roles: :app do
-    run "sudo god restart resque-#{rails_env.downcase}"
+    run "rvmsudo god restart resque-#{rails_env.downcase}"
   end
 end
 
