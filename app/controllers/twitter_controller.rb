@@ -6,7 +6,7 @@ class TwitterController < ApplicationController
 
   def tweets
     search_for = params[:search_for].present? ? params[:search_for] : 'vurlme OR vurl.me'
-    search = Twitter::Search.new(search_for)
+    search = Twitter::Search.new.q(search_for)
     if params[:tweet_id]
       search.since(params[:tweet_id])
     else

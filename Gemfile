@@ -4,6 +4,7 @@ gem "mysql"
 gem "rails", "3.0.7"
 
 gem "authlogic", "3.0.2"
+gem "crack", "0.1.8"
 gem "decent_exposure", "1.0.1"
 gem "haml", "3.1.1"
 gem "hoptoad_notifier", "2.4.9"
@@ -34,5 +35,6 @@ group :test do
   gem "capybara", "0.4.1.2"
   gem "cucumber-rails", "0.4.1"
   gem "database_cleaner"
+  gem "fakeweb", "1.3.0"
   gem "shoulda", "2.11.3"
 end
