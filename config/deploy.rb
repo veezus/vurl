@@ -26,6 +26,12 @@ task :staging do
   set :branch, 'staging'
   set :user, "vurl"
   set :scm_username, "vurl"
+
+  $:.unshift(File.expand_path('./lib', ENV['rvm_path']))
+  require 'rvm/capistrano'
+  set :rvm_ruby_string, '1.9.2-p180@vurl'
+  set :rvm_type, :user
+
   role :app, "staging.vurl.me"
   role :web, "staging.vurl.me"
   role :db, "staging.vurl.me", primary: true
@@ -45,7 +51,7 @@ task :create_symlinks, roles: :app, except: {no_release: true, no_symlink: true}
 end
 
 task :bundle_install, roles: :app do
-  run "cd #{release_path} && bundle --without development:test"
+  run "cd #{release_path}; bundle install --without development:test"
 end
 
 namespace :resque do
