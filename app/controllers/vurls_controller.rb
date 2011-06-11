@@ -145,10 +145,6 @@ class VurlsController < ApplicationController
     end
   end
 
-  def random
-    redirect_to Vurl.random.url
-  end
-
   def safe_url_for(vurl)
     vurl.flagged_as_spam? ? spam_url(slug: vurl.slug) : vurl.url
   end

@@ -17,7 +17,6 @@ VurlApp::Application.routes.draw do
       get :title
     end
     collection do
-      get :random
       get :chart_settings
       get :image_screenshot
     end

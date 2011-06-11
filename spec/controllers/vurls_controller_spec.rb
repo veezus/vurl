@@ -120,24 +120,6 @@ describe VurlsController do
     end
   end
 
-  describe "when redirecting to a random vurl" do
-    before do
-      Vurl.stub!(:random).and_return(vurl)
-    end
-    it "loads a random vurl" do
-      Vurl.should_receive(:random).and_return(vurl)
-      do_get
-    end
-    it "redirects to that vurl's url" do
-      do_get
-      response.should redirect_to(vurl.url)
-    end
-
-    def do_get
-      get :random
-    end
-  end
-
   describe "#safe_url_for" do
     let(:vurl) { Fabricate(:vurl) }
     context "when the vurl is flagged as spam" do

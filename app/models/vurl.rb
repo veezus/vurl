@@ -51,10 +51,6 @@ class Vurl < ActiveRecord::Base
       "
     end
 
-    def random
-      find(:first, offset: (Vurl.count * rand).to_i)
-    end
-
     def tweet_most_popular_of_the_day
       require 'twitter'
 

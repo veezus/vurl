@@ -64,11 +64,6 @@ describe "Vurl" do
     end
   end
 
-  describe ".random" do
-    # Not entirely sure how to test this. Maybe stubbing count and rand and setting
-    # an expectation that find is called with that offset? - Veezus
-  end
-
   describe ".most_popular" do
     it "returns the correct number of vurls" do
       5.times { Fabricate(:vurl) }

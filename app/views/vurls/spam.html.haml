@@ -21,10 +21,8 @@
     Original URL:
     = link_to current_vurl.url, current_vurl.url
   %h2 Other actions that might help
-  %p While you're here, why don't you try the I'm Feeling Lucky feature? It will redirect you to a random vurl from the archives. You may also want to create a new vurl.
   %ul
     %li= link_to 'Create a new vurl', new_vurl_path
-    %li= link_to "I'm Feeling Lucky", random_vurls_path, class: 'lucky_link'
 
   %h2 All-time most popular vurls
   = render partial: 'summary', collection: most_popular_vurls
