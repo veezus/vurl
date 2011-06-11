@@ -1,5 +1,5 @@
 GIT
-  remote: https://github.com/paulelliott/fabrication.git
+  remote: git://github.com/paulelliott/fabrication.git
   revision: 2284c18e142fd71a13e620efa89f6c48473ac6c3
   specs:
     fabrication (0.9.5)

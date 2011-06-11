@@ -19,7 +19,7 @@ gem "state_machine", "0.10.4"
 gem "twitter", "1.4.1"
 
 group :test, :development do
-  gem "fabrication", :git => "https://github.com/paulelliott/fabrication.git"
+  gem "fabrication", :git => "git://github.com/paulelliott/fabrication.git"
   gem "rspec-rails", "2.5.0"
 end
 
