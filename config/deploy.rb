@@ -15,7 +15,7 @@ set :rvm_ruby_string, '1.9.2-p180@vurl'
 set :rvm_type, :user
 
 task :production do
-  set :deploy_to, "/var/www/apps/#{application}"
+  set :deploy_to, "/srv/#{application}"
   set :rails_env, 'production'
   set :branch, 'production'
   set :user, "veez"
