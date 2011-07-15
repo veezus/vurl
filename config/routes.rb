@@ -2,7 +2,7 @@ VurlApp::Application.routes.draw do
   match "/stats/:slug", to: "vurls#stats", as: "stats"
   match "/spam/:slug", to: "vurls#spam", as: "spam"
   match "/twitter", to: "twitter#index", as: "twitter"
-  match "/shorten.:format", to: "vurls#api", as: "shorten"
+  match "/shorten(.:format)", to: "vurls#api", as: "shorten"
 
   resources :pages do
     collection { get :tweetie }
