@@ -164,10 +164,16 @@ class Vurl < ActiveRecord::Base
     logger.warn "Could not fetch data for #{construct_url}."
   end
 
-  def get_page
-    uri = URI.parse(construct_url)
-    Net::HTTP.start(uri.host, uri.port) do |http|
-      http.get(uri.request_uri, "User-Agent" => "Vurl.me Metadata Fetcher drone #9fc3po").body
+  def get_page(url = construct_url)
+    uri = URI.parse(url)
+    use_ssl = uri.scheme == 'https'
+    response = Net::HTTP.start(uri.host, uri.port, :use_ssl => use_ssl) do |http|
+      http.get(uri.request_uri, "User-Agent" => "Vurl.me Metadata Fetcher drone #9fc3po")
+    end
+    if response.header['location'].present?
+      get_page response.header['location']
+    else
+      response.body
     end
   end
 

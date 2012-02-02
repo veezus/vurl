@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require 'fakeweb'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -24,4 +25,11 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  FakeWeb.allow_net_connect = false
+
+  FakeWeb.register_uri :get, "http://github.com",
+    :response => File.read(Rails.root.join("spec", "data", "http_github_com.html"))
+  FakeWeb.register_uri :get, /^https:\/\/github.com/,
+    :response => File.read(Rails.root.join("spec", "data", "https_github_com.html"))
 end
