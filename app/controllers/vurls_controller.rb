@@ -1,136 +1,11 @@
 class VurlsController < ApplicationController
-
-  expose(:current_vurls) { current_user.vurls }
-  expose(:new_vurl) do
-    vurl_params = (params[:vurl] || {}).reverse_merge!(url: params[:url])
-    Vurl.new vurl_params
-  end
-  expose(:recent_popular_vurls) { Vurl.popular_since current_period_ago, limit: 8 }
-  expose(:most_popular_vurls) { Vurl.most_popular.not_spam }
-
-  skip_before_filter :verify_authenticity_token, :only => :create
-  def show
-    respond_to do |format|
-      format.html
-      format.xml  { render :xml => current_vurl }
-    end
-  end
-
-  def real_time_clicks
-    respond_to do |format|
-      format.html { render nothing: true }
-      format.xml
-    end
-  end
-
-  def flag_as_spam
-    if current_user.admin?
-      current_vurl.flag_as_spam!
-      flash[:success] = "Successfully flagged vurl as spam"
+  expose(:current_vurl) do
+    if slug = params[:slug]
+      slug = slug[/^\w+/]
+      Vurl.find_by_slug(slug)
     else
-      flash[:error] = "You must be an admin to perform that function"
+      Vurl.find_by_id(params[:id])
     end
-    redirect_to root_path
-  end
-
-  def image_screenshot
-    render layout: false
-  end
-
-  def screenshot
-    render partial: 'screenshot', locals: {vurl: current_vurl}
-  end
-
-  def title
-    render partial: 'title', locals: {vurl: current_vurl}
-  end
-
-  def description
-    render partial: 'description', locals: {vurl: current_vurl}
-  end
-
-  def stats
-    if current_vurl.nil?
-      render template: 'vurls/not_found' and return
-    end
-    respond_to do |format|
-      format.html { render :show }
-      format.xml  { render xml: current_vurl }
-    end
-  end
-
-  def preview
-    redirect_to action: :stats, slug: params[:slug]
-  end
-
-  def new
-    if params[:url].present?
-      create
-    else
-      respond_to do |format|
-        format.html
-        format.xml  { render xml: new_vurl }
-      end
-    end
-  end
-
-  def edit
-    redirect_to new_vurl_path
-  end
-
-  def api
-    new_vurl.ip_address = request.remote_ip
-    new_vurl.user = if api_token && user = User.find_by_api_token(api_token)
-                      user
-                    else
-                      User.create!(name: 'API')
-                    end
-
-    respond_to do |format|
-      if suspected_spam_user?
-        format.html { render text: "Get thee behind me, spammer" and return }
-        format.json { render json: {errors: "Get thee behind me, spammer"} and return }
-      end
-
-      if new_vurl.save
-        format.html { render text: redirect_url(new_vurl.slug) }
-        format.json { render json: {shortUrl: redirect_url(new_vurl.slug)} }
-      else
-        format.html { render text: new_vurl.errors.full_messages }
-        format.json { render json: {errors: new_vurl.errors.full_messages.first} }
-      end
-    end
-  end
-
-  def create
-    new_vurl.ip_address = request.remote_ip
-    new_vurl.user = current_user
-
-    if suspected_spam_user?
-      flash[:error] = "We've flagged this IP for suspicious activity and will not allow creation of Vurls.  Contact Veezus if you feel this is an error"
-      redirect_to root_path and return
-    end
-
-    respond_to do |format|
-      if new_vurl.save
-        flash[:notice] = 'Vurl was successfully created.'
-        format.html { redirect_to stats_path(new_vurl.slug) }
-        format.xml  { render xml: new_vurl, status: :created, location: new_vurl }
-      else
-        format.html { render action: "new" }
-        format.xml  { render xml: new_vurl.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  def update
-    redirect_to new_vurl_path
-  end
-
-  # DELETE /vurls/1
-  # DELETE /vurls/1.xml
-  def destroy
-    redirect_to new_vurl_path
   end
 
   def redirect
@@ -141,38 +16,11 @@ class VurlsController < ApplicationController
       end
       redirect_to safe_url_for(current_vurl), status: :moved_permanently
     else
-      render template: 'vurls/not_found'
+      redirect_to '/'
     end
   end
 
   def safe_url_for(vurl)
     vurl.flagged_as_spam? ? spam_url(slug: vurl.slug) : vurl.url
-  end
-  hide_action :safe_url_for
-
-  protected
-
-  def current_period
-    return params[:period] if params[:period]
-    if action_name == 'stats'
-      'hour'
-    else
-      'week'
-    end
-  end
-
-  def current_period_ago
-    period_ago current_period
-  end
-  helper_method :current_period_ago
-
-  def period_ago period
-    1.send(period).ago
-  end
-  helper_method :period_ago
-
-  private
-  def api_token
-    params[:api_token]
   end
 end

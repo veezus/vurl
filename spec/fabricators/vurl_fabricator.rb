@@ -1,7 +1,7 @@
 Fabricator(:vurl) do
-  user! { Fabricate(:user) }
   url 'http://veez.us'
   title 'Veezus Kreist'
+  slug 'AA'
 end
 
 Fabricator(:vurl_with_clicks, from: :vurl) do

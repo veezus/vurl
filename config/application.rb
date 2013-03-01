@@ -8,10 +8,6 @@ Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 module VurlApp
   class Application < Rails::Application
-    # resque workers
-    require Rails.root.join("lib", "fetch_metadata")
-    require Rails.root.join("lib", "take_screenshot")
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

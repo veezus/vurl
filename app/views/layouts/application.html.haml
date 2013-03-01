@@ -2,72 +2,9 @@
 %html{ "xml:lang" => "en", lang: "en", xmlns: "http://www.w3.org/1999/xhtml" }
   %head
     %meta{ content: "text/html;charset=UTF-8", "http-equiv" => "content-type" }/
-    = yield :seo_data
     %title
-      Vurl.me: #{page_title}
-    = stylesheet_link_tag %w(tipsy style jquery.fancybox-1.3.1 application)
-    = javascript_include_tag %w(jquery-1.3.2 /amcolumn/swfobject)
-    = javascript_include_tag %w(cufon-yui jquery.color general Myriad_Pro_400-Myriad_Pro_700-Myriad_Pro_italic_400-Myriad_Pro_italic_700.font contentslider jquery.form jquery.tipsy jquery.fancybox-1.3.1)
-    = javascript_include_tag %w(application)
+      Vurl.me is closed for business
+    = stylesheet_link_tag 'application'
   %body
-    #preloader
-    #wrapper
-      #navhold
-        #navleft
-        #nav
-          %ul
-            %li.first= link_to 'Home', root_path, class: tab_class_for('Home')
-            - if current_user.has_vurls?
-              %li= link_to 'History', vurls_path, class: tab_class_for('History')
-            %li
-              = link_to "My Account", edit_user_path, class: tab_class_for('My Account')
-        #navright
-      #logo
-        %h1= link_to 'Vurl.me', root_path
-      #featured
-        .contentdiv
-          = render 'shared/user_information'
-          = yield :featured
-        .shadow
-      #content
-        .inner
-          .shadow
-          #services
-            .left
-              .right
-                .box
-                  = link_to image_tag("vurlify.png", width: '64', height: '64', class: 'iconic'), "javascript:void(location.href='#{new_vurl_url}?url='+encodeURIComponent(location.href))"
-                  %h3 Bookmarklet
-                  %p
-                    Drag this image to your browser's toolbar. Then click it to vurlify any page you're browsing!
-                .box-center
-                  = link_to image_tag('hashrocket.png', id: 'hashrocket_logo'), 'http://hashrocket.com/'
-                .box2
-                  = image_tag "help.png", class: 'iconic'
-                  %h3 Need help?
-                  %p
-                    = mail_to 'mremsik@gmail.com', "Send Veez an email"
-                    if you're having trouble. He'll get you sorted out in no time.
-          #leftcolumn
-            - [:success, :error].each do |message_type|
-              - if flash[message_type]
-                %div{class: message_type}
-                  = flash[message_type]
-            = yield :leftcolumn
-          #rightcolumn
-            %h2 Tweets
-            %p
-              = yield(:twitter_search_text) || "See recent tweets from vurl or about vurl!"
-            #vurlme_tweets
-            = yield :twitter_search_for
-          .clear
-      #footer
-        Copyright &copy; 2008 - 2010 Veezus Kreist &bull; The URL Shortener by Veezus Kreist
-        %script{ type: "text/javascript" }
-          var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-          document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-        %script{ type: "text/javascript" }
-          try {
-          var pageTracker = _gat._getTracker("UA-7239606-1");
-          pageTracker._trackPageview();
-          } catch(err) {}
+    #content
+      = yield

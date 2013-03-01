@@ -47,7 +47,6 @@ after "deploy:restart", "resque:restart"
 task :create_symlinks, roles: :app, except: {no_release: true, no_symlink: true} do
   run "ln -nfs #{shared_path}/config/database.yml #{release_path}/config/database.yml"
   run "ln -nfs #{shared_path}/config/settings.yml #{release_path}/config/settings.yml"
-  run "ln -nfs #{shared_path}/screenshots #{release_path}/public/screenshots"
 end
 
 task :bundle_install, roles: :app do
