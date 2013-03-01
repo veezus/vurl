@@ -175,6 +175,8 @@ GEM
     ruby_core_source (0.1.5)
       archive-tar-minitar (>= 0.5.2)
     rubyzip (0.9.9)
+    rvm-capistrano (1.2.7)
+      capistrano (>= 2.0.0)
     selenium-webdriver (2.30.0)
       childprocess (>= 0.2.5)
       multi_json (~> 1.0)
@@ -246,6 +248,7 @@ DEPENDENCIES
   resque
   rspec-rails
   ruby-debug19
+  rvm-capistrano
   shoulda
   sitemap_generator (= 1.5.2)
   state_machine

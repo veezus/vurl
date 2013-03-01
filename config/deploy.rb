@@ -9,10 +9,8 @@ set :repository,  "git@github.com:veezus/vurl.git"
 set :deploy_via, :remote_cache
 set :group_writable, false
 
-$:.unshift(File.expand_path('./lib', ENV['rvm_path']))
 require 'rvm/capistrano'
 set :rvm_ruby_string, '1.9.2-p180@vurl'
-set :rvm_type, :user
 
 task :production do
   set :deploy_to, "/srv/#{application}"

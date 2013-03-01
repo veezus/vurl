@@ -26,6 +26,7 @@ end
 
 group :development do
   gem "capistrano"
+  gem "rvm-capistrano"
   gem "launchy"
   gem "ruby-debug19"
   gem "thin"
