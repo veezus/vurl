@@ -54,6 +54,7 @@ GEM
       ffi (~> 1.0, >= 1.0.11)
     cocaine (0.3.2)
     columnize (0.3.6)
+    concurrent-ruby (1.1.10)
     crack (0.3.2)
     cucumber (1.2.1)
       builder (>= 2.1.2)
@@ -85,7 +86,8 @@ GEM
     hoptoad_notifier (2.4.11)
       activesupport
       builder
-    i18n (0.6.4)
+    i18n (0.9.5)
+      concurrent-ruby (~> 1.0)
     journey (1.0.4)
     json (1.7.7)
     launchy (2.2.0)
