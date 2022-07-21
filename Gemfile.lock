@@ -214,7 +214,7 @@ GEM
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
       simple_oauth (~> 0.2)
-    tzinfo (0.3.35)
+    tzinfo (0.3.61)
     vegas (0.1.11)
       rack (>= 1.0.0)
     websocket (1.0.7)
